@@ -1,0 +1,18 @@
+
+#container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#getDetails{
+    background-color: antiquewhite;
+    border-radius: 3px;
+    padding: 18px 36px;
+}
+#getDetails p{
+    margin: 0;
+}
+#getDetails span{
+    padding: 50px 0;
+}
