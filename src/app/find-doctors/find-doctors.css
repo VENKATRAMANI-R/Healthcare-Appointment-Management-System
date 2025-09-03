@@ -1,0 +1,233 @@
+/* === GLOBAL RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+ 
+body {
+  background-color: #f0f5ff;
+  color: #333;
+  line-height: 1.6;
+}
+ 
+/* === HEADER === */
+header {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+ 
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+ 
+/* === SEARCH BAR === */
+.search-container {
+  display: flex;
+  width: 50%;
+}
+ 
+.search-container input {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid #1976d2;     /* match theme */
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+}
+ 
+.search-container button {
+  background: #557281;
+  color: white;
+  border: none;
+  padding: 0 1.5rem;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+ 
+.search-container button:hover {
+  background: #557281;
+}
+ 
+/* === LAYOUT === */
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+ 
+/* === FILTERS === */
+.filters {
+  width: 280px;
+  background: #f9fbff;                /* softer background */
+  border: 1px solid #e3f2fd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.08);
+  position: sticky;
+  align-self: flex-start;
+  top: 2rem;
+  margin-right: 2rem;
+}
+ 
+.filters h2 {
+  color: #1976d2;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e3f2fd;
+}
+ 
+.filter-group {
+  margin-bottom: 1.8rem;
+}
+ 
+.filter-group h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+ 
+.availability-options,
+.expertise-options {
+  list-style: none;
+}
+ 
+.availability-options li,
+.expertise-options li {
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+}
+ 
+input[type='checkbox'] {
+  margin-right: 0.8rem;
+  width: 18px;
+  height: 18px;
+}
+ 
+label {
+  cursor: pointer;
+}
+ 
+/* === DOCTOR LIST === */
+.doctors-list {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+ 
+/* === DOCTOR CARD === */
+.doctor-card {
+  background: white;
+  border: 1px solid #e3f2fd;          /* subtle border */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(25, 118, 210, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+.doctor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(25, 118, 210, 0.15);  /* subtle hospital-blue glow */
+}
+ 
+.doctor-image {
+  height: 200px;
+  overflow: hidden;
+  position:relative;
+}
+ 
+.doctor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+ 
+.doctor-card:hover .doctor-image img {
+  transform: scale(1.05);
+}
+ 
+.doctor-info {
+  padding: 1.5rem;
+}
+ 
+.doctor-name {
+  font-size: 1.4rem;
+  color: #0d47a1;      /* deeper hospital blue */
+  margin-bottom: 0.5rem;
+}
+ 
+.doctor-position {
+  color: #1565c0;      /* secondary blue */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+ 
+.doctor-qualification {
+  color: #666;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+ 
+.doctor-hours {
+  background: #e3f2fd;
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+ 
+.doctor-hours h4 {
+  margin-bottom: 0.3rem;
+  color: #1976d2;
+}
+ 
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+ 
+  .filters {
+    width: 100%;
+    position: static;
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+ 
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+ 
+  .search-container {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+ 
+@media (max-width: 600px) {
+  .doctors-list {
+    grid-template-columns: 1fr;
+  }
+ 
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+ 

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BookAppointment } from './book-appointment/book-appointment';
 import { App } from './app';
+import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
 import { AboutUs } from './about-us/about-us';
 
@@ -17,5 +18,9 @@ export const routes: Routes = [
         path: 'about-us', 
         component: AboutUs 
 
+    },
+    {
+        path: 'FindDoctors',
+        component: FindDoctors
     }
 ];
