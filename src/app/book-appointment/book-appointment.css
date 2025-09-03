@@ -1,4 +1,4 @@
-
+/* 
 #container{
     display: flex;
     align-items: center;
@@ -15,4 +15,73 @@
 }
 #getDetails span{
     padding: 50px 0;
+} */
+#container {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  margin: 0 10px 0 10px;
+  border-radius: 3px;
+
 }
+
+#getDetails {
+  margin-bottom: 5px;
+  border-radius: 3px;
+  padding: 18px 36px;
+  width: 100%;
+  height: 100%; 
+  box-sizing: border-box;
+}
+input{
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  
+  border: 1px black solid;
+}
+input:hover{
+  box-shadow: 1px 1px 30px rgb(200, 200, 200);
+}
+select{
+  width: 105%;
+  padding: 10px;
+}
+select:hover{
+  box-shadow: 1px 1px 30px rgb(200, 200, 200);
+}
+#getDetails div{
+  display: flex;
+  justify-content: space-evenly;
+}
+#getDetails div button{
+  padding: 10px 50px;
+  color: red;
+  border: red solid;
+  border-radius: 3px;
+  background-color: white;
+}
+#getDetails div button:hover{
+  cursor: pointer;
+  color: white;
+  background-color: red;
+}
+#getDetails span {
+  display: block;
+  width: 100%;
+}
+#getDetails span select option{
+  color: lightskyblue;
+
+}
+ .form-group small {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .form-group input:hover + small,
+  .form-group input:focus + small {
+    visibility: visible;
+    opacity: 1;
+  }

@@ -65,12 +65,12 @@ body {
  
 .sidebar ul li a:hover {
     background: #557281;
-    color: #ffd700;
+    color: #c5ffe0;
 }
  
 .sidebar a.active {
     background: #557281;
-    color: #ffd700;
+    color: #c5ffe0;
     font-weight: bold;
 }
  

@@ -1,17 +1,49 @@
 
 <div id="banner">
-        <img src="assest/image.png" style="height: 75px; width: 75px; " alt="logo">
-        <h1 id="HospoitalName">HealWell Hospoital</h1>
-        <a href="#"><img src="assest/profile-user.png" style="height: 60px; width: 60px; " alt="Profile"></a>
+  <img src="images/image.png" style="width: 75px; height: 75;"  alt="logo">
+  <h1 id="HospitalName">HEALWELL HOSPITAL</h1>
+  <!-- <a href="#" class="profileDropdown">
+    <img src="images/profileUser.png" style="width: 50px; height: 50;"alt="Profile" (mouseenter)="toggleDropdownProfile(true)" (mouseleave)="toggleDropdownProfile(false)">
+  </a>
+    <div class="dropdown-menu" *ngIf="isDropdownOpenProfile">
+        <a class="dropdown-item" href="#">Login/SignUp</a> <hr>
+        <a class="dropdown-item" href="#">Account Details</a> <hr>
+        <a class="dropdown-item" href="#">Consulting Details</a>
+    </div> -->
+    <div class="profileDropdown" style="position: relative;">
+  <img src="images/profileUser.png" style="width: 50px; height: 50px; " alt="Profile">
+  <div class="dropdown-menu-p">
+    <a class="dropdown-item-p" href="#">Login/SignUp</a>
+    <hr>
+    <a class="dropdown-item-p" href="#">Account Details</a>
+    <hr>
+    <a class="dropdown-item-p" href="#">Consulting Details</a>
+  </div>
+</div>
 </div>
 <div id="nav">
-            <h4 id="emergency">Accident & Emergency 9898989898</h4>
+            
+            <span class="dropdown" (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)">
+                <!-- <button class="btn btn-primary">Hover Me</button> -->
+                <h4 id="emergency" >Accident & Emergency <i class="arrow myarrow"> </i></h4>
+                <div class="dropdown-menu" *ngIf="isDropdownOpen">
+                    <a class="dropdown-item" href="tel:+919865675556">Chennai - 9865675556</a> <hr>
+                    <a class="dropdown-item" href="tel:+917654562821">Kochi - 7654562821</a> <hr>
+                    <a class="dropdown-item" href="tel:+919678670921">Coimbatore - 9678670921</a>
+                </div>
+            </span>
             <span>
-                <a routerLink="/about-us">About us</a>
-                <a href="#">Excellence</a>
-                <a href="#">Departments</a>
-                <a href="#">Patient Care</a>
-                <a href="#">Contact us</a>
+                <a class="nav-elements" routerLink="/about-us">About us</a>
+                <a class="nav-elements" href="#">Excellence</a>
+                <a class="nav-elements" href="#">Departments</a>
+                <a class="nav-elements" href="#">Patient Care</a>
+                <a class="nav-elements" href="#">Contact us</a>
+            </span>
+            
+            <span>
+                <a class="AttentionBanner" routerLink="bookAppoinment" (click)="openAppointmentModal()">Book Appointment</a>
+                
+                <a class="AttentionBanner">Find Doctor</a>
             </span>
 </div>
     
@@ -24,8 +56,6 @@
         </button>
 </div> -->
 <div id="EmergencyBanner">
-    <button>book Appointment</button>
-    <span>&#9742; Emergency <i class="arrow myarrow"> </i></span>
-    <button>Find Doctor</button>
+
 </div>
 <router-outlet/>
