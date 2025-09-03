@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BookAppointment } from '../book-appointment/book-appointment';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-find-doctors',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './find-doctors.html',
+  imports: [CommonModule,BookAppointment],
+  templateUrl: './find-doctors.html', 
   styleUrls: ['./find-doctors.css']
 })
 export class FindDoctors {
   searchQuery: string = '';
   activeFilters: Set<string> = new Set();
   img1 = 'images/Doctor_Default.jpg';
+
+  constructor(public dialog: MatDialog) {}
 
   doctors = [
     {
@@ -89,6 +93,12 @@ export class FindDoctors {
       this.activeFilters.add(filter);
     }
     this.applyFilters();
+  }
+
+  openAppointmentModal(): void {
+    this.dialog.open(BookAppointment, {
+      width: '600px'
+    });
   }
 
   applyFilters() {
