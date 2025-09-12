@@ -4,6 +4,7 @@ import { App } from './app';
 import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
 import { AboutUs } from './about-us/about-us';
+import { Departments } from './departments/departments';
 
 export const routes: Routes = [
     {
@@ -22,5 +23,9 @@ export const routes: Routes = [
     {
         path: 'FindDoctors',
         component: FindDoctors
+    },
+    {
+        path: 'departments',
+        component: Departments
     }
 ];

@@ -19,7 +19,7 @@ export class FindDoctors {
 
   doctors = [
     {
-      name: 'Dr. Sarah Johnson',
+      name: 'Dr. Amal Krishna',
       position: 'Senior Cardiologist',
       qualification: 'MD, Cardiology, Harvard Medical School',
       image: this.img1,
@@ -28,7 +28,7 @@ export class FindDoctors {
       availability: ['morning', 'afternoon']
     },
     {
-      name: 'Dr. Michael Chen',
+      name: 'Dr. Venkat Ramani',
       position: 'Neurology Specialist',
       qualification: 'MD, Neurology, Johns Hopkins University',
       //image: 'assets/doctor2.jpg',
@@ -37,7 +37,7 @@ export class FindDoctors {
       availability: ['morning', 'afternoon']
     },
     {
-      name: 'Dr. Emily Rodriguez',
+      name: 'Dr. Guru Sakthi',
       position: 'Pediatrician',
       qualification: 'MD, Pediatrics, Stanford University',
       //image: 'assets/doctor3.jpg',
@@ -46,7 +46,7 @@ export class FindDoctors {
       availability: ['morning', 'afternoon', 'weekend']
     },
     {
-      name: 'Dr. James Wilson',
+      name: 'Dr. Aravindh.R',
       position: 'Orthopedic Surgeon',
       qualification: 'MD, Orthopedics, Mayo Clinic',
       //image: 'assets/doctor4.jpg',
@@ -55,7 +55,7 @@ export class FindDoctors {
       availability: ['morning', 'afternoon', 'evening']
     },
     {
-      name: 'Dr. Lisa Patel',
+      name: 'Dr. AmarSri',
       position: 'Dermatologist',
       qualification: 'MD, Dermatology, UCSF',
       //image: 'assets/doctor5.jpg',
@@ -96,10 +96,10 @@ export class FindDoctors {
   }
 
   openAppointmentModal(): void {
-    this.dialog.open(BookAppointment, {
-      width: '600px'
-    });
-  }
+      this.dialog.open(BookAppointment, {
+        width: '600px'
+      });
+    }
 
   applyFilters() {
     const query = this.searchQuery.toLowerCase();

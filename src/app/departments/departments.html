@@ -1,0 +1,6 @@
+<div class = "dropdown">
+    <button class="dropbtn" (click)="toggleDropdown()">Departments ▼</button>
+    <div class="dropdown-content" *ngIf="isOpen">
+      <a *ngFor="let dept of departments" (click)="selectDepartment(dept)">{{ dept }}</a>
+    </div>
+</div>
