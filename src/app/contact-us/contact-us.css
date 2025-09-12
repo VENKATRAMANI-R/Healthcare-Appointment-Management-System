@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+}
+ 
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+ 
+h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+ 
+p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.info-boxes p{
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+}
+ 
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    
+}
+ 
+.box {
+    flex: 1;
+    min-width: 200px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+ 
+.box.blue {
+    background: #1e73be;
+    color: #fff;
+}
+ 
+iframe {
+    width: 100%;
+    height: 250px;
+    border: 0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+ 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+ 
+input, textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+ 
+textarea {
+    resize: none;
+    height: 80px;
+}
+ 
+button {
+    background: #1e73be;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+button:hover {
+    background: #155a91;
+}

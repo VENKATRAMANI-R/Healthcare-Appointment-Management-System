@@ -5,6 +5,7 @@ import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
 import { AboutUs } from './about-us/about-us';
 import { Departments } from './departments/departments';
+import { ContactUs } from './contact-us/contact-us';
 
 export const routes: Routes = [
     {
@@ -27,5 +28,10 @@ export const routes: Routes = [
     {
         path: 'departments',
         component: Departments
+    },
+    {
+        path: 'contact-us',
+        component: ContactUs
+    
     }
 ];
