@@ -53,6 +53,7 @@ body {
   font-size: 16px;
   font-weight: 500;
   transition: background 0.3s ease;
+  cursor: pointer;
 }
  
 .sidebar ul li a:hover {
@@ -72,5 +73,40 @@ body {
   padding: 30px;
   background: #fff;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+ 
+/* FAQ Styles */
+.faq-container {
+  /* max-width: 800px; */
+  margin-left:0;
+  padding:10px 20px;
+}
+ 
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  cursor: pointer;
+}
+ 
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #333;
+}
+ 
+.faq-question:hover {
+  color: #0066cc;
+}
+ 
+.icon {
+  font-size: 20px;
+  font-weight: bold;
+}
+ 
+.faq-answer {
+  margin-top: 10px;
+  color: #555;
+  line-height: 1.5;
 }
  
