@@ -2,19 +2,57 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <!-- <img src="assets/image.png" style="height: 75px; width: 75px;" alt="logo"> -->
       <h3>ABOUT US</h3>
     </div>
     <ul>
-      <li><a href="#" (click)="loadSection('profile'); $event.preventDefault()" [class.active]="activeSection === 'profile'">Profile</a></li>
-      <li><a href="#" (click)="loadSection('vision'); $event.preventDefault()" [class.active]="activeSection === 'vision'">Vision & Mission</a></li>
-      <li><a href="#" (click)="loadSection('journey'); $event.preventDefault()" [class.active]="activeSection === 'journey'">Our Journey</a></li>
-      <li><a href="#" (click)="loadSection('board'); $event.preventDefault()" [class.active]="activeSection === 'board'">Board of Directors</a></li>
-      <li><a href="#" (click)="loadSection('services'); $event.preventDefault()" [class.active]="activeSection === 'services'">Our Services</a></li>
-      <li><a href="#" (click)="loadSection('quality'); $event.preventDefault()" [class.active]="activeSection === 'quality'">Quality Policy</a></li>
+      <li>
+        <a href="#" 
+           (click)="loadSection('profile'); $event.preventDefault()" 
+           [class.active]="activeSection==='profile'">
+           Profile
+        </a>
+      </li>
+      <li>
+        <a href="#" 
+           (click)="loadSection('vision'); $event.preventDefault()" 
+           [class.active]="activeSection==='vision'">
+           Vision & Mission
+        </a>
+      </li>
+      <li>
+        <a href="#" 
+           (click)="loadSection('journey'); $event.preventDefault()" 
+           [class.active]="activeSection==='journey'">
+           Our Journey
+        </a>
+      </li>
+      <li>
+        <a href="#" 
+           (click)="loadSection('board'); $event.preventDefault()" 
+           [class.active]="activeSection==='board'">
+           Board of Directors
+        </a>
+      </li>
+      <li>
+        <a href="#" 
+           (click)="loadSection('services'); $event.preventDefault()" 
+           [class.active]="activeSection==='services'">
+           Our Services
+        </a>
+      </li>
+      <li>
+        <a href="#" 
+           (click)="loadSection('quality'); $event.preventDefault()" 
+           [class.active]="activeSection==='quality'">
+           Quality Policy
+        </a>
+      </li>
     </ul>
   </div>
-
+ 
   <!-- Main Content -->
-  <div class="content" [innerHTML]="sectionContents[activeSection]"></div>
+  <div class="content" id="main-content">
+    <div [innerHTML]="sectionContents[activeSection]"></div>
+  </div>
 </div>
+ 

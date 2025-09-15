@@ -1,0 +1,36 @@
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Patient Care</h3>
+    <ul>
+      <li><a (click)="setActiveSection('inpatient')" [ngClass]="{active: activeSection === 'inpatient'}">In Patient Services</a></li>
+      <li><a (click)="setActiveSection('outpatient')" [ngClass]="{active: activeSection === 'outpatient'}">Out Patient Services</a></li>
+      <li><a (click)="setActiveSection('homecare')" [ngClass]="{active: activeSection === 'homecare'}">Home Care Services</a></li>
+      <li><a (click)="setActiveSection('insurance')" [ngClass]="{active: activeSection === 'insurance'}">Health Insurance</a></li>
+      <li><a (click)="setActiveSection('faq')" [ngClass]="{active: activeSection === 'faq'}">FAQ</a></li>
+    </ul>
+ 
+  </div>
+ 
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Normal sections -->
+    <div *ngIf="activeSection !== 'faq'" [innerHTML]="sectionContents[activeSection]"></div>
+ 
+    <!-- FAQ section -->
+  <div class="faq-container">
+    <div *ngFor="let faq of faqs; let i = index" class="faq-item">
+      <div class="faq-question" (click)="toggleFaq(i)">
+        {{ faq.question }}
+        <span class="icon">{{ activeFaq === i ? '-' : '+' }}</span>
+      </div>
+      <div *ngIf="activeFaq === i" class="faq-answer">
+        {{ faq.answer }}
+     </div>
+    </div>
+  </div>
+ 
+  </div>
+</div>
+
+ 

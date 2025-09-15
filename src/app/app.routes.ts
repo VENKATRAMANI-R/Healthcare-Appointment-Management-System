@@ -4,8 +4,12 @@ import { App } from './app';
 import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
 import { AboutUs } from './about-us/about-us';
+import { Excellence } from './excellence/excellence';
 import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
+
+import { E } from '@angular/cdk/keycodes';
+import { PatientCare } from './patient-care/patient-care';
 
 export const routes: Routes = [
     {
@@ -32,6 +36,14 @@ export const routes: Routes = [
     {
         path: 'contact-us',
         component: ContactUs
+    },
+    {
     
+        path: 'excellence',
+        component: Excellence
+    },
+    {
+        path:'patient-care',
+        component:PatientCare
     }
 ];
