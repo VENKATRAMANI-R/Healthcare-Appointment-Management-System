@@ -8,12 +8,16 @@ header h1 {
       margin: 0;
       font-size: 2.5em;
 }
-
+#LandingPageImg{
+  display: flex;
+  justify-content: center;
+  
+}
 .hero {
-        background-image: url('/public/images/LandingPage.png'); /* Replace with actual image path */
+        /* background-image: url('/public/images/LandingPage.png');  */
         background-size: cover;
         background-position: center;
-        height: 100vh;
+        height: 60%;
         position: relative;
         display: flex;
         align-items: center;
