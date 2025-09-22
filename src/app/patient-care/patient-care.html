@@ -1,36 +1,43 @@
 <div class="container">
+ 
   <!-- Sidebar -->
   <div class="sidebar">
-    <h3>Patient Care</h3>
+    <div class="sidebar-header">
+      <h3>Patient Care</h3>
+    </div>
     <ul>
-      <li><a (click)="setActiveSection('inpatient')" [ngClass]="{active: activeSection === 'inpatient'}">In Patient Services</a></li>
-      <li><a (click)="setActiveSection('outpatient')" [ngClass]="{active: activeSection === 'outpatient'}">Out Patient Services</a></li>
-      <li><a (click)="setActiveSection('homecare')" [ngClass]="{active: activeSection === 'homecare'}">Home Care Services</a></li>
-      <li><a (click)="setActiveSection('insurance')" [ngClass]="{active: activeSection === 'insurance'}">Health Insurance</a></li>
-      <li><a (click)="setActiveSection('faq')" [ngClass]="{active: activeSection === 'faq'}">FAQ</a></li>
+      <li *ngFor="let item of menu">
+        <button 
+          (click)="loadSection(item.key)"
+          [class.active]="activeSection === item.key"
+          [attr.aria-current]="activeSection === item.key ? 'page' : null">
+          {{ item.label }}
+        </button>
+      </li>
     </ul>
- 
   </div>
  
   <!-- Main Content -->
   <div class="content">
-    <!-- Normal sections -->
-    <div *ngIf="activeSection !== 'faq'" [innerHTML]="sectionContents[activeSection]"></div>
  
-    <!-- FAQ section -->
-  <div class="faq-container">
-    <div *ngFor="let faq of faqs; let i = index" class="faq-item">
-      <div class="faq-question" (click)="toggleFaq(i)">
-        {{ faq.question }}
-        <span class="icon">{{ activeFaq === i ? '-' : '+' }}</span>
-      </div>
-      <div *ngIf="activeFaq === i" class="faq-answer">
-        {{ faq.answer }}
-     </div>
+    <!-- Normal Sections -->
+    <div *ngIf="activeSection !== 'faq'" 
+         [innerHTML]="sectionContents[activeSection] || '<p>Content not available</p>'">
     </div>
-  </div>
+ 
+    <!-- FAQ Section -->
+    <div *ngIf="activeSection === 'faq'" class="faq-container">
+      <div *ngFor="let faq of faqs; let i = index" class="faq-item">
+        <div class="faq-question" (click)="toggleFaq(i)">
+          {{ faq.question }}
+          <span class="icon">{{ activeFaq === i ? '-' : '+' }}</span>
+        </div>
+        <div *ngIf="activeFaq === i" class="faq-answer">
+          {{ faq.answer }}
+        </div>
+      </div>
+    </div>
  
   </div>
 </div>
-
  

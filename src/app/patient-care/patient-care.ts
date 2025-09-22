@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
  
 @Component({
@@ -6,13 +6,25 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './patient-care.html',
-  styleUrl: './patient-care.css'
+  styleUrls: ['./patient-care.css']
 })
-export class PatientCare {
+export class PatientCare implements OnInit {
+ 
+  // Sidebar menu
+  menu = [
+    { key: 'inpatient', label: 'In Patient Services' },
+    { key: 'outpatient', label: 'Out Patient Services' },
+    { key: 'homecare', label: 'Home Care Services' },
+    { key: 'insurance', label: 'Health Insurance' },
+    { key: 'faq', label: 'FAQ' }
+  ];
+ 
   activeSection: string = 'inpatient';
   activeFaq: number | null = null;
  
+  // Section contents
   sectionContents: { [key: string]: string } = {
+
     inpatient: `
       <h2>In-Patient Services</h2>
  
@@ -187,9 +199,10 @@ export class PatientCare {
       </ul>
     `
   };
-  // FAQ content
+ 
+  // FAQ list
   faqs = [
-    {
+        {
       question: 'How can I schedule an appointment with a specialist?',
       answer: 'You can schedule an appointment through our website, helpline, or by visiting the hospital reception desk.',
       open: false
@@ -231,16 +244,24 @@ export class PatientCare {
     }
   ];
  
-toggleFaq(index: number) {
+  ngOnInit() {
+    const saved = localStorage.getItem('patientCareActiveSection');
+    if (saved && (saved === 'faq' || this.sectionContents[saved])) {
+      this.activeSection = saved;
+    } else {
+      this.activeSection = 'inpatient';
+      localStorage.setItem('patientCareActiveSection', 'inpatient');
+    }
+  }
+ 
+  loadSection(section: string) {
+    this.activeSection = section;
+    localStorage.setItem('patientCareActiveSection', section);
+    this.activeFaq = null; // reset FAQ when switching sections
+  }
+ 
+  toggleFaq(index: number) {
     this.activeFaq = this.activeFaq === index ? null : index;
   }
-    setActiveSection(section: string) {
-    this.activeSection = section;
-    }
 }
- 
-//   loadSection(section: string) {
-//     this.activeSection = section;
-//   }
-// }
  

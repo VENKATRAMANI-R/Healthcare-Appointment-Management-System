@@ -11,6 +11,8 @@ import { RegistrationPage } from './registration-page/registration-page';
 
 import { E } from '@angular/cdk/keycodes';
 import { PatientCare } from './patient-care/patient-care';
+import { MyConsultations } from './my-consultations/my-consultations';
+import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
 
 export const routes: Routes = [
     {
@@ -50,5 +52,14 @@ export const routes: Routes = [
     {
         path:'registration-page',
         component:RegistrationPage
+    },
+    {
+        path:'my-consultations',
+        component:MyConsultations
+    },
+    {
+        path:'consultation-list',
+        component:ConsultationList
     }
+
 ];

@@ -1,37 +1,25 @@
 <div class="container">
+ 
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
       <h3>EXCELLENCE</h3>
     </div>
     <ul>
-      <li>
-        <a href="#"
-           (click)="loadSection('awards'); $event.preventDefault()"
-           [class.active]="activeSection==='awards'">
-           Awards & Accolades
-        </a>
-      </li>
-      <li>
-        <a href="#"
-           (click)="loadSection('accreditation'); $event.preventDefault()"
-           [class.active]="activeSection==='accreditation'">
-           Accreditation & Certification
-        </a>
-      </li>
-      <li>
-        <a href="#"
-           (click)="loadSection('milestones'); $event.preventDefault()"
-           [class.active]="activeSection==='milestones'">
-           Achievements & Milestones
-        </a>
+    
+      <li *ngFor="let item of menu">
+        <button 
+          (click)="loadSection(item.key)" 
+          [class.active]="activeSection === item.key"
+          [attr.aria-current]="activeSection === item.key ? 'page' : null">
+          {{ item.label }}
+        </button>
       </li>
     </ul>
   </div>
  
-  <!-- Main Content -->
   <div class="content" id="main-content">
-    <div [innerHTML]="sectionContents[activeSection]"></div>
+    <div [innerHTML]="sectionContents[activeSection] || '<p>Content not available</p>'"></div>
   </div>
 </div>
  
