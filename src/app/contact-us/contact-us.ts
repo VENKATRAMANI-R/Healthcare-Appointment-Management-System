@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 // import { AlertModule } from './_alert';
@@ -24,18 +24,21 @@ export class ContactUs {
   formError = false;
 
   onSubmit() {
-  this.submitted = false;
-  this.formError = false;
-    this.submitted = true;
-    this.contactForm.reset();
+   this.submitted = false;
+  this.formError = false; 
+    /* this.submitted = true; */
+    
   if (this.contactForm.valid) {
     this.submitted = true;
-    this.contactForm.reset();
+    this.formError = false;
+     this.contactForm.reset(); 
   } else {
     this.formError = true;
+      /* this.contactForm.reset();  */
   }
+  this.cdr.detectChanges();
 }
-constructor(private dialog: MatDialog) {}
+ constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
 
-
-}
+ 
+} 
