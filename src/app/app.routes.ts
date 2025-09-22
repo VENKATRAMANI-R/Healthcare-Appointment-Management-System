@@ -7,6 +7,7 @@ import { AboutUs } from './about-us/about-us';
 import { Excellence } from './excellence/excellence';
 import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
+import { RegistrationPage } from './registration-page/registration-page';
 
 import { E } from '@angular/cdk/keycodes';
 import { PatientCare } from './patient-care/patient-care';
@@ -45,5 +46,9 @@ export const routes: Routes = [
     {
         path:'patient-care',
         component:PatientCare
+    },
+    {
+        path:'registration-page',
+        component:RegistrationPage
     }
 ];

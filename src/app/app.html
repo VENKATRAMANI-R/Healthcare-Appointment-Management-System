@@ -13,7 +13,7 @@
     <div class="profileDropdown" style="position: relative;">
   <img src="images/profileUser.png" style="width: 50px; height: 50px; " alt="Profile">
   <div class="dropdown-menu-p">
-    <a class="dropdown-item-p" href="#">Login/SignUp</a>
+    <a class="dropdown-item-p" routerLink = "/registration-page">Login/SignUp</a>
     <hr>
     <a class="dropdown-item-p" href="#">Account Details</a>
     <hr>
@@ -42,20 +42,13 @@
             </span>
             
             <span>
+                <!-- <a class="AttentionBanner" routerLink="bookAppoinment" >Book Appointment</a> -->
                 <a class="AttentionBanner" routerLink="bookAppoinment" (click)="openAppointmentModal()">Book Appointment</a>
                 
                 <a class="AttentionBanner" routerLink="FindDoctors">Find Doctor</a>
             </span>
 </div>
     
-
-<!-- <div id="bookAppoinment">
-        <button class="pushable" [routerLink]="['/bookAppointment']">
-            <span class="shadow"></span>
-            <span class="edge"></span>
-            <span class="front">Book Appointment</span>
-        </button>
-</div> -->
 <div id="EmergencyBanner">
 
 </div>
