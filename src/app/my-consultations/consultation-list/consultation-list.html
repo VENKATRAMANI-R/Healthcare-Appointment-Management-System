@@ -1,0 +1,62 @@
+
+<table class="consultation-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Patient ID</th>
+      <th>Patient Name</th>
+      <th>Doctor</th>
+      <th>Notes Preview</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of consultations">
+      <td>{{ c.date }}</td>
+      <td>{{ c.patientId }}</td>
+      <td>{{ c.patientName }}</td>
+      <td>{{ c.doctorName }}</td>
+      <td>{{ c.notes ? (c.notes | slice:0:20) + '...' : '' }}</td>
+      <td>
+        <button (click)="viewDetails(c)">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Popup for Consultation Details -->
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <h3>Consultation Details</h3>
+    <p><strong>Date:</strong> {{ selectedConsultation?.date }}</p>
+    <p><strong>Patient:</strong> {{ selectedConsultation?.patientName }} ({{ selectedConsultation?.patientId }})</p>
+    <p><strong>Doctor:</strong> {{ selectedConsultation?.doctorName }}</p>
+
+    <h4>Notes:</h4>
+    <p>{{ selectedConsultation?.notes }}</p>
+
+    <div *ngIf="selectedConsultation?.prescription?.length">
+      <h4>Prescription:</h4>
+      <table class="prescription-table">
+        <thead>
+          <tr>
+            <th>Medicine</th>
+            <th>Dose</th>
+            <th>Frequency</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of selectedConsultation?.prescription">
+            <td>{{ p.medicineName }}</td>
+            <td>{{ p.dose }}</td>
+            <td>{{ p.frequency }}</td>
+            <td>{{ p.duration }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="close-btn" (click)="closePopup()">Close</button>
+  </div>
+</div>

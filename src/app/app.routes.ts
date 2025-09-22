@@ -10,6 +10,8 @@ import { ContactUs } from './contact-us/contact-us';
 
 import { E } from '@angular/cdk/keycodes';
 import { PatientCare } from './patient-care/patient-care';
+import { MyConsultations } from './my-consultations/my-consultations';
+import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
 
 export const routes: Routes = [
     {
@@ -45,5 +47,14 @@ export const routes: Routes = [
     {
         path:'patient-care',
         component:PatientCare
+    },
+    {
+        path:'my-consultations',
+        component:MyConsultations
+    },
+    {
+        path:'consultation-list',
+        component:ConsultationList
     }
+
 ];

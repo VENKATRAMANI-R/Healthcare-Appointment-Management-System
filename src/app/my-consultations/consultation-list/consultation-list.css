@@ -1,0 +1,86 @@
+.consultation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+ 
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+ 
+  th {
+    background: #6E8E9E;
+    color: white;
+  }
+ 
+  tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+ 
+  button {
+    padding: 5px 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+ 
+    &:hover {
+      background: #0056b3;
+    }
+  }
+}
+ 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+.popup-content {
+  background: white;
+  padding: 20px;
+  width: 600px;
+  border-radius: 8px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+ 
+.prescription-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+ 
+  th, td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+  }
+ 
+  th {
+    background: #557281;
+    color: white;
+  }
+}
+ 
+.close-btn {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+ 
+  &:hover {
+    background: #a71d2a;
+  }
+}
+ 
