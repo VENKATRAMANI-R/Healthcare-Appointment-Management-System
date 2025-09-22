@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
  
 @Component({
@@ -6,12 +6,23 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './about-us.html',
-  styleUrl: './about-us.css'
+  styleUrls: ['./about-us.css']   
 })
-export class AboutUs {
+export class AboutUs implements OnInit {
+ 
+  menu = [
+    { key: 'profile', label: 'Profile' },
+    { key: 'vision', label: 'Vision & Mission' },
+    { key: 'journey', label: 'Our Journey' },
+    { key: 'board', label: 'Board of Directors' },
+    { key: 'services', label: 'Our Services' },
+    { key: 'quality', label: 'Quality Policy' }
+  ];
+ 
+
   activeSection: string = 'profile';
  
-  // contents moved from about.js
+  
   sectionContents: { [key: string]: string } = {
     profile: `
   <h2 style="text-align:center;">Hospital Profile</h2>
@@ -118,11 +129,28 @@ vision: `
             world-class healthcare.
         </p>
     `
-};
+
+  };
  
-  // Method to switch section
+  // On component load, restore section from localStorage
+  ngOnInit() {
+    const saved = localStorage.getItem('aboutActiveSection');
+ 
+  
+    if (saved && this.sectionContents[saved]) {
+      this.activeSection = saved;
+    } else {
+      
+      this.activeSection = 'profile';
+      localStorage.setItem('aboutActiveSection', 'profile');
+    }
+  }
+ 
+  //  Change section and save to localStorage
   loadSection(section: string) {
+    if (!this.sectionContents[section]) return;
     this.activeSection = section;
+    localStorage.setItem('aboutActiveSection', section);
   }
 }
  
