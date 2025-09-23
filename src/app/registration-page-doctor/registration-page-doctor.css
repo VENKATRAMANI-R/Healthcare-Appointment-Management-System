@@ -4,7 +4,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    color: #2e4a62; 
+    color: #2e4a62; /* calm navy tone */
 }
  
 /* Container */
@@ -104,18 +104,27 @@ input {
     box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
 }
 
+/* Role{
+    width: 110%;        
+    border: 1.5px solid #a3d2ca;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f9fefe;
+    margin-bottom: 5px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
+} */
 
 .right form div{
     display: block;
     justify-content: space-between;
 }
 
-.col-md-4 {
+.margin {
     margin: 5px;
 }
 
 .text-danger {
-    color: #d9534f; /* Bootstrap's standard danger color */
+    color: #d9534f; /* standard danger color */
     font-size: 14px;
     margin-top: 4px;
     display: block;

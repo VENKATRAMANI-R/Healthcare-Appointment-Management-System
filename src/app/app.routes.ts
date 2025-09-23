@@ -13,7 +13,8 @@ import { E } from '@angular/cdk/keycodes';
 import { PatientCare } from './patient-care/patient-care';
 import { MyConsultations } from './my-consultations/my-consultations';
 import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
-
+import { RegistrationPageDoctor } from './registration-page-doctor/registration-page-doctor';
+import { Login } from './registration-page/login';
 export const routes: Routes = [
     {
         path:'',
@@ -22,6 +23,10 @@ export const routes: Routes = [
     {
         path:'bookAppoinment',
         component:BookAppointment
+    },
+    {
+        path:'login',
+        component: Login
     },
     {
         path: 'about-us', 
@@ -60,6 +65,10 @@ export const routes: Routes = [
     {
         path:'consultation-list',
         component:ConsultationList
+    },
+    {
+        path: 'registration-page-doctor',
+        component: RegistrationPageDoctor
     }
 
 ];

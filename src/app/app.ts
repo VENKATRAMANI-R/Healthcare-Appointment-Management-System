@@ -28,4 +28,9 @@ export class App {
       width: '600px'
     });
   }
+  showPopup = false;
+
+  // togglePopup() {
+  //   this.showPopup = !this.showPopup;
+  // }
 }

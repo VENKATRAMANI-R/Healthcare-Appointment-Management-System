@@ -1,17 +1,16 @@
-import { Component,signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule,FormControl, ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-
 @Component({
-  selector: 'app-registration-page',
+  selector: 'app-registration-page-doctor',
   imports: [ReactiveFormsModule,CommonModule,RouterLink],
-  templateUrl: './registration-page.html',
-  styleUrl: './registration-page.css'
+  templateUrl: './registration-page-doctor.html',
+  styleUrl: './registration-page-doctor.css'
 })
-export class RegistrationPage {
-  userForm: FormGroup;
+export class RegistrationPageDoctor {
+userForm: FormGroup;
  
 
   /* errors = [
@@ -19,11 +18,10 @@ export class RegistrationPage {
     { name: 'pattern', text: 'Only numbers min length is 4', rules: ['dirty'] }
   ]; */
 
-  constructor() {
+  constructor(/* private fb: FormBuilder */) {
     this.userForm = new FormGroup({
-      /* userId: new FormControl('', [Validators.required]), */
+      doctorId: new FormControl('', [Validators.required]), 
       userName: new FormControl ('', [Validators.required]),
-      role: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       phonenumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)]),
@@ -61,5 +59,4 @@ export class RegistrationPage {
     this.userForm.reset();
   }
 
-  
 }
