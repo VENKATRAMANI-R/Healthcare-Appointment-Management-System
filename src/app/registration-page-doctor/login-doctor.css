@@ -1,6 +1,6 @@
 /* General Page Style */
 body {
-    background-color: #e6f7f9;  /* soft pastel aqua */
+    background-color: #e6f7f9;  
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
@@ -31,11 +31,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #146C94; */
+   
 }
  
 .left img {
-    /* width: 200%; */
+    
     width: 550px;
     height: 300px;
     border-radius: 15px;
@@ -56,7 +56,7 @@ body {
 h1 {
     font-size: 38px;
     margin-bottom: 20px;
-    color: #146C94; /* pastel teal */
+    color: #146C94; 
 }
  
 /* Center Text */
@@ -73,7 +73,7 @@ button {
     padding: 12px 30px;
     font-size: 16px;
     font-weight: 500;
-    background-color: #a3d2ca; /* pastel green-blue */
+    background-color: #a3d2ca; 
     color: #2e4a62;
     border: none;
     border-radius: 12px;
@@ -82,32 +82,26 @@ button {
 }
  
 button:hover {
-    background-color: #5eaaa8; /* slightly darker pastel */
+    background-color: #5eaaa8; 
     color: white;
 }
 button:active {
-    background-color: #4a8482; /* slightly darker pastel */
+    background-color: #4a8482; 
 }
  
 
  
 input {
-    width: 100%;        /* makes input stretch to container */
-    max-width: 400px;   /* increase this value to make them wider */
-    padding: 10px; /* increase padding for taller inputs */
-    font-size: 17px;    /* increase font size for bigger text inside */
+    width: 100%;        
+    max-width: 400px;   
+    padding: 10px;
+    font-size: 17px;    
     border: 1.5px solid #a3d2ca;
     border-radius: 10px;
     outline: none;
     background-color: #f9fefe;
     margin-bottom: 5px;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-}
-
-
-.right form div{
-    display: block;
-    justify-content: space-between;
 }
 
 .col-md-4 {

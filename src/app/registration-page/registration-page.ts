@@ -14,14 +14,10 @@ export class RegistrationPage {
   userForm: FormGroup;
  
 
-  /* errors = [
-    { name: 'required', text: 'This field is required', rules: ['touched'] },
-    { name: 'pattern', text: 'Only numbers min length is 4', rules: ['dirty'] }
-  ]; */
+
 
   constructor() {
     this.userForm = new FormGroup({
-      /* userId: new FormControl('', [Validators.required]), */
       userName: new FormControl ('', [Validators.required]),
       role: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -46,7 +42,7 @@ export class RegistrationPage {
       console.log('Form Submitted:', this.userForm.value);
       alert(`Registration Successful!`);
       
-      // add further logic here (e.g., send data to backend)
+      // further logic will be added here 
      } 
     
     

@@ -9,13 +9,14 @@ import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
 import { RegistrationPage } from './registration-page/registration-page';
 
+import { E } from '@angular/cdk/keycodes';
 
 import { PatientCare } from './patient-care/patient-care';
 import { MyConsultations } from './my-consultations/my-consultations';
 import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
 import { RegistrationPageDoctor } from './registration-page-doctor/registration-page-doctor';
 import { Login } from './registration-page/login';
-import { Logindoctor } from './registration-page-doctor/login-doctor';x
+import { Logindoctor } from './registration-page-doctor/login-doctor';
 export const routes: Routes = [
     {
         path:'',

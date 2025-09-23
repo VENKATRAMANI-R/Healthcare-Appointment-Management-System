@@ -1,10 +1,10 @@
 /* General Page Style */
 body {
-    background-color: #e6f7f9;  /* soft pastel aqua */
+    background-color: #e6f7f9;  
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    color: #2e4a62; /* calm navy tone */
+    color: #2e4a62;
 }
  
 /* Container */
@@ -17,25 +17,21 @@ body {
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
- 
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+
 }
  
 /* Left Section */
 .left {
     width: 550px;
     height: 300px;
-    flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: #146C94; */
+    
 }
  
 .left img {
-    /* width: 200%; */
     width: 550px;
     height: 300px;
     border-radius: 15px;
@@ -44,9 +40,8 @@ body {
  
 /* Right Section */
 .right {
-    flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   /* It is for change the direction in the column */
     align-items: flex-start;
     padding-left: 2em;
     margin: 20px;
@@ -72,59 +67,39 @@ button {
     margin: 10px 5px;
     padding: 12px 30px;
     font-size: 16px;
-    font-weight: 500;
-    background-color: #a3d2ca; /* pastel green-blue */
+    font-weight: 500; /* For Boldness */
+    background-color: #a3d2ca; 
     color: #2e4a62;
     border: none;
     border-radius: 12px;
-    cursor: pointer;
+    cursor: pointer; /* Changed into hand icon */
     transition: all 0.3s ease;
 }
  
 button:hover {
-    background-color: #5eaaa8; /* slightly darker pastel */
+    background-color: #5eaaa8; 
     color: white;
 }
 button:active {
-    background-color: #4a8482; /* slightly darker pastel */
+    background-color: #4a8482; 
 }
  
 
  
 input {
-    width: 100%;        /* makes input stretch to container */
-    max-width: 400px;   /* increase this value to make them wider */
-    padding: 10px; /* increase padding for taller inputs */
-    font-size: 17px;    /* increase font size for bigger text inside */
+    width: 100%;        
+    max-width: 400px;  
+    padding: 10px; 
+    font-size: 17px;    
     border: 1.5px solid #a3d2ca;
     border-radius: 10px;
-    outline: none;
     background-color: #f9fefe;
     margin-bottom: 5px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-}
-
-/* Role{
-    width: 110%;        
-    border: 1.5px solid #a3d2ca;
-    border-radius: 10px;
-    outline: none;
-    background-color: #f9fefe;
-    margin-bottom: 5px;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-} */
-
-.right form div{
-    display: block;
-    justify-content: space-between;
-}
-
-.margin {
-    margin: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .text-danger {
-    color: #d9534f; /* standard danger color */
+    color: #d9534f; 
     font-size: 14px;
     margin-top: 4px;
     display: block;
