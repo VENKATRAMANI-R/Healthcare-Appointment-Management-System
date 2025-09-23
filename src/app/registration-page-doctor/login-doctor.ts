@@ -8,7 +8,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login-doctor.html',
   styleUrl: './login-doctor.css'
 })
-export class Login {
+export class Logindoctor {
     userForm: FormGroup;
  
   constructor(private loginService:LoginService) {
