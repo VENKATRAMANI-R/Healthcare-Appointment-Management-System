@@ -7,7 +7,6 @@ import { AboutUs } from './about-us/about-us';
 import { Excellence } from './excellence/excellence';
 import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
-
 import { E } from '@angular/cdk/keycodes';
 import { PatientCare } from './patient-care/patient-care';
 import { MyConsultations } from './my-consultations/my-consultations';

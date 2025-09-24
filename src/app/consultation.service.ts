@@ -12,19 +12,18 @@ export interface PrescriptionItem {
   medicineName: string;
   dose: string;
   frequency: string;
-  duration?: string;
-  notes?: string;
+  duration: string;
 }
 
 export interface Consultation {
   id?: string;
   appointmentId?: string;
   patientId: string;
-  patientName?: string;
-  doctorId?: string;
+  patientName: string;
+  doctorId: string;
   doctorName: string;
   date: string;
-  notes?: string;
+  notes: string;
   prescription?: PrescriptionItem[];
   attachments?: Attachment[];
   createdAt?: string;

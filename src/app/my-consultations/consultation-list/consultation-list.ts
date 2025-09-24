@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsultationService, Consultation } from '../../consultation.service';
 
@@ -11,7 +11,7 @@ import { ConsultationService, Consultation } from '../../consultation.service';
   styleUrls: ['./consultation-list.css']
 })
 export class ConsultationList implements OnInit {
-  consultations: Consultation[] = [];
+  @Input() consultations: Consultation[] = [];
   selectedConsultation: Consultation | null = null;
   showPopup: boolean = false;
 
