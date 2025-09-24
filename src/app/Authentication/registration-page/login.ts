@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../login-service';
+import { LoginService } from '../../login-service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
-  templateUrl: './login-doctor.html',
-  styleUrl: './login-doctor.css'
+  templateUrl: './login.html',
+  styleUrl: './login.css'
 })
-export class Logindoctor {
+export class Login {
     userForm: FormGroup;
  
-  constructor(private loginService:LoginService) {
+  constructor(private loginService:LoginService, private router : Router) {
   this.userForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
@@ -53,6 +54,7 @@ export class Logindoctor {
 
     if(this.userForm.get('username')?.value === correctUsername && this.userForm.get('password')?.value === correctPassword) {
       alert('Login successful!');
+      this.router.navigate(['/']);
   }
 }
 }

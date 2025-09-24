@@ -1,26 +1,23 @@
-import { Component, signal } from '@angular/core';
+import { Component,signal } from '@angular/core';
 import { FormsModule,FormControl, ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+
 
 @Component({
-  selector: 'app-registration-page-doctor',
+  selector: 'app-registration-page',
   imports: [ReactiveFormsModule,CommonModule,RouterLink],
-  templateUrl: './registration-page-doctor.html',
-  styleUrl: './registration-page-doctor.css'
+  templateUrl: './registration-page.html',
+  styleUrl: './registration-page.css'
 })
-export class RegistrationPageDoctor {
-userForm: FormGroup;
+export class RegistrationPage {
+  userForm: FormGroup;
  
 
-  /* errors = [
-    { name: 'required', text: 'This field is required', rules: ['touched'] },
-    { name: 'pattern', text: 'Only numbers min length is 4', rules: ['dirty'] }
-  ]; */
 
-  constructor(/* private fb: FormBuilder */) {
+
+  constructor(private router: Router) {
     this.userForm = new FormGroup({
-      doctorId: new FormControl('', [Validators.required]), 
       userName: new FormControl ('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       phonenumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
@@ -43,8 +40,9 @@ userForm: FormGroup;
     if (this.userForm.valid) {
       console.log('Form Submitted:', this.userForm.value);
       alert(`Registration Successful!`);
+       this.router.navigate(['/login']); 
       
-      // add further logic here (e.g., send data to backend)
+      // further logic will be added here 
      } 
     
     
@@ -59,4 +57,5 @@ userForm: FormGroup;
     this.userForm.reset();
   }
 
+  
 }

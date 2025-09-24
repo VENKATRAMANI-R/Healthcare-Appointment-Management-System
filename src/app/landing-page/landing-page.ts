@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.css'
 })
