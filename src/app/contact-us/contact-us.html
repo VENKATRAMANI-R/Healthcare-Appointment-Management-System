@@ -16,11 +16,13 @@
             <p>{{ email }}</p>
         </div>
     </div>
-    <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+    
+    <form  [formGroup]="contactForm" (ngSubmit)="onSubmit()">
         <input type="text" placeholder="Your Name" formControlName="yourname" >
         <input type="email" placeholder="Email" formControlName="email" >
         <input type="tel" placeholder="Phone Number" formControlName="phoneNumber" >
         <textarea placeholder="Description / Message" formControlName="message"></textarea>
+    
 
         <button type="submit">Submit</button>
     </form>
