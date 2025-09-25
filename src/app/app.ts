@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, NgOptimizedImage, CommonModule],
+  imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -28,4 +28,9 @@ export class App {
       width: '600px'
     });
   }
+  showPopup = false;
+
+  // togglePopup() {
+  //   this.showPopup = !this.showPopup;
+  // }
 }

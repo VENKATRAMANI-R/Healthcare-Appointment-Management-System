@@ -7,12 +7,16 @@ import { AboutUs } from './about-us/about-us';
 import { Excellence } from './excellence/excellence';
 import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
+import { RegistrationPage } from './Authentication/registration-page/registration-page';
 
 import { E } from '@angular/cdk/keycodes';
+
 import { PatientCare } from './patient-care/patient-care';
 import { MyConsultations } from './my-consultations/my-consultations';
 import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
-
+import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';
+import { Login } from './Authentication/registration-page/login';
+import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
 export const routes: Routes = [
     {
         path:'',
@@ -21,6 +25,14 @@ export const routes: Routes = [
     {
         path:'bookAppoinment',
         component:BookAppointment
+    },
+    {
+        path:'login',
+        component: Login
+    },
+    {
+        path:'login-doctor',
+        component: Logindoctor
     },
     {
         path: 'about-us', 
@@ -49,12 +61,20 @@ export const routes: Routes = [
         component:PatientCare
     },
     {
+        path:'registration-page',
+        component:RegistrationPage
+    },
+    {
         path:'my-consultations',
         component:MyConsultations
     },
     {
         path:'consultation-list',
         component:ConsultationList
+    },
+    {
+        path: 'registration-page-doctor',
+        component: RegistrationPageDoctor
     }
 
 ];

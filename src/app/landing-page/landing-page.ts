@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.css'
 })
