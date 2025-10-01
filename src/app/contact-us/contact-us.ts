@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './contact-us.css'
 })
 export class ContactUs {
-    address = "Phase 3, Hinjewadi, Pune, 411057";
+  address = "Phase 3, Hinjewadi, Pune, 411057";
   phone = "910-910-1150";
   email = "healwell@gmail.com";
   contactForm = new FormGroup({
@@ -19,15 +19,18 @@ export class ContactUs {
     phoneNumber: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{10}$/)]),
     message: new FormControl("", [Validators.required, Validators.minLength(10)])
   });
+    
+    submitted = false;
+    formError = false;
 
-  submitted = false;
-  formError = false;
-
+  
   onSubmit() {
    this.submitted = false;
-  this.formError = false; 
-    /* this.submitted = true; */
-    
+   this.formError = false; 
+    /* this.submitted = true; 
+    console.log(this.contactForm);
+    console.log(this.contactForm.controls);
+    /* console.log(this.contactForm.controls.yourname.errors); */
   if (this.contactForm.valid) {
     this.submitted = true;
     this.formError = false;
@@ -36,9 +39,9 @@ export class ContactUs {
     this.formError = true;
       /* this.contactForm.reset();  */
   }
-  this.cdr.detectChanges();
+  /* this.cdr.detectChanges(); */
 }
- constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
+ constructor(private dialog: MatDialog, /*private cdr: ChangeDetectorRef*/) {}
 
  
 } 

@@ -8,7 +8,7 @@ import { Doctor } from './doctor-model';
 @Component({
   selector: 'app-find-doctors',
   standalone: true,
-  imports: [CommonModule, BookAppointment],
+  imports: [CommonModule],
   templateUrl: './find-doctors.html',
   styleUrls: ['./find-doctors.css']
 })
