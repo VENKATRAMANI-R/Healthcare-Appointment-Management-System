@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+//import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-book-appointment',
   imports: [ReactiveFormsModule],
@@ -13,7 +13,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export class BookAppointment implements OnInit {
   appointmentForm!: FormGroup;
 
-  // constructor(private fb: FormBuilder) {}
+   //constructor(private fb: FormBuilder) {}
 
   // ngOnInit(): void {
   //   this.appointmentForm = this.fb.group({
@@ -32,9 +32,11 @@ export class BookAppointment implements OnInit {
   //   }
   // }
   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<BookAppointment>
-  ) {
+    private fb: FormBuilder
+    //public dialogRef: MatDialogRef<BookAppointment>
+  ) {}
+
+  ngOnInit(): void {
     this.appointmentForm = this.fb.group({
       userId: [{ value: 'PAT12345', disabled: true }],
       userName: [{ value: 'John Doe', disabled: true }],
@@ -43,18 +45,19 @@ export class BookAppointment implements OnInit {
       problem: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  
+  //ngOnInit(): void {
+   // throw new Error('Method not implemented.');
+  //}
 
   onSubmit(): void {
     if (this.appointmentForm.valid) {
       console.log('Appointment booked:', this.appointmentForm.getRawValue());
-      this.dialogRef.close();
+      //this.dialogRef.close();
     }
   }
 
-  onClose(): void {
-    this.dialogRef.close();
-  }
+  //onClose(): void {
+   //this.dialogRef.close();
+//}
 }

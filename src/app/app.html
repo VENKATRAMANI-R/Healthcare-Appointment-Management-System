@@ -18,6 +18,8 @@
     <a class="dropdown-item-p" href="#">Account Details</a>
     <hr>
     <a class="dropdown-item-p" routerLink="/my-consultations">My Consultations</a>
+    <hr>
+    <a class="dropdown-item-p" routerLink="/my-appointments">My Appointments</a>
   </div>
   <!-- Child Popup -->
   <div class="popup" *ngIf="showPopup">
@@ -48,7 +50,7 @@
             
             <span>
                 <!-- <a class="AttentionBanner" routerLink="bookAppoinment" >Book Appointment</a> -->
-                <a class="AttentionBanner" routerLink="bookAppoinment" (click)="openAppointmentModal()">Book Appointment</a>
+                <a class="AttentionBanner" routerLink="bookAppoinment" >Book Appointment</a>
                 
                 <a class="AttentionBanner" routerLink="FindDoctors">Find Doctor</a>
             </span>

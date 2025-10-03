@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { BookAppointment } from '../book-appointment/book-appointment';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,10 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './landing-page.css'
 })
 export class LandingPage {
-  constructor(private dialog: MatDialog) {}
-  openAppointmentModal(): void {
-      this.dialog.open(BookAppointment, {
-        width: '600px'
-      });
-    }
+  constructor(private router: Router) {}
+  onClick(){
+    this.router.navigate(['/bookAppoinment']);
+  }
 }
