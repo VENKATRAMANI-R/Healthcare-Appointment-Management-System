@@ -10,16 +10,10 @@ import { ConsultationService, Consultation } from '../../consultation.service';
   templateUrl: './consultation-list.html',
   styleUrls: ['./consultation-list.css']
 })
-export class ConsultationList implements OnInit {
+export class ConsultationList  {
   @Input() consultations: Consultation[] = [];
   selectedConsultation: Consultation | null = null;
   showPopup: boolean = false;
-
-  constructor(private consultationService: ConsultationService) {}
-
-  ngOnInit(): void {
-    this.consultations = this.consultationService.getConsultations();
-  }
 
   viewDetails(consultation: Consultation) {
     this.selectedConsultation = consultation;

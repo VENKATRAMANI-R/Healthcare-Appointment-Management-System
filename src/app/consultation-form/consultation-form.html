@@ -1,0 +1,89 @@
+<h2>Consultation Record</h2>
+
+<form [formGroup]="consultationForm" (ngSubmit)="submitForm()">
+
+  <label>Date:</label>
+  <input type="date" formControlName="date"/>
+  <div *ngIf="consultationForm.controls['date'].invalid && (consultationForm.controls['date'].touched || consultationForm.controls['date'].dirty)">
+    <span *ngIf="consultationForm.controls['date'].errors?.['required']">
+    <small>*This field is Required </small></span>
+  </div>
+
+
+  <label>Patient ID:</label>
+  <input formControlName="patientId" />
+  <div *ngIf="consultationForm.controls['patientId'].invalid && (consultationForm.controls['patientId'].touched || consultationForm.controls['patientId'].dirty)">
+    <span *ngIf="consultationForm.controls['patientId'].errors?.['required']">
+    <small>This is Required </small></span>
+  </div>
+
+    <label>Patient Name:</label>
+  <input formControlName="patientName" />
+  <div *ngIf="consultationForm.controls['patientName'].invalid && (consultationForm.controls['patientName'].touched || consultationForm.controls['patientName'].dirty)">
+    <span *ngIf="consultationForm.controls['patientName'].errors?.['required']">
+    <small>This is Required </small></span>
+  </div>
+
+
+  <label>Doctor ID:</label>
+  <input formControlName="doctorId" />
+  <div *ngIf="consultationForm.controls['doctorId'].invalid && (consultationForm.controls['doctorId'].touched || consultationForm.controls['doctorId'].dirty)">
+    <span *ngIf="consultationForm.controls['doctorId'].errors?.['required']">
+    <small>This is Required </small></span>
+  </div>
+
+  <label>Doctor Name:</label>
+  <input formControlName="doctorName" />
+  <div *ngIf="consultationForm.controls['doctorName'].invalid && (consultationForm.controls['doctorName'].touched || consultationForm.controls['doctorName'].dirty)">
+    <span *ngIf="consultationForm.controls['doctorName'].errors?.['required']">
+    <small>This is Required </small></span>
+  </div>
+
+
+  <label>Notes:</label>
+  <textarea formControlName="notes" rows="4"></textarea>
+
+  <h3>Prescription</h3>
+  <div formArrayName="prescription">
+    <div *ngFor="let item of prescription.controls; let i = index" [formGroupName]="i">
+
+
+      <label>Medicine Name:</label>
+      <input formControlName="medicineName" />
+      <div *ngIf="item.get('medicineName')?.invalid && (item.get('medicineName')?.touched || item.get('medicineName')?.dirty)">
+        <span *ngIf="item.get('medicineName')?.errors?.['required']">
+        <small>Medicine name is required</small>
+        </span>
+      </div>
+
+      
+
+      <label>Dose:</label>
+      <input formControlName="dose" />
+      <div *ngIf="item.get('dose')?.invalid && (item.get('dose')?.touched || item.get('dose')?.dirty)">
+        <span *ngIf="item.get('dose')?.errors?.['required']">
+        <small>Dose is required</small>
+        </span>
+      </div>
+
+      <label>Frequency:</label>
+      <input formControlName="frequency"/>
+
+      <label>Duration:</label>
+      <input formControlName="duration" />
+
+      <button type="button" (click)="removePrescriptionItem(i)">Remove</button>
+      <hr />
+    </div>
+  </div>
+  <button type="button" (click)="addPrescriptionItem()">Add Prescription Item</button>
+
+  <h3>Attachments</h3>
+  <input type="file" multiple (change)="onFileSelected($event)" />
+
+  <ul>
+    <li *ngFor="let file of uploadedFiles">{{ file.name }} ({{ file.size }} bytes)</li>
+  </ul>
+
+  <button type="submit">Submit Consultation</button>
+</form>

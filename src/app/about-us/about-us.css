@@ -5,11 +5,11 @@
  
 .sidebar {
   width: 220px;
-  background: #6E8E9E;   /* old sidebar background */
+  background: #6E8E9E;   
   padding: 15px;
-  min-height: 100vh;     /* make sidebar stretch to bottom */
+  min-height: 100vh;     
   color: white;          
-  box-shadow: 2px 0 6px rgba(0,0,0,0.1); /* same depth effect as old */
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1); 
 }
  
 .sidebar-header h3 {

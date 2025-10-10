@@ -44,7 +44,6 @@ export class Excellence implements OnInit {
  
 ngOnInit() {
   this.activeSection = 'awards';
-  localStorage.setItem('excellenceActiveSection', 'awards');
 }
  
  
@@ -52,7 +51,6 @@ ngOnInit() {
   loadSection(section: string) {
     if (!this.sectionContents[section]) return;
     this.activeSection = section;
-    localStorage.setItem('excellenceActiveSection', section);
   }
 }
  

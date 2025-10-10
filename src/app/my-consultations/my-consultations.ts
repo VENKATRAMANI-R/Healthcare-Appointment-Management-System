@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConsultationService, Consultation } from '../consultation.service';
 import { ConsultationList } from './consultation-list/consultation-list';
-
+import { ReactiveFormsModule } from '@angular/forms'
 @Component({
   selector: 'app-my-consultations',
   standalone: true,
-  imports: [CommonModule,FormsModule, ConsultationList],
+  imports: [CommonModule,FormsModule, ConsultationList,ReactiveFormsModule],
   templateUrl: './my-consultations.html',
   styleUrls: ['./my-consultations.css']
 })

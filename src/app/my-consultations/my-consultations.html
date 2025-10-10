@@ -2,20 +2,17 @@
   <h1 class="center-heading">Medical History</h1>
 
 
-<!-- Unified Search Box -->
+<!-- Search Box -->
 <div class="search-bar">
 <input
   type="search"
   placeholder="Search by doctor name or date..."
-  (input)="onSearch($event)"
-/>
+  (input)="onSearch($event)" />
 
 </div>
-
-
 
 <app-consultation-list [consultations]="filteredConsultations"></app-consultation-list>
 
 
-  <!-- <app-consultation-list></app-consultation-list> -->
+
 </div>
