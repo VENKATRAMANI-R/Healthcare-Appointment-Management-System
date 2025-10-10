@@ -1,12 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
-export interface Attachment {
-  id?: string;
-  filename: string;
-  url?: string;
-  mimeType?: string;
-  size?: number;
-}
+
 
 export interface PrescriptionItem {
   medicineName: string;
@@ -25,7 +19,7 @@ export interface Consultation {
   date: string;
   notes: string;
   prescription?: PrescriptionItem[];
-  attachments?: Attachment[];
+  // attachments?: Attachment[];
   createdAt?: string;
   updatedAt?: string;
 }

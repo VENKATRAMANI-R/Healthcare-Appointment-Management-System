@@ -18,6 +18,8 @@ import { RegistrationPageDoctor } from './Authentication/registration-page-docto
 import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
 import { ConsultationForm } from './consultation-form/consultation-form';
+import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
+
 export const routes: Routes = [
     {
         path:'',
@@ -81,6 +83,10 @@ export const routes: Routes = [
     {
         path: 'registration-page-doctor',
         component: RegistrationPageDoctor
+    },
+    {
+        path:'doctor-availablity-management',
+        component:DoctorAvailablityManagement
     }
 
 ];
