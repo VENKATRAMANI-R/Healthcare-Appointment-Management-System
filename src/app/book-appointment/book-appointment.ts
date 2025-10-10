@@ -38,9 +38,10 @@ export class BookAppointment implements OnInit {
 
   ngOnInit(): void {
     this.appointmentForm = this.fb.group({
-      userId: [{ value: 'PAT12345', disabled: true }],
-      userName: [{ value: 'John Doe', disabled: true }],
-      appointmentDate: ['', Validators.required],
+      PatientId: [{ value: 'PAT12345', disabled: true }],
+      PatientName: [{ value: 'John Doe', disabled: true }],
+      DoctorName: [{ value: 'Dr. Guru Sakthi', disabled: true }],
+      date: ['', Validators.required],
       timeSlot: ['', Validators.required],
       problem: ['', [Validators.required, Validators.maxLength(50)]]
     });

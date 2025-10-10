@@ -93,20 +93,26 @@
   <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
     <div id="getDetails" class="form-group">
       <span>
-        <label for="UserID">User ID</label>
-        <input type="text" id="UserID" formControlName="userId" readonly />
+        <label for="PatientID">Patient ID</label>
+        <input type="text" id="Patient" formControlName="PatientId" readonly />
         <small style="color: gray;">Auto-generated. Cannot be edited.</small>
       </span>
       <!-- <br> -->
       <span>
-        <label for="UserName">Name</label>
-        <input type="text" id="UserName" formControlName="userName" readonly />
+        <label for="Patient">Patient Name</label>
+        <input type="text" id="Patient Name" formControlName="PatientName" readonly />
+        <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small>
+      </span>
+      <!-- <br> -->
+       <span>
+        <label for="Doctor">Doctor Name</label>
+        <input type="text" id="Doctor Name" formControlName="DoctorName" readonly />
         <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small>
       </span>
       <!-- <br> -->
       <span>
-        <label for="AppointmentDate">Appointment Date</label>
-        <input type="date" id="AppointmentDate" formControlName="appointmentDate" />
+        <label for="Date">Date</label>
+        <input type="date" id="Date" formControlName="Date" />
             <small style="color: gray;">Select a date within the next 30 days.</small>
       </span>
       <!-- <br> -->

@@ -17,13 +17,14 @@ import { ConsultationList } from './my-consultations/consultation-list/consultat
 import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';
 import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
+import { MyAppointments } from './my-appointments/my-appointments';
 export const routes: Routes = [
     {
         path:'',
         component:LandingPage
     },
     {
-        path:'bookAppoinment',
+        path:'bookAppointment',
         component:BookAppointment
     },
     {
@@ -75,6 +76,10 @@ export const routes: Routes = [
     {
         path: 'registration-page-doctor',
         component: RegistrationPageDoctor
+    },
+    {
+        path:'my-appointments',
+        component:MyAppointments
     }
 
 ];
