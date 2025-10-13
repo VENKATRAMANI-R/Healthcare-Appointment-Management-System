@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../../login-service';
+import { LoginService } from '../login-service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 

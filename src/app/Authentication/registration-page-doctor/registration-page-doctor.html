@@ -8,39 +8,32 @@
     <h1 class="center">Registration Page Doctor</h1>
     <form [formGroup]="userForm">
       <div class="margin">
-          <input type="text" class="form-control" formControlName="doctorId" placeholder="DoctorId">
-          <div class="text-danger" *ngIf="userForm.controls['doctorId'].invalid && (userForm.controls['doctorId'].touched || userForm.controls['doctorId'].dirty)">
-              <span *ngIf="userForm.controls['doctorId'].errors?.['required']">
-                <small>This is Required</small></span>
-          </div>
-      </div>
-      <div class="margin">
-        <input type="text" class="form-control" formControlName="userName" placeholder="Doctor Name">
-          <div class="text-danger" *ngIf="userForm.controls['userName'].invalid && (userForm.controls['userName'].touched || userForm.controls['userName'].dirty)">
-            <span *ngIf="userForm.controls['userName'].errors?.['required']">
+        <input type="text" class="form-control" formControlName="doctorName" placeholder="Doctor Name">
+          <div class="text-danger" *ngIf="userForm.controls['doctorName'].invalid && (userForm.controls['doctorName'].touched || userForm.controls['doctorName'].dirty)">
+            <span *ngIf="userForm.controls['doctorName'].errors?.['required']">
               <small>This is Required</small></span>
           </div>
       </div>
   
       <div class="margin">
-          <input type="text" class="form-control" formControlName="email" placeholder="Email">
-          <div class="text-danger" *ngIf="userForm.controls['email'].invalid  && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
-            <span *ngIf="userForm.controls['email'].errors?.['required']"> This is Required </span>
-            <span *ngIf="userForm.controls['email'].errors?.['email']"> Email Is Not Proper </span>
+          <input type="text" class="form-control" formControlName="doctorEmail" placeholder="doctorEmail">
+          <div class="text-danger" *ngIf="userForm.controls['doctorEmail'].invalid  && (userForm.controls['doctorEmail'].touched || userForm.controls['doctorEmail'].dirty)">
+            <span *ngIf="userForm.controls['doctorEmail'].errors?.['required']"> This is Required </span>
+            <span *ngIf="userForm.controls['doctorEmail'].errors?.['doctorEmail']"> Email Is Not Proper </span>
           </div>
       </div>
       <div class="margin">
-        <input type="tel" class="form-control" formControlName="phonenumber" placeholder="PhoneNumber">
-        <div class="text-danger" *ngIf="userForm.controls['phonenumber'].invalid  && (userForm.controls['phonenumber'].touched || userForm.controls['phonenumber'].dirty)">
-          <span *ngIf="userForm.controls['phonenumber'].errors?.['required']"> This is Required </span>
-          <span *ngIf="userForm.controls['phonenumber'].errors?.['pattern']"> It should have 10 digits </span>
+        <input type="tel" class="form-control" formControlName="doctorMobileNumber" placeholder="doctorMobileNumber">
+        <div class="text-danger" *ngIf="userForm.controls['doctorMobileNumber'].invalid  && (userForm.controls['doctorMobileNumber'].touched || userForm.controls['doctorMobileNumber'].dirty)">
+          <span *ngIf="userForm.controls['doctorMobileNumber'].errors?.['required']"> This is Required </span>
+          <span *ngIf="userForm.controls['doctorMobileNumber'].errors?.['pattern']"> It should have 10 digits </span>
         </div>
       </div> 
       <div class="margin">
-          <input type="password" class="form-control" formControlName="password" placeholder="Password">
-          <div class="text-danger" *ngIf="userForm.controls['password'].invalid  && (userForm.controls['password'].touched || userForm.controls['password'].dirty)">
-            <span *ngIf="userForm.controls['password'].errors?.['required']"> This IS Required </span>
-            <span *ngIf="userForm.controls['password'].errors?.['pattern']"> password should have 10 charactor(atleast have one small,capital,special charactor)</span>
+          <input type="password" class="form-control" formControlName="doctorPassword" placeholder="doctorPassword">
+          <div class="text-danger" *ngIf="userForm.controls['doctorPassword'].invalid  && (userForm.controls['doctorPassword'].touched || userForm.controls['doctorPassword'].dirty)">
+            <span *ngIf="userForm.controls['doctorPassword'].errors?.['required']"> This IS Required </span>
+            <span *ngIf="userForm.controls['doctorPassword'].errors?.['pattern']"> password should have 10 charactor(atleast have one small,capital,special charactor)</span>
           </div>
       </div>
       <div class="margin">

@@ -17,6 +17,8 @@ import { ConsultationList } from './my-consultations/consultation-list/consultat
 import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';
 import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
+import { DoctorProfiles } from './Authentication/Doctor-Profiles/doctor-profiles/doctor-profiles';
+import { PatientProfiles } from './Authentication/Patient-Profiles/patient-profiles/patient-profiles';
 export const routes: Routes = [
     {
         path:'',
@@ -75,6 +77,14 @@ export const routes: Routes = [
     {
         path: 'registration-page-doctor',
         component: RegistrationPageDoctor
+    },
+    {
+        path:'doctor-profiles',
+        component:DoctorProfiles
+    },
+    {
+        path:'patient-profiles',
+        component:PatientProfiles
     }
 
 ];

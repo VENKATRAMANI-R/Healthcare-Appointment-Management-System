@@ -1,0 +1,18 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <img src="https://cdn-icons-png.flaticon.com/512/4322/4322991.png" alt="Patient Avatar" class="profile-img" />
+      <h2>{{ patient.name }}</h2>
+      <p class="specialization">{{ patient.bloodGroup }} Blood Group</p>
+    </div>
+ 
+    <div class="profile-details">
+      <div class="detail"><strong>Email:</strong> {{ patient.email }}</div>
+      <div class="detail"><strong>Phone:</strong> {{ patient.phoneNumber }}</div>
+      <div class="detail"><strong>Age:</strong> {{ patient.age }}</div>
+      <div class="detail"><strong>Gender:</strong> {{ patient.gender }}</div>
+      <div class="detail"><strong>Address:</strong> {{ patient.address }}</div>
+      <div class="detail"><strong>Medical History:</strong> {{ patient.medicalHistory }}</div>
+    </div>
+  </div>
+</div>
