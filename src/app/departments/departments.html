@@ -1,6 +1,14 @@
-<div class = "dropdown">
-    <button class="dropbtn" (click)="toggleDropdown()">Departments ▼</button>
-    <div class="dropdown-content" *ngIf="isOpen">
-      <a *ngFor="let dept of departments" (click)="selectDepartment(dept)">{{ dept }}</a>
+<div class="departments-section">
+  <div class="section-header">
+    <h2 class="section-title">Our Departments</h2>
+    <p class="section-subtitle">Expert care across a wide range of specialties</p>
+  </div>
+  <div class="departments-grid">
+    <div class="department-card" *ngFor="let dept of departments">
+      <span class="material-icons dept-icon">{{ dept.icon }}</span>
+      <h3 class="dept-name">{{ dept.name }}</h3>
+      <p class="dept-description">{{ dept.description }}</p>
     </div>
+  </div>
 </div>
+ 
