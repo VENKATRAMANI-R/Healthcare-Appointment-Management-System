@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookAppointment } from '../book-appointment/book-appointment';
+import { BookAppointment } from '../Appointment Booking/book-appointment/book-appointment';
 import { MatDialog } from '@angular/material/dialog';
 import { DoctorService } from '../doctor-service';
 import { Doctor } from './doctor-model';

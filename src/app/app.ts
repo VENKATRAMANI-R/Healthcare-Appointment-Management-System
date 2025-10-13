@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { BookAppointment } from './book-appointment/book-appointment';
+import { BookAppointment } from './Appointment Booking/book-appointment/book-appointment';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

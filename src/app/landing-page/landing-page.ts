@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookAppointment } from '../book-appointment/book-appointment';
+import { BookAppointment } from '../Appointment Booking/book-appointment/book-appointment';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,6 @@ import { Router } from '@angular/router';
 export class LandingPage {
   constructor(private router: Router) {}
   onClick(){
-    this.router.navigate(['/bookAppoinment']);
+    this.router.navigate(['/bookAppointment']);
   }
 }
