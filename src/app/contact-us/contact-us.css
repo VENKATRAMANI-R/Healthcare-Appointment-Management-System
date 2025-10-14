@@ -92,3 +92,6 @@ button {
 button:hover {
     background: #155a91;
 }
+button:active {
+    background: #155a91;
+}

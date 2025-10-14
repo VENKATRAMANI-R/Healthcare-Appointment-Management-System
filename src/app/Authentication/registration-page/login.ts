@@ -19,8 +19,11 @@ export class Login {
   }); 
   }
   onLogin() {
-    const correctUsername = this.loginService.userObj.username;
-    const correctPassword = this.loginService.userObj.password;
+    // const correctUsername = this.loginService.userObj.username;
+    // const correctPassword = this.loginService.userObj.password;
+
+    const correctUsername='';
+    const correctPassword='';
  
     if (!this.userForm.get('username')?.value && !this.userForm.get('password')?.value) {
       alert('Please enter username and password.');

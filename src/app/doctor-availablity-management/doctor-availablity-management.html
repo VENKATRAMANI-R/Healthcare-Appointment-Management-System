@@ -1,0 +1,153 @@
+<div class="doctor-availability-container">
+  <header>
+    <div class="header-content">
+      <h1><i class="fas fa-stethoscope"></i>Appointments Manager</h1>
+      <div class="doctor-info">
+        <div class="doctor-avatar">DR</div>
+        <div>
+          <div>{{ doctor?.name || 'NA' }}</div>
+          <div style="font-size: 12px; opacity: 0.8;">{{ doctor?.specialization || 'NA' }}</div>
+        </div>
+      </div>
+    </div>
+  </header>
+<div>
+  <main>
+    <div class="dashboard">
+      <div class="stat-card">
+        <div class="stat-icon pending">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ getPendingAppointmentsCount() || 0 }}</h3>
+          <p>Pending Appointments</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon confirmed">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ getConfirmedAppointmentsCount() || 0 }}</h3>
+          <p>Confirmed Appointments</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Doctor Availability Section -->
+    <div class="card">
+      <div class="card-header">
+        <h2><i class="fas fa-calendar-alt"></i> Manage Availability</h2>
+      </div>
+
+      <form (ngSubmit)="addAvailability()" #availabilityForm="ngForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" [(ngModel)]="newAvailability.date" required #date="ngModel" [min]="minDate">
+            <div *ngIf="date.invalid && (date.dirty || date.touched)" class="error-message">Date is required</div>
+          </div>
+
+          <div class="form-group">
+            <label for="start-time">Start Time</label>
+            <input type="time" id="start-time" name="startTime" [(ngModel)]="newAvailability.startTime" required #startTime="ngModel">
+            <div *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)" class="error-message">Start time is required</div>
+          </div>
+
+          <div class="form-group">
+            <label for="end-time">End Time</label>
+            <input type="time" id="end-time" name="endTime" [(ngModel)]="newAvailability.endTime" required #endTime="ngModel">
+            <div *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)" class="error-message">End time is required</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!availabilityForm.valid">
+          <i class="fas fa-plus"></i> Add Availability
+        </button>
+      </form>
+
+      <h3 style="margin: 25px 0 15px 0;">My Availability Slots</h3>
+      <!-- <input type="number" id="numberPicker" name="numberPicker" min="0" max="50" step="5" value="5"> -->
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let slot of availabilitySlots; let i = index">
+            <td>{{ slot.date || 'NA' }}</td>
+            <td>{{ slot.startTime || 'NA' }}</td>
+            <td>{{ slot.endTime || 'NA' }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="removeAvailability(slot)">
+                <i class="fas fa-times"></i> Remove
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="availabilitySlots.length === 0">
+            <td colspan="4" class="empty-state">
+              <i class="fas fa-calendar-times"></i>
+              <p>No availability slots added yet</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Booking Requests Section -->
+    <div class="card">
+      <div class="card-header">
+        <h2><i class="fas fa-list-alt"></i> Booking Requests</h2>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of appointments">
+            <td>{{ appointment.patientName || 'NA' }}</td>
+            <td>{{ appointment.date || 'NA' }}</td>
+            <td>{{ appointment.startTime || 'NA' }} - {{ appointment.endTime || 'NA' }}</td>
+            <td>
+              <span [class]="'status ' + (appointment.status || 'na')">
+                {{ appointment.status ? (appointment.status | titlecase) : 'NA' }}
+              </span>
+            </td>
+            <td [class]="appointment.status === 'pending' ? 'action-buttons' : ''">
+              <ng-container *ngIf="appointment.status === 'pending'">
+                <button class="btn btn-success btn-sm" (click)="updateAppointmentStatus(appointment.id, 'confirmed')">
+                  <i class="fas fa-check"></i> Accept
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="updateAppointmentStatus(appointment.id, 'rejected')">
+                  <i class="fas fa-times"></i> Reject
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="appointment.status === 'confirmed'">
+                <button class="btn btn-warning btn-sm" (click)="updateAppointmentStatus(appointment.id, 'cancelled')">
+                  <i class="fas fa-ban"></i> Cancel
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="appointment.status === 'rejected' || appointment.status === 'cancelled'">
+                <span class="no-actions">No actions available</span>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>

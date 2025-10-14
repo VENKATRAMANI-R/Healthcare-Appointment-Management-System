@@ -49,7 +49,7 @@ userForm: FormGroup;
       });
      /*  console.log('Form Submitted:', this.userForm.value);
       alert(`Registration Successful!`); */
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login-doctor']);
       
       // add further logic here (e.g., send data to backend)
      } 

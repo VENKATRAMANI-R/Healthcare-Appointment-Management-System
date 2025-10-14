@@ -13,6 +13,7 @@ export class RegistrationpageService {
 
     registerDoctor(user: any): Observable<any> {
         return this.http.post(this.url, user);
+        
     }
 
     registerUser(user: any): Observable<any> {

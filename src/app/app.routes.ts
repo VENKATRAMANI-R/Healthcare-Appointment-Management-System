@@ -14,6 +14,7 @@ import { E } from '@angular/cdk/keycodes';
 import { PatientCare } from './patient-care/patient-care';
 import { MyConsultations } from './my-consultations/my-consultations';
 import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
+import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
 import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';
 import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
@@ -73,6 +74,10 @@ export const routes: Routes = [
     {
         path:'consultation-list',
         component:ConsultationList
+    },
+    {
+        path:'doctor-availablity-management',
+        component:DoctorAvailablityManagement
     },
     {
         path: 'registration-page-doctor',
