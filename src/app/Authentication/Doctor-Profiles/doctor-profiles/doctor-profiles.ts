@@ -173,16 +173,16 @@ export class DoctorProfiles implements OnInit {
     });
  
     // Load profile on init
-  //   this.doctorService.getProfile().subscribe({
-  //     next: (data: any) => {
-  //       if (data) {
-  //         this.savedDoctor = data;
-  //         this.isProfileSaved = true;
-  //         // this.doctorForm.patchValue(data); // prefill form for editing
-  //       }
-  //     },
-  //     error: (err) => console.error('Error fetching profile:', err)
-  //   });
+    this.doctorService.getProfile().subscribe({
+      next: (data: any) => {
+        if (data) {
+          this.savedDoctor = data;
+          this.isProfileSaved = true;
+          // this.doctorForm.patchValue(data); // prefill form for editing
+        }
+      },
+      error: (err) => console.error('Error fetching profile:', err)
+    });
   }
  
 

@@ -1,70 +1,197 @@
-body {
-  background: linear-gradient(135deg, #fffde7, #f1f8e9);
+/* /* Container Styling
+.profile-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 40px;
+  background: linear-gradient(to bottom right, #e6f2ff, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Helvetica Neue', sans-serif;
+  border: 1px solid #d0e6f7;
+}
+
+
+.profile-container h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #34495e;
+}
+
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #bcdffb;
+  font-size: 15px;
+  background-color: #f9fcff;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2a80b9;
+}
+
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+
+.form-group:not(:last-child) {
+  border-bottom: 1px solid #e0eaf3;
+  padding-bottom: 15px;
+} */
+
+
+.profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
   font-family: 'Poppins', sans-serif;
 }
  
-.profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
-  padding: 20px;
+
+form .form-group {
+  margin-bottom: 15px;
 }
  
-.profile-card {
-  width: 420px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+label {
+  font-weight: 600;
+  color: #333;
 }
  
-.profile-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
 }
  
-.profile-header {
+textarea {
+  resize: none;
+}
+ 
+button {
+  display: block;
+  margin-top: 15px;
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  /* transition: background 0.3s; */
+}
+ 
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+ 
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+ 
+/* Profile view styling */
+.profile-view {
   text-align: center;
-  margin-bottom: 25px;
 }
  
 .profile-img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 4px solid #4caf50;
-  object-fit: cover;
-  margin-bottom: 10px;
+  border: 4px solid #007bff;
+  margin-bottom: 15px;
 }
  
-h2 {
-  color: #2e7d32;
-  font-size: 24px;
+h3 {
+  color: #007bff;
   margin-bottom: 5px;
 }
  
-.specialization {
+h4 {
   color: #666;
-  font-weight: 500;
-  font-size: 16px;
+  margin-bottom: 15px;
 }
  
-.profile-details {
-  background: #fafafa;
-  border-radius: 12px;
+.profile-info {
+  text-align: left;
+  background: #fff;
   padding: 15px;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
 }
  
-.detail {
-  margin: 10px 0;
+.profile-info p {
   font-size: 15px;
-  color: #333;
+  margin: 8px 0;
 }
  
 strong {
-  color: #1b5e20;
+  color: #0056b3;
+}
+ 
+.edit-btn {
+  margin-top: 20px;
+  background: #28a745;
+}
+ 
+.edit-btn:hover {
+  background: #1c7c31;
+} 
+
+.center{
+    text-align: center;
 }

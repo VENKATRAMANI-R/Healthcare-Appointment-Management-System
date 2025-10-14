@@ -130,6 +130,10 @@ patientDashboard = [
   login(): void {
     this.router.navigate(['registration-page-doctor']);
   }
+
+  login1(): void {
+    this.router.navigate(['registration-page']);
+  }
  
   callEmergency(phone: string): void {
     window.open(`tel:${phone}`, '_self');

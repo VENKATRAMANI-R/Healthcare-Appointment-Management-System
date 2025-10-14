@@ -21,10 +21,17 @@ export class LoginService {
 
   private url = 'http://localhost:8080/doctor';
 
+  private url1 = 'http://localhost:8080/patient';
+
   constructor(private http: HttpClient) { }
   login(doctorEmail: string, doctorPassword: string) {
     const body = { doctorEmail, doctorPassword };
     return this.http.post(`${this.url}/login`, body );
+  }
+
+  loginPatient(patientEmail: string, patientPassword: string) {
+    const body = { patientEmail, patientPassword };
+    return this.http.post(`${this.url1}/login`, body );
   }
   }
 
