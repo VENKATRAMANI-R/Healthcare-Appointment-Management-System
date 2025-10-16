@@ -1,36 +1,290 @@
-<!-- <section class="hero">
-  
-    <h2>Compassionate Care. Advanced Medicine.</h2>
-  </section> -->
-<div id="LandingPageImg">
-  <img src="images\LandingPage2.jpg" alt="LandingPageImage" width="50%" >
-</div>
-  <section class="services">
-    <div class="service-card">
-      <h3>Emergency Services</h3>
-      <p>24/7 emergency care with expert staff and modern equipment.</p>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="healwell-landing">
+  <!-- Header / Navbar -->
+  <header class="navbar" [class.scrolled]="isScrolled">
+    <div class="navbar-container">
+      <div class="navbar-brand">
+        <img src="assets/images/healwell-logo.png" alt="HealWell Hospital" class="logo" />
+        <h1 class="hospital-name">HEALWELL HOSPITAL</h1>
+      </div>
+
+      <div class="emergency-section">
+        <button class="emergency-btn" [class.active]="isEmergencyDropdownOpen" (click)="toggleEmergencyDropdown()">
+          <span class="pill-dot"></span>
+          Accident & Emergency
+          <i class="material-icons redicon" [class.rotate]="isEmergencyDropdownOpen">{{ isEmergencyDropdownOpen ? 'expand_less' : 'expand_more' }}</i>
+        </button>
+
+        <div class="emergency-dropdown" [class.show]="isEmergencyDropdownOpen">
+          <div class="emergency-item" *ngFor="let service of emergencyServices">
+            <div class="emergency-info">
+              <i class="material-icons">{{ service.icon }}</i>
+              <span>{{ service.name }}</span>
+            </div>
+            <button class="call-btn" (click)="callEmergency(service.phone)">
+              <i class="material-icons">phone</i>
+              {{ service.phone }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div class="nav-actions">
+        <button class="btn btn-outline" (click)="bookAppointment()">
+          <i class="material-icons">calendar_today</i> Book Appointment
+        </button>
+        <button class="btn btn-primary" (click)="findDoctor()">
+          <i class="material-icons">medical_services</i> Find Doctor
+        </button>
+
+        
+        <button class="btn btn-primary user-profile-btn" (click)="AccountDropdown()">
+          <img [src]="user.profileImage" alt="Profile" class="profile-pic" />
+          {{ user.name}}
+        </button>
+        <div class="profile-dropdown" *ngIf="AccountDropdownState">
+          <a class="dropdown-link" (click)="navigateToPatientFeature('')" >Account Details</a>
+          <a class="dropdown-link" (click)="logout()">Logout</a>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-toggle" (click)="toggleMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </div>
-    <div class="service-card">
-      <h3>Outpatient Clinics</h3>
-      <p>Specialized consultations across cardiology, pediatrics, and more.</p>
-    </div>
-    <div class="service-card">
-      <h3>Diagnostics</h3>
-      <p>State-of-the-art lab and imaging services for accurate diagnosis.</p>
-    </div>
-    <div class="service-card">
-      <h3>Pharmacy</h3>
-      <p>On-site pharmacy with trusted medications and expert advice.</p>
+  </header> 
+
+  <!-- Menu Icon -->
+  <!-- <span class="menu-toggle-icon"><i class="material-icons" (click)="toggleMenu()">menu</i> </span> -->
+  <span >
+    <button class="menu-toggle" (click)="toggleMenu()" [class.open]="isMenuOpen">
+    <span class="bar top"></span>
+    <span class="bar middle"></span>
+    <span class="bar bottom"></span>
+  </button>
+  </span>
+
+  <div class="menu" *ngIf="isMenuOpen" #menuRef>
+    <nav class="main-nav mobile-open">
+      <ul class="nav-list">
+        <li class="nav-item" *ngFor="let item of navigationItems">
+          <a class="nav-link" (click)="navigateTo(item.route)" [class.has-dropdown]="item.hasDropdown">
+            {{ item.label }}
+            <i class="material-icons"  *ngIf="item.hasDropdown">chevron_right</i>
+          </a>
+          <!-- <div class="departments-dropdown" *ngIf="item.hasDropdown">
+            <div class="dropdown-grid">
+              <div class="department-item" *ngFor="let dept of departments" (click)="navigateToDepartment(dept.route)">
+                <i class="material-icons">{{ dept.icon }}</i>
+                <span>{{ dept.name }}</span>
+              </div>
+            </div>
+          </div> -->
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h2 class="hero-title">{{ heroContent.title }}</h2>
+          <p class="hero-subtitle">{{ heroContent.subtitle }}</p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-large" (click)="bookAppointment()" >
+              <i class="material-icons">calendar_today</i> {{ heroContent.ctaText }}
+            </button>
+            <button class="btn btn-outline btn-large" (click)="findDoctor()">
+              <i class="material-icons">search</i> {{ heroContent.secondaryCtaText }}
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <img src="assets/images/doctors-hero.jpg" alt="Doctors" />
+          
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="cta">
-    <h2 >Book Your Appointment Today</h2>
-    <p>Experience world-class healthcare with a human touch.</p>
-    <button type="button" (click)="onClick()" >Make an Appointment</button>
+  <!-- Services -->
+  <section class="services-section" id="services">
+    <div class="section-container">
+      <div class="section-header">
+        <h3 class="section-title">Our Healthcare Services</h3>
+        <p class="section-subtitle">Comprehensive care powered by advanced technology</p>
+      </div>
+    
+      
+
+  <!-- Quick Actions -->
+  <section class="quick-actions-section">
+    <div class="section-container">
+      <div class="quick-actions-grid">
+        <div class="quick-action-card emergency-card">
+          <i class="material-icons ">local_hospital</i>
+          <h4>Emergency Care</h4>
+          <p>24/7 Emergency services available</p>
+          <button class="btn btn-emergency" (click)="callEmergency('+91-9876543210')">
+            <i class="material-icons" style="color: white;">phone</i> Call Now: +91-9876543210
+          </button>
+        </div>
+
+        <div class="quick-action-card appointment-card">
+          <i class="material-icons">calendar_month</i>
+          <h4>Book Appointment</h4>
+          <p>Schedule your consultation online</p>
+          <button class="btn btn-primary" (click)="bookAppointment()">
+            <i class="material-icons" style="color: white;">calendar_today</i> Book Now
+          </button>
+        </div>
+
+        <div class="quick-action-card doctor-card">
+          <i class="material-icons">person</i>
+          <h4>Find a Doctor</h4>
+          <p>Search our expert medical professionals</p>
+          <button class="btn btn-secondary" (click)="findDoctor()">
+            <i class="material-icons" style="color: darkblue;">search</i> Search Doctors
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="services-grid">
+        <div class="service-card" *ngFor="let service of services">
+          <div class="service-icon"><i class="material-icons">{{ service.icon }}</i></div>
+          <h4 class="service-title">{{ service.title }}</h4>
+          <p class="service-description">{{ service.description }}</p>
+          <!-- <ul class="service-features">
+            <li *ngFor="let f of service.features"><i class="material-icons">check_circle</i>{{ f }}</li>
+          </ul> -->
+          <!-- <button class="btn btn-text">Learn More <i class="material-icons">arrow_forward</i></button> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Patient Tools -->
+  <section class="patient-actions-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h3 class="section-title">Patient Tools</h3>
+        <p class="section-subtitle">Access your personal health features</p>
+      </div>
+
+      <div class="patient-actions-grid">
+        <button class="btn btn-outline btn-large" (click)="navigateToPatientFeature('')">
+          <i class="material-icons">account_circle</i> Account Details
+        </button>
+        <button class="btn btn-outline btn-large" (click)="navigateToPatientFeature('/my-consultations')">
+          <i class="material-icons">event_note</i> My Consultations
+        </button>
+        <button class="btn btn-outline btn-large" (click)="navigateToPatientFeature('my-appointments')">
+          <i class="material-icons">schedule</i> View Appointment
+        </button>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    &copy; 2025 HealWell Hospital. All rights reserved.
+  <!-- Why Choose Us -->
+  <section class="why-choose-section">
+    <div class="section-container">
+      <div class="section-header">
+        <h3 class="section-title">Why Choose HealWell Hospital</h3>
+        <p class="section-subtitle">Leading healthcare provider with commitment to excellence</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item">
+          <i class="material-icons">emoji_events</i>
+          <h5>25+ Years Experience</h5>
+          <p>Trusted healthcare with decades of excellence</p>
+        </div>
+        <div class="feature-item">
+          <i class="material-icons">groups</i>
+          <h5>Expert Medical Team</h5>
+          <p>500+ qualified doctors and professionals</p>
+        </div>
+        <div class="feature-item">
+          <i class="material-icons">precision_manufacturing</i>
+          <h5>Advanced Technology</h5>
+          <p>State-of-the-art diagnostics and treatments</p>
+        </div>
+                <div class="feature-item">
+          <i class="material-icons">support_agent</i>
+          <h5>24/7 Patient Care</h5>
+          <p>Round-the-clock medical support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-brand">
+            <img src="assets/images/healwell-logo.png" class="footer-logo" alt="HealWell" />
+            <h4>HEALWELL HOSPITAL</h4>
+          </div>
+          <p class="footer-description">
+            Compassionate, quality healthcare with modern facilities and expert professionals.
+          </p>
+          <div class="contact-info">
+            <div class="contact-item"><i class="material-icons">phone</i><span>+91-9876543210</span></div>
+            <div class="contact-item"><i class="material-icons">email</i><span>info@healwellhospital.com</span></div>
+            <div class="contact-item"><i class="material-icons">location_on</i><span>123 Medical Center, Health City</span></div>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a (click)="navigateTo('about-us')">About Us</a></li>
+            <li><a (click)="navigateTo('departments')">Departments</a></li>
+            <li><a (click)="navigateTo('FindDoctors')">Our Doctors</a></li>
+            <li><a (click)="navigateTo('patient-care')">Patient Care</a></li>
+            <li><a (click)="navigateTo('contact-us')">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h5>Services</h5>
+          <ul class="footer-links">
+            <li><a (click)="navigateTo('/emergency')">Emergency Care</a></li>
+            <li><a (click)="navigateTo('/surgery')">Surgery</a></li>
+            <li><a (click)="navigateTo('/diagnostics')">Diagnostics</a></li>
+            <li><a (click)="navigateTo('/pharmacy')">Pharmacy</a></li>
+            <li><a (click)="navigateTo('/ambulance')">Ambulance</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h5>Emergency</h5>
+          <div class="emergency-number"><i class="material-icons">local_hospital</i><span>+91-9876543210</span></div>
+          <p>Available 24/7</p>
+          <div class="social-links">
+            <a href="#"><i class="material-icons">facebook</i></a>
+            <a href="#"><i class="material-icons">linkedin</i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 HealWell Hospital. All rights reserved.</p>
+        <div class="footer-legal">
+          <a routerLink="/privacy-policy">Privacy Policy</a>
+          <a routerLink="/terms-conditions">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
   </footer>
-  <!-- <router-outlet/> -->
+</div>

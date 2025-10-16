@@ -1,28 +1,28 @@
-<h1 style="text-align: center; color: lightskyblue;">Book an Appointment</h1>
+<h1 style="text-align: center; color: rgb(46, 47, 47);">Book an Appointment</h1>
 <div id="container">
   <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
     <div id="getDetails" class="form-group">
       <span>
         <label for="PatientID">Patient ID</label>
-        <input type="text" id="Patient" formControlName="PatientId" readonly />
+        <input type="text" id="Patient" formControlName="patientId"  />
         <small style="color: gray;">Auto-generated. Cannot be edited.</small>
       </span>
       <!-- <br> -->
       <span>
         <label for="Patient">Patient Name</label>
-        <input type="text" id="Patient Name" formControlName="PatientName" readonly />
+        <input type="text" id="Patient Name" formControlName="patientName"/>
         <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small>
       </span>
       <!-- <br> -->
        <span>
         <label for="Doctor">Doctor Name</label>
-        <input type="text" id="Doctor Name" formControlName="DoctorName" readonly />
+        <input type="text" id="Doctor Name" formControlName="doctorName"  />
         <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small>
       </span>
       <!-- <br> -->
       <span>
         <label for="Date">Date</label>
-        <input type="date" id="Date" formControlName="Date" />
+        <input type="date" id="Date" formControlName="date" />
             <small style="color: gray;">Select a date within the next 30 days.</small>
       </span>
       <!-- <br> -->
@@ -54,6 +54,8 @@
       <div>
         <button type="submit">Book Now</button>
         <!--<button type="button" (click)="onClose()">Close</button>-->
+       <!----<button type="submit">View Appointment</button>-->
+        <button type="button" (click)=" onClick()">View Appointment</button>"
       </div>
     </div>
   </form>

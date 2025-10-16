@@ -1,0 +1,28 @@
+<header class="static-navbar">
+  <div class="static-navbar-container">
+    <!-- Branding -->
+    <div class="static-brand">
+      <img src="assets/images/healwell-logo.png" alt="HealWell Hospital" class="static-logo" />
+      <h1 class="static-title">HEALWELL HOSPITAL</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="static-nav">
+      <a (click)="navigateHome()" class="static-link">Home</a>
+      <a (click)="navigateDepartments()" class="static-link">Departments</a>
+      <a (click)="navigateDoctors()" class="static-link">Doctors</a>
+      <a (click)="navigateAppointments()" class="static-link">Appointments</a>
+      <a (click)="navigateContact()" class="static-link">Contact</a>
+    </nav>
+
+    <!-- Actions -->
+    <div class="static-actions">
+      <button class="btn btn-outline" (click)="navigateBooking()">  <!-- Actions need to be taken after amarshree push to check wheather itst working or not -->
+        <i class="material-icons">calendar_today</i> Book
+      </button>
+      <button class="btn btn-primary" (click)="navigateDoctors()">
+        <i class="material-icons">medical_services</i> Find Doctor
+      </button>
+    </div>
+  </div>
+</header>

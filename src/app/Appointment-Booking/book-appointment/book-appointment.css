@@ -16,6 +16,10 @@
 #getDetails span{
     padding: 50px 0;
 } */
+ *{
+  max-width: 1200px;
+  
+ }
  body{
    margin: 0;
    padding: 0;
@@ -65,22 +69,22 @@ select:hover{
 }
 #getDetails div button{
   padding: 10px 50px;
-  color: red;
-  border: red solid;
+  color: rgb(43, 112, 168);
+  border: rgb(59, 104, 156) solid;
   border-radius: 3px;
   background-color: white;
 }
 #getDetails div button:hover{
   cursor: pointer;
   color: white;
-  background-color: red;
+  background-color: rgb(91, 144, 228);
 }
 #getDetails span {
   display: block;
   width: 100%;
 }
 #getDetails span select option{
-  color: lightskyblue;
+  color: rgb(63, 165, 228);
 
 }
  .form-group small {

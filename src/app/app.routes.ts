@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { BookAppointment } from './Appointment Booking/book-appointment/book-appointment';
+import { BookAppointment } from './Appointment-Booking/book-appointment/book-appointment';
 import { App } from './app';
 import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
@@ -17,7 +17,7 @@ import { ConsultationList } from './my-consultations/consultation-list/consultat
 import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';
 import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
-import { MyAppointments } from './Appointment Booking/my-appointments/my-appointments';
+import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
 
 export const routes: Routes = [

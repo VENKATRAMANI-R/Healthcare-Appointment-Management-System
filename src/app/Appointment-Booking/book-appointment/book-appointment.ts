@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 //import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AppointmentService } from '../appointment-service';
+
 @Component({
   selector: 'app-book-appointment',
   imports: [ReactiveFormsModule],
@@ -32,15 +35,17 @@ export class BookAppointment implements OnInit {
   //   }
   // }
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
     //public dialogRef: MatDialogRef<BookAppointment>
+    private router: Router,
+    private appointmentService: AppointmentService
   ) {}
 
   ngOnInit(): void {
     this.appointmentForm = this.fb.group({
-      PatientId: [{ value: 'PAT12345', disabled: true }],
-      PatientName: [{ value: 'John Doe', disabled: true }],
-      DoctorName: [{ value: 'Dr. Guru Sakthi', disabled: true }],
+      patientId: [ '', Validators.required ],
+      patientName: [ '', Validators.required ],
+      doctorName: ['', Validators.required],
       date: ['', Validators.required],
       timeSlot: ['', Validators.required],
       problem: ['', [Validators.required, Validators.maxLength(50)]]
@@ -53,10 +58,29 @@ export class BookAppointment implements OnInit {
 
   onSubmit(): void {
     if (this.appointmentForm.valid) {
-      console.log('Appointment booked:', this.appointmentForm.getRawValue());
+      // console.log(this.appointmentForm.getRawValue());
+      const AppointmentData = this.appointmentForm.getRawValue(); 
+      this.appointmentService.bookAppointment(AppointmentData).subscribe({
+        next: (response) => {
+          // console.log(this.appointmentForm.getRawValue());
+          alert('Appointment booked successfully!');
+          console.log('Appointment booked:', response);
+          // this.router.navigate(['/my-appointments']);
+        },
+        error: (error) => {
+          alert('Failed to book appointment. Please try again.');
+          console.error('Error booking appointment:', error);
+        }
+      });
+      // console.log('Appointment booked:', this.appointmentForm.getRawValue());
       //this.dialogRef.close();
     }
   }
+
+  onClick():void{
+    this.router.navigate(['/my-appointments']);
+  }
+      
 
   //onClose(): void {
    //this.dialogRef.close();
