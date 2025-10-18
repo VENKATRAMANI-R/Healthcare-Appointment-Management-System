@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Consultation } from '../../consultation.service';
+import { Consultation } from '../consultation.service';
 
 @Component({
-  selector: 'app-consultation-list',
+  selector: 'app-doctor-consultation-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './consultation-list.html',
-  styleUrls: ['./consultation-list.css']
+  templateUrl: './doctor-consultation-list.html',
+  styleUrls: ['./doctor-consultation-list.css']
 })
-export class ConsultationList {
-  @Input() consultations: Consultation[] = []; 
+export class DoctorConsultationList {
+  @Input() consultations: Consultation[] = [];
   selectedConsultation: Consultation | null = null;
   showPopup: boolean = false;
 
