@@ -126,6 +126,14 @@ patientDashboard = [
   findDoctor(): void {
     this.router.navigate(['FindDoctors']);
   }
+
+  login(): void {
+    this.router.navigate(['registration-page-doctor']);
+  }
+
+  login1(): void {
+    this.router.navigate(['registration-page']);
+  }
  
   callEmergency(phone: string): void {
     window.open(`tel:${phone}`, '_self');

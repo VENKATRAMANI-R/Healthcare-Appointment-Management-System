@@ -1,0 +1,52 @@
+<div class="profile-container">
+  <h2 *ngIf="!isProfileSaved">Complete Patient Profile</h2>
+  <h2 *ngIf="isProfileSaved" class="center">Patient Profile</h2>
+ 
+  <!-- FORM SECTION -->
+  <form *ngIf="!isProfileSaved" [formGroup]="patientForm" (ngSubmit)="savePatientProfile()">
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input type="date" formControlName="dob" placeholder="e.g., DD/MM/YYYY">
+    </div>
+ 
+     <div class="form-group">
+      <label>gender</label>
+      <input type="text" formControlName="gender">
+    </div>
+
+    <div class="form-group">
+      <label>BloodGroup</label>
+      <input type="text" formControlName="bloodgroup" placeholder="e.g., A+, O-">
+    </div>
+ 
+    <div class="form-group">
+      <label>Address</label>
+      <textarea formControlName="address" placeholder="Enter your address"></textarea>
+    </div>
+ 
+    <div class="form-group">
+      <label>Emergerncy Contact</label>
+  
+      <input type="tel" formControlName="emergencyContact">
+    </div>
+ 
+    <button type="submit" [disabled]="patientForm.invalid" >Save Profile</button>
+  </form>
+ 
+  <!-- PROFILE VIEW SECTION -->
+  <div *ngIf="isProfileSaved" class="profile-view">
+    <img src="https://cdn-icons-png.flaticon.com/512/4322/4322991.png" alt="Patient Avatar" class="profile-img" />
+    <h3>{{ savedPatient?.patientName }}</h3>
+ 
+    <div class="profile-info">
+      <p><strong>Email:</strong> {{ savedPatient?.patientEmail }}</p>
+      <p><strong>phone No:</strong> {{ savedPatient?.patientPhonenumber }}</p>  
+      <p><strong>Date Of Birth:</strong> {{ savedPatient?.dob }}</p>
+      <p><strong>Blood Group:</strong> {{ savedPatient?.bloodgroup }}</p>
+      <p><strong>Address:</strong> {{ savedPatient?.address }}</p>
+      <p><strong>Emergency Contact:</strong> {{ savedPatient?.emergencyContact }}</p>
+    </div>
+ 
+    <button class="edit-btn" (click)="editProfile()">Edit Profile</button>
+  </div>
+</div>
