@@ -44,7 +44,7 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
   return this.http.post(`${this.baseUrl1}/profile/${patientEmail}`, patientData, { headers });
 }
  
-  // Get doctor profile
+  // Get patient profile
   getProfilePatient(): Observable<any> {
     const Patienttoken = localStorage.getItem('Patienttoken') || '';
     const headers = new HttpHeaders().set('Authorization',  `Bearer ${Patienttoken}`);

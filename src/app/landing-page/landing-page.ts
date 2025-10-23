@@ -57,7 +57,7 @@ export class LandingPage {
   // Patient Dashboard
 patientDashboard = [
   { label: 'Account Details', icon: 'account', route: '/patient/account' },
-  { label: 'My Consultations', icon: 'consultation', route: '/patient/consultations' },
+  { label: 'My Consultations', icon: 'consultation', route: '/patient/my-consultations' },
   { label: 'Appointment Scheduler', icon: 'scheduler', route: '/patient/scheduler' }
 ];
 
@@ -110,15 +110,16 @@ patientDashboard = [
     this.isMenuOpen = false;
   }
  navigateToPatientFeature(route: string): void {
-  this.router.navigate(['patient-profiles']);
+  this.router.navigate([route]);
 }
+
 
   navigateToDepartment(route: string): void {
     this.router.navigate([route]);
   }
  
   bookAppointment(): void {
-    this.router.navigate(['bookAppoinment']);
+    this.router.navigate(['bookAppointment']);
   }
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;

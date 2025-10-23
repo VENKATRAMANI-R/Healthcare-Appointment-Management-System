@@ -24,13 +24,13 @@ export class Header {
     this.router.navigate(['FindDoctors']);
   }
   navigateAppointments(){
-    this.router.navigate(['landingpage']); //need to be configured after amarshree push
+    this.router.navigate(['bookAppointment']); //need to be configured after amarshree push
   }
   navigateContact(){
     this.router.navigate(['contact-us']);
   }
   navigateBooking(){
-    this.router.navigate(['bookAppoinment']);
+    this.router.navigate(['bookAppointment']);
   }
   @HostListener('window:scroll')
   onWindowScroll(): void {

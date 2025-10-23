@@ -1,4 +1,4 @@
-// src/app/doctor.model.ts
+
 export interface Doctor {
   name: string;
   position: string;
