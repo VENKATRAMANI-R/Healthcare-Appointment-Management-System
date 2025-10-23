@@ -37,7 +37,7 @@ export class Login {
       next: (response: any) => {
         console.log('Login successful****', response);
         localStorage.setItem('Patienttoken', response.token); // Store the token
-
+        localStorage.setItem('patientId', response.patientId);
         localStorage.setItem('patientEmail', response.patientEmail);
         localStorage.setItem('patientName', response.patientName);
         // this.doctorEmail = response.doctorEmail; // Store the email

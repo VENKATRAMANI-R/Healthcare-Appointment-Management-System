@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { BookAppointment } from './book-appointment/book-appointment';
+import { BookAppointment } from './Appointment-Booking/book-appointment/book-appointment';
 import { App } from './app';
 import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
@@ -24,7 +24,7 @@ import { PatientProfiles } from './Authentication/Patient-Profiles/patient-profi
 import { LoginLanding } from './Authentication/login-landing/login-landing';
 import { ConsultationForm } from './consultation-form/consultation-form';
 import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
-
+import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 export const routes: Routes = [
     {
         path:'',
@@ -105,6 +105,14 @@ export const routes: Routes = [
     {
         path:'doctor-availablity-management',
         component:DoctorAvailablityManagement
+    },
+    {
+        path:"my-appointments",
+        component:MyAppointments
+    },
+    {
+        path:'patientProfiles',
+        component:PatientProfiles
     }
 
 ];

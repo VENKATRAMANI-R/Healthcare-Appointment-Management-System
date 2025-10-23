@@ -24,7 +24,7 @@ export class Header {
     this.router.navigate(['FindDoctors']);
   }
   navigateAppointments(){
-    this.router.navigate(['bookAppointment']); //need to be configured after amarshree push
+    this.router.navigate(['my-appointments']); 
   }
   navigateContact(){
     this.router.navigate(['contact-us']);
