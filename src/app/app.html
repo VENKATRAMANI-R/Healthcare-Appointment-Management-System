@@ -1,5 +1,5 @@
 
-@if (router.url !== '/') {
+@if (router.url !== '/' && router.url !== '/landingpage' && router.url !== '/login') {
   <app-header></app-header>
-}
+}  
  <router-outlet></router-outlet>

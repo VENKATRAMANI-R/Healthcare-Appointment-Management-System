@@ -14,7 +14,7 @@ export class Header {
     this.router.navigate([path]);
   }
   navigateHome(){
-    this.router.navigate(['']);
+    this.router.navigate(['landingpage']);
   }
 
   navigateDepartments(){
@@ -24,7 +24,7 @@ export class Header {
     this.router.navigate(['FindDoctors']);
   }
   navigateAppointments(){
-    this.router.navigate(['']); //need to be configured after amarshree push
+    this.router.navigate(['landingpage']); //need to be configured after amarshree push
   }
   navigateContact(){
     this.router.navigate(['contact-us']);

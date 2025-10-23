@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = 'http://localhost:8080/doctor';
-  private baseUrl1 = 'http://localhost:8080/patient';
+  private baseUrl = 'http://localhost:8082/doctor';
+  private baseUrl1 = 'http://localhost:8082/patient';
 
  
   constructor(private http: HttpClient) {}

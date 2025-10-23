@@ -1,21 +1,19 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule,FormControl, ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { RegistrationpageService } from '../registrationpage-service';
-import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-registration-page-doctor',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,RouterLink,HttpClientModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './registration-page-doctor.html',
   styleUrl: './registration-page-doctor.css'
 })
 export class RegistrationPageDoctor {
 userForm: FormGroup;
-
   constructor(private router: Router, private Service : RegistrationpageService ) {
     this.userForm = new FormGroup({
       doctorName: new FormControl ('', [Validators.required]),
@@ -26,7 +24,6 @@ userForm: FormGroup;
 
       });
   }
-
   passwordMatchValidator(control : AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmpassword')?.value;
@@ -35,7 +32,6 @@ userForm: FormGroup;
     } 
     return null;
   }
-
   onSubmit(): void {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
@@ -50,20 +46,14 @@ userForm: FormGroup;
      /*  console.log('Form Submitted:', this.userForm.value);
       alert(`Registration Successful!`); */
       this.router.navigate(['/login-doctor']);
-      
-      // add further logic here (e.g., send data to backend)
      } 
-    
-    
     else {
       console.log('Form is invalid');
       this.userForm.markAllAsTouched();
     }
   } 
-
   onReset()
   {
     this.userForm.reset();
   }
-
 }

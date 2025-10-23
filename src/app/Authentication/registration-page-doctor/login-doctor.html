@@ -16,6 +16,10 @@
     <div>
         <button (click)="onLogin()">Login</button>
     </div>
-    </form>
+    <p class="register-text">
+      Don't have an account?
+      <a href="#" class="register-link" (click)="goRegister(); $event.preventDefault()">Register</a>
+    </p>
+  </form>
   </div>
 </div>

@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 export class PatientProfiles {
    patientForm!: FormGroup;
   isProfileSaved = false;
+  isEditSaved = false;
   savedPatient: any;
  
   constructor(private fb: FormBuilder, private patientService: ProfileService) {}
@@ -33,6 +34,7 @@ export class PatientProfiles {
         if (data) {
           this.savedPatient = data;
           this.isProfileSaved = true;
+          this.isEditSaved=false;
           // this.doctorForm.patchValue(data); // prefill form for editing
         }
       },
@@ -52,6 +54,7 @@ export class PatientProfiles {
         console.log('Profile saved:', res);
         this.savedPatient = res;
         this.isProfileSaved = true;
+        this.isEditSaved = false;
       },
       error: (err) => console.error('Error saving profile:', err)
     });
@@ -60,7 +63,7 @@ export class PatientProfiles {
 
  
   editProfile() {
-    this.isProfileSaved = false;
+    this.isEditSaved = true;
     this.patientForm.patchValue(this.savedPatient); 
   }  
 }

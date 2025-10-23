@@ -20,9 +20,14 @@ import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
 import { DoctorProfiles } from './Authentication/Doctor-Profiles/doctor-profiles/doctor-profiles';
 import { PatientProfiles } from './Authentication/Patient-Profiles/patient-profiles/patient-profiles';
+import { LoginLanding } from './Authentication/login-landing/login-landing';
 export const routes: Routes = [
     {
         path:'',
+        component:LoginLanding
+    },
+    {
+        path:'landingpage',
         component:LandingPage
     },
     {

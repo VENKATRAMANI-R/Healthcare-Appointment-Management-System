@@ -110,7 +110,7 @@ patientDashboard = [
     this.isMenuOpen = false;
   }
  navigateToPatientFeature(route: string): void {
-  this.router.navigate([route]);
+  this.router.navigate(['patient-profiles']);
 }
 
   navigateToDepartment(route: string): void {
@@ -144,7 +144,8 @@ patientDashboard = [
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
   logout(){
-    //configurations need to be done!
+    //configuration
+    this.router.navigate(['login']);
   }
   AccountDropdown(){
     this.AccountDropdownState = !this.AccountDropdownState;

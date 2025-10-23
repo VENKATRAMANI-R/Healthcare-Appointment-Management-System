@@ -24,6 +24,10 @@ export class Logindoctor {
     // const username = this.userForm.get('doctorEmail')?.value;
     // const password = this.userForm.get('password')?.value;
 
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('doctorEmail');
+    // localStorage.removeItem('doctorName');
+
     if(this.userForm.invalid) {
       alert('Please fill in all required fields.');
       return;
@@ -41,12 +45,15 @@ export class Logindoctor {
         // this.doctorEmail = response.doctorEmail; // Store the email
         // this.doctorName = response.doctorPassword; // Store the name
         alert('Login successful!');
-        this.router.navigate(['/doctor-profiles']); // Navigate to doctor profile
+        this.router.navigate(['landingpage']); // Navigate to landingPage
       },
       error: (error: any) => {
         console.error('There was an error during login!', error);
         alert('Invalid username or password.');
       } 
     });
+  }
+  goRegister() {
+    this.router.navigate(['/registration-page-doctor']);
   }
 }

@@ -19,9 +19,9 @@ export class LoginService {
 //       return false; 
 //     }
 
-  private url = 'http://localhost:8080/doctor';
+  private url = 'http://localhost:8082/doctor';
 
-  private url1 = 'http://localhost:8080/patient';
+  private url1 = 'http://localhost:8082/patient';
 
   constructor(private http: HttpClient) { }
   login(doctorEmail: string, doctorPassword: string) {

@@ -7,7 +7,7 @@ import { RegistrationpageService } from '../registrationpage-service';
 
 @Component({
   selector: 'app-registration-page',
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './registration-page.html',
   styleUrl: './registration-page.css'
 })

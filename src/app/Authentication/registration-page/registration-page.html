@@ -14,6 +14,7 @@
         </div>
     </div>
  
+    
      <div class="margin">
         <input type="text" class="form-control" formControlName="patientEmail" placeholder="patientEmail">
        <div class="text-danger" *ngIf="userForm.controls['patientEmail'].invalid  && (userForm.controls['patientEmail'].touched || userForm.controls['patientEmail'].dirty)">
@@ -45,11 +46,6 @@
     <div>
         <button type="button" (click)="onSubmit()">Register</button>
         <button type="button" (click)="onReset()">Reset</button>
-    </div>
-    <div>
-      <p>Already have an account?
-        <a routerLink="/login">Login</a>
-      </p>
     </div>
 </form>
   </div>
