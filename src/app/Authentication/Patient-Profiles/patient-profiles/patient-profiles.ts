@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../profile-service';
 import { CommonModule } from '@angular/common';
@@ -9,14 +9,18 @@ import { CommonModule } from '@angular/common';
   templateUrl: './patient-profiles.html',
   styleUrl: './patient-profiles.css'
 })
-export class PatientProfiles {
+export class PatientProfiles implements OnInit {
    patientForm!: FormGroup;
   isProfileSaved = false;
   isEditSaved = false;
   savedPatient: any;
  
-  constructor(private fb: FormBuilder, private patientService: ProfileService) {}
- 
+  constructor(private fb: FormBuilder, private patientService: ProfileService) {
+ if(!this.isBrowser()) return;
+  }
+  isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
   ngOnInit(): void {
     this.patientForm = this.fb.group({
    
@@ -31,11 +35,13 @@ export class PatientProfiles {
     // Load profile on init
     this.patientService.getProfilePatient().subscribe({
       next: (data: any) => {
+        console.log('Fetched profile data:', data);
         if (data) {
           this.savedPatient = data;
           this.isProfileSaved = true;
           this.isEditSaved=false;
           // this.doctorForm.patchValue(data); // prefill form for editing
+          this.patientForm.patchValue(data);
         }
       },
       error: (err) => console.error('Error fetching profile:', err)
