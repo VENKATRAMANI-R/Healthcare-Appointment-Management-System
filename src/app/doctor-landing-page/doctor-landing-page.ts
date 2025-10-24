@@ -293,7 +293,7 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
  
   } 
   listConsultation():void{
-    this.router.navigate(['/my-consultations']);
+    this.router.navigate(['/doctor-consultations']);
     this.showToast('Opening My Consultations...', 'info'); 
   }
   goToCalendar(): void { 

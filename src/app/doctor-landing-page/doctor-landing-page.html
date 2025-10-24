@@ -65,22 +65,22 @@
           <!-- <div class="patient-avatar">{{ getPatientInitial(nextAppointment.gender) }}</div>  -->
           <div class="appointment-header"> 
             <h3>Next Appointment</h3> 
-            <span class="appointment-time">{{ nextAppointment?.time }} • {{ nextAppointment?.type }}</span> 
+            <span class="appointment-time">{{ nextAppointment.time || 'NA' }} • {{ nextAppointment.type || 'NA'}}</span> 
           </div> 
         </div> 
         <div class="card-content"> 
           <div class="appointment-details"> 
             <div class="detail-row"> 
               <span class="material-icons detail-icon">person</span> 
-              <span>{{ nextAppointment?.patientName || 'NA' }} • {{ nextAppointment?.age }}y • {{ nextAppointment?.gender }}</span> 
+              <span>{{ nextAppointment.patientName || 'NA' }} • {{ nextAppointment.age || 'NA'}}y • {{ nextAppointment.gender || 'NA'}}</span> 
             </div> 
             <div class="detail-row"> 
               <span class="material-icons detail-icon">local_hospital</span> 
-              <span>{{ nextAppointment?.reason }}</span> 
+              <span>{{ nextAppointment.reason || 'NA'}}</span> 
             </div> 
             <div class="detail-row"> 
               <span class="material-icons detail-icon">location_on</span> 
-              <span>{{ nextAppointment?.mode === 'In-person' ? nextAppointment?.room : 'Teleconsultation' }}</span> 
+              <span>{{ nextAppointment.mode === 'In-person' ? nextAppointment.room : 'Teleconsultation' }}</span> 
             </div> 
           </div> 
         </div> 
