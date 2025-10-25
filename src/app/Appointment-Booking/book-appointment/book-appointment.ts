@@ -52,7 +52,8 @@ export class BookAppointment implements OnInit {
       patientName: [ '', Validators.required ],
       doctorName: ['', Validators.required],
       date: ['', Validators.required],
-      timeSlot: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
       problem: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
