@@ -108,3 +108,24 @@ input {
     margin: 5px;
 }
 
+.register-text {
+  font-size: 14px;
+  color: #333;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-link {
+  color: #004d99;
+  text-decoration: underline;
+  font-weight: 600;
+  margin-left: 6px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #002b66;
+}
+
+

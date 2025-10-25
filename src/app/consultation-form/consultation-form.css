@@ -1,0 +1,114 @@
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 350px;
+  max-width: 600px;
+   
+}
+
+input, textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background-color: #19A7CE; /* primary */
+  color: #ffffff; /* bg */
+  border: none;
+  width: 105%;
+  border-radius: 12px; /* r-md */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* shadow-md */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #1189ad; /* primary-deep */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12); /* shadow-lg */
+}
+
+button:disabled {
+  background-color: #e5e7eb; /* line */
+  color: #4b5563; /* muted */
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.Attachments-input {
+  margin-top: 16px;
+  display: block;
+  padding: 10px 12px;
+  background-color: #ffffff; /* bg */
+  border: 1px solid #e5e7eb; /* line */
+  border-radius: 12px; /* r-md */
+  font-size: 14px;
+  color: #0f172a; /* ink */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* shadow-md */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Attachments-input:hover,
+.Attachments-input:focus {
+  border-color: #19A7CE; /* primary */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12); /* shadow-lg */
+  outline: none;
+}
+
+.Attachments-input::file-selector-button {
+  padding: 8px 14px;
+  background-color: #19A7CE; /* primary */
+  color: #ffffff; /* bg */
+  border: none;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Attachments-input::file-selector-button:hover {
+  background-color: #1189ad; /* primary-deep */
+}
+input {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #0f172a; /* ink */
+  background-color: #ffffff; /* bg */
+  border: 1px solid #e5e7eb; /* line */
+  border-radius: 12px; /* r-md */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* shadow-md */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+input:hover {
+  border-color: #19A7CE; /* primary */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12); /* shadow-lg */
+  outline: none;
+}
+
+input:disabled {
+  background-color: #f9f9f9;
+  color: #4b5563; /* muted */
+  cursor: not-allowed;
+}
+small{
+    color: #d9534f;
+}
+

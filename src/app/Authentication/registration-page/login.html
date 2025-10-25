@@ -7,15 +7,17 @@
     <h1 class="center">Patient Login Page</h1>
     <form [formGroup]="userForm" >
     <div class="col-md-4">
-        <input type="text" class="form-control" formControlName="username" placeholder="UserName">
+        <input type="text" class="form-control" formControlName="patientEmail" placeholder="UserName">
     </div>
      <div class="col-md-4">
-        <input type="password" class="form-control" formControlName="password" placeholder="Password">
+        <input type="password" class="form-control" formControlName="patientPassword" placeholder="Password">
     </div>
     
     <div>
         <button (click)="onLogin()">Login</button>
     </div>
+    Don't have an account?
+    <a href="#" (click)="goRegister(); $event.preventDefault()">Register</a>
     </form>
   </div>
 </div>

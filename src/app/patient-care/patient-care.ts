@@ -22,7 +22,6 @@ export class PatientCare implements OnInit {
   activeSection: string = 'inpatient';
   activeFaq: number | null = null;
  
-  // Section contents
   sectionContents: { [key: string]: string } = {
 
     inpatient: `

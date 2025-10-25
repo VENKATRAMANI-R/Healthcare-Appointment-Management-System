@@ -42,11 +42,13 @@
         
         <button class="btn btn-primary user-profile-btn" (click)="AccountDropdown()">
           <img [src]="user.profileImage" alt="Profile" class="profile-pic" />
-          {{ user.name}}
+          {{ user.name }}
         </button>
         <div class="profile-dropdown" *ngIf="AccountDropdownState">
-          <a class="dropdown-link" (click)="navigateToPatientFeature('')" >Account Details</a>
+          <a class="dropdown-link" (click)="goToUserProfile()" >Account Details</a>
           <a class="dropdown-link" (click)="logout()">Logout</a>
+          <a class="dropdown-link" (click)="navigateToPatientFeature('doctor-consultations')">My Consultations</a>
+          <a class="dropdown-link" (click)="navigateToPatientFeature('consultation-form')">Consultation Form</a>
         </div>
       </div>
       
@@ -180,7 +182,7 @@
       </div>
 
       <div class="patient-actions-grid">
-        <button class="btn btn-outline btn-large" (click)="navigateToPatientFeature('')">
+        <button class="btn btn-outline btn-large" (click)="navigateToPatientFeature('/patientProfiles')">
           <i class="material-icons">account_circle</i> Account Details
         </button>
         <button class="btn btn-outline btn-large" (click)="navigateToPatientFeature('/my-consultations')">

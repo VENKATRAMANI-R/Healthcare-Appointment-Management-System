@@ -1,4 +1,9 @@
 .consultation-table {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 10px;  
+  box-sizing: border-box;
+  border-radius: 5px;
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
@@ -10,7 +15,7 @@
   }
  
   th {
-    background: #6E8E9E;
+    background: #19A7CE;
     color: white;
   }
  
@@ -20,14 +25,14 @@
  
   button {
     padding: 5px 10px;
-    background: #007bff;
+    background: #18c58d;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
  
     &:hover {
-      background: #0056b3;
+      background: #087a56;
     }
   }
 }
@@ -36,6 +41,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);

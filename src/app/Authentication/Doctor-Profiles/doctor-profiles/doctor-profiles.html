@@ -1,0 +1,52 @@
+<div class="profile-container">
+  <h2 *ngIf="!isProfileSaved">Complete Doctor Profile</h2>
+  <h2 *ngIf="isProfileSaved" class="center">Doctor Profile</h2>
+ 
+  <!-- FORM SECTION -->
+  <form *ngIf="!isProfileSaved" [formGroup]="doctorForm" (ngSubmit)="saveDoctorProfile()">
+    <div class="form-group">
+      <label>Specialization</label>
+      <input type="text" formControlName="specialization" placeholder="e.g., Cardiologist">
+    </div>
+ 
+    <div class="form-group">
+      <label>Qualification</label>
+      <input type="text" formControlName="qualification" placeholder="e.g., MBBS, MD">
+    </div>
+ 
+    <div class="form-group">
+      <label>Experience (in years)</label>
+      <input type="number" formControlName="experience">
+    </div>
+ 
+    <div class="form-group">
+      <label>Address</label>
+      <textarea formControlName="address" placeholder="Enter your clinic address"></textarea>
+    </div>
+ 
+    <div class="form-group">
+      <label>About</label>
+      <textarea formControlName="about" placeholder="Write a short description about yourself"></textarea>
+    </div>
+ 
+    <button type="submit" [disabled]="doctorForm.invalid">Save Profile</button>
+  </form>
+ 
+  <!-- PROFILE VIEW SECTION -->
+  <div *ngIf="isProfileSaved" class="profile-view">
+    <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor" class="profile-img" />
+    <h3>{{ savedDoctor?.doctorName }}</h3>
+    <h4>{{ savedDoctor?.specialization }}</h4>
+ 
+    <div class="profile-info">
+      <p><strong>Email:</strong> {{ savedDoctor?.doctorEmail }}</p>
+      <p><strong>phone No:</strong> {{ savedDoctor?.doctorMobileNumber }}</p>  
+      <p><strong>Qualification:</strong> {{ savedDoctor?.qualification }}</p>
+      <p><strong>Experience:</strong> {{ savedDoctor?.experience }} years</p>
+      <p><strong>Address:</strong> {{ savedDoctor?.address }}</p>
+      <p><strong>About:</strong> {{ savedDoctor?.about }}</p>
+    </div>
+ 
+    <button class="edit-btn" (click)="editProfile()">Edit Profile</button>
+  </div>
+</div>

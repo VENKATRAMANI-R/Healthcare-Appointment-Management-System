@@ -1,7 +1,6 @@
-
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConsultationService, Consultation } from '../../consultation.service';
+import { Consultation } from '../../consultation.service';
 
 @Component({
   selector: 'app-consultation-list',
@@ -10,16 +9,10 @@ import { ConsultationService, Consultation } from '../../consultation.service';
   templateUrl: './consultation-list.html',
   styleUrls: ['./consultation-list.css']
 })
-export class ConsultationList implements OnInit {
-  consultations: Consultation[] = [];
+export class ConsultationList {
+  @Input() consultations: Consultation[] = []; 
   selectedConsultation: Consultation | null = null;
   showPopup: boolean = false;
-
-  constructor(private consultationService: ConsultationService) {}
-
-  ngOnInit(): void {
-    this.consultations = this.consultationService.getConsultations();
-  }
 
   viewDetails(consultation: Consultation) {
     this.selectedConsultation = consultation;

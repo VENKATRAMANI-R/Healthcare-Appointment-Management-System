@@ -17,7 +17,7 @@ export class Excellence implements OnInit {
     { key: 'awards', label: 'Awards & Accolades' },
     { key: 'accreditation', label: 'Accreditation & Certification' },
     { key: 'milestones', label: 'Achievements & Milestones' },
-    {key:'rahul', label:'RAHUL'}
+    // {key:'rahul', label:'RAHUL'}
 
   ];
  
@@ -36,15 +36,14 @@ export class Excellence implements OnInit {
       <h2>Achievements & Milestones</h2>
       <p>Over the years, our hospital has achieved several key milestones, from expanding specialties to adopting cutting-edge medical technology.</p>
     `,
-      rahul: `
-      <h2> JAVA TRAINER <h2>
+      // rahul: `
+      // <h2> JAVA TRAINER <h2>
   
-      `,
+      // `,
   };
  
 ngOnInit() {
   this.activeSection = 'awards';
-  localStorage.setItem('excellenceActiveSection', 'awards');
 }
  
  
@@ -52,7 +51,6 @@ ngOnInit() {
   loadSection(section: string) {
     if (!this.sectionContents[section]) return;
     this.activeSection = section;
-    localStorage.setItem('excellenceActiveSection', section);
   }
 }
  

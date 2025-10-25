@@ -85,7 +85,7 @@ export class BookAppointment implements OnInit {
   }
 
   onClick():void{
-    this.router.navigate(['/my-appointments']);
+    this.router.navigate(['my-appointments']);
   }
       
 

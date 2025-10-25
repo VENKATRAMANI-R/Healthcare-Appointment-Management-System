@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user-service';
+
 @Component({
   selector: 'app-landing-page',
   imports: [CommonModule],
@@ -8,7 +10,11 @@ import { Router } from '@angular/router';
   styleUrl: './landing-page.css',
   encapsulation: ViewEncapsulation.None  
 })
-export class LandingPage {
+export class LandingPage implements OnInit {
+
+
+
+  
 
   // UI state
   isMenuOpen = false;
@@ -17,6 +23,9 @@ export class LandingPage {
   isEmergencyDropdownOpen = false;
   isDropdownOpen = false;
   AccountDropdownState = false;
+  userId:any;
+  userDetails:any;
+  patientName:string="";
   @ViewChild('menuRef') menuRef!: ElementRef;
  
   // Emergency services data
@@ -84,11 +93,22 @@ patientDashboard = [
       icon: 'support_agent'
     }
   ];
- user = {
-    name: 'Venkatramani R',
-    profileImage: 'assets/images/profile.jpg' // Replace with actual image path
+  user = {
+    name: '',
+    profileImage: 'assets/images/profile.jpg'
   };
+
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    const storedName = localStorage.getItem('patientName');
+    if (storedName) {
+      this.patientName = storedName;
+      this.user.name = storedName;
+    }
+    console.log('Patient Name from localStorage:', storedName);
+  }
+
  
   @HostListener('window:scroll')
   onWindowScroll(): void {
@@ -103,7 +123,7 @@ patientDashboard = [
     this.isEmergencyDropdownOpen = !this.isEmergencyDropdownOpen;
   }
   goToUserProfile(): void {
-    this.router.navigate(['/user/profile']);
+    this.router.navigate(['patientProfiles']);
   }
   navigateTo(route: string): void {
     this.router.navigate([route]);
@@ -137,6 +157,7 @@ patientDashboard = [
   }
   logout(){
     //configurations need to be done!
+    this.router.navigate(['/login']);
   }
   AccountDropdown(){
     this.AccountDropdownState = !this.AccountDropdownState;

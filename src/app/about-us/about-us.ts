@@ -132,25 +132,16 @@ vision: `
 
   };
  
-  // On component load, restore section from localStorage
-  ngOnInit() {
-    const saved = localStorage.getItem('aboutActiveSection');
+
+ngOnInit() {
+  this.activeSection = 'profile';
+}
+
  
-  
-    if (saved && this.sectionContents[saved]) {
-      this.activeSection = saved;
-    } else {
-      
-      this.activeSection = 'profile';
-      localStorage.setItem('aboutActiveSection', 'profile');
-    }
-  }
- 
-  //  Change section and save to localStorage
-  loadSection(section: string) {
-    if (!this.sectionContents[section]) return;
-    this.activeSection = section;
-    localStorage.setItem('aboutActiveSection', section);
-  }
+loadSection(section: string) {
+  if (!this.sectionContents[section]) return;
+  this.activeSection = section;
+}
+
 }
  
