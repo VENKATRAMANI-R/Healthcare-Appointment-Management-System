@@ -116,6 +116,10 @@ export const routes: Routes = [
         component:PatientProfiles
     },
     {
+        path:'doctorProfiles',
+        component:DoctorProfiles
+    },
+    {
         path:'doctorLandingPage',
         component:DoctorLandingPage
     }

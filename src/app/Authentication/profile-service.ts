@@ -33,6 +33,7 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
  
     // Optional: backend could get email from token, but if not, you can send it
     const email = localStorage.getItem('doctorEmail') || '';
+    console.log("Fetching patient profile for email:", email);  
     return this.http.get(`${this.baseUrl}/get/${email}`, { headers });
   }
 

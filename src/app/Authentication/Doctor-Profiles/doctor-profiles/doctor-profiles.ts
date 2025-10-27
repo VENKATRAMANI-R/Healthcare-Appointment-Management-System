@@ -144,7 +144,7 @@
 // }
 
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../profile-service';
 
@@ -158,10 +158,15 @@ import { ProfileService } from '../../profile-service';
 export class DoctorProfiles implements OnInit {
   doctorForm!: FormGroup;
   isProfileSaved = false;
+  isEditSaved = false;
   savedDoctor: any;
  
-  constructor(private fb: FormBuilder, private doctorService: ProfileService) {}
- 
+  constructor(private fb: FormBuilder, private doctorService: ProfileService, private cdr: ChangeDetectorRef) {
+  if(!this.isBrowser()) return;
+  }
+  isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
   ngOnInit(): void {
     this.doctorForm = this.fb.group({
       specialization: ['', Validators.required],
@@ -175,10 +180,13 @@ export class DoctorProfiles implements OnInit {
     // Load profile on init
     this.doctorService.getProfile().subscribe({
       next: (data: any) => {
+        console.log('Fetched profile data:', data);
         if (data) {
           this.savedDoctor = data;
           this.isProfileSaved = true;
-          // this.doctorForm.patchValue(data); // prefill form for editing
+          this.isEditSaved=false;
+          this.doctorForm.patchValue(data); // prefill form for editing
+          this.cdr.detectChanges();
         }
       },
       error: (err) => console.error('Error fetching profile:', err)
@@ -197,6 +205,8 @@ saveDoctorProfile() {
         console.log('Profile saved:', res);
         this.savedDoctor = res;
         this.isProfileSaved = true;
+        this.isEditSaved = false;
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error saving profile:', err)
     });
@@ -205,7 +215,7 @@ saveDoctorProfile() {
 
  
   editProfile() {
-    this.isProfileSaved = false;
+    this.isEditSaved = true;
     this.doctorForm.patchValue(this.savedDoctor);
   }
 }
