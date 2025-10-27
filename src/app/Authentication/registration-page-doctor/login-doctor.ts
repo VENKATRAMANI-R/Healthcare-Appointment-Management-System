@@ -45,7 +45,7 @@ export class Logindoctor {
         // this.doctorEmail = response.doctorEmail; // Store the email
         // this.doctorName = response.doctorPassword; // Store the name
         alert('Login successful!');
-        this.router.navigate(['landingpage']); // Navigate to landingPage
+        this.router.navigate(['doctorLandingPage']); // Navigate to landingPage
       },
       error: (error: any) => {
         console.error('There was an error during login!', error);

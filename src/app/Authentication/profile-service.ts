@@ -33,6 +33,7 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
  
     // Optional: backend could get email from token, but if not, you can send it
     const email = localStorage.getItem('doctorEmail') || '';
+    console.log("Fetching patient profile for email:", email);  
     return this.http.get(`${this.baseUrl}/get/${email}`, { headers });
   }
 
@@ -52,7 +53,7 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
     const Patienttoken = localStorage.getItem('Patienttoken') ;//|| '';
     const headers = new HttpHeaders().set('Authorization',  `Bearer ${Patienttoken}`);
     
-    const email = localStorage.getItem('patientId') //|| '';
+    const email = localStorage.getItem('patientEmail') //|| '';
     console.log("Fetching patient profile for email:", email);  
     return this.http.get(`${this.baseUrl1}/get/${email}`, { headers });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileService } from '../../profile-service';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ export class PatientProfiles implements OnInit {
   isEditSaved = false;
   savedPatient: any;
  
-  constructor(private fb: FormBuilder, private patientService: ProfileService) {
+  constructor(private fb: FormBuilder, private patientService: ProfileService, private cdr: ChangeDetectorRef) {
  if(!this.isBrowser()) return;
   }
   isBrowser(): boolean {
@@ -42,6 +42,7 @@ export class PatientProfiles implements OnInit {
           this.isEditSaved=false;
           // this.doctorForm.patchValue(data); // prefill form for editing
           this.patientForm.patchValue(data);
+          this.cdr.detectChanges();
         }
       },
       error: (err) => console.error('Error fetching profile:', err)
@@ -61,6 +62,7 @@ export class PatientProfiles implements OnInit {
         this.savedPatient = res;
         this.isProfileSaved = true;
         this.isEditSaved = false;
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error saving profile:', err)
     });

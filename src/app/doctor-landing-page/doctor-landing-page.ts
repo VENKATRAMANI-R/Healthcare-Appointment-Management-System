@@ -35,6 +35,8 @@ type SortDirection = 'asc' | 'desc';
 })
 export class DoctorLandingPage implements OnInit, OnDestroy{
   doctor: Doctor | null = null;
+
+  doctorName = localStorage.getItem('doctorName');
   
   appointments: Appointment[] = [];
   filteredAppointments: Appointment[] = [];
@@ -48,7 +50,7 @@ export class DoctorLandingPage implements OnInit, OnDestroy{
   // UI State 
   isAvailable = true; 
   currentDate = new Date(); 
- 
+  AccountDropdownState = false;
   searchQuery = ''; 
   currentView: ViewMode = 'list'; 
   isLoading = false; 
@@ -77,7 +79,9 @@ export class DoctorLandingPage implements OnInit, OnDestroy{
     // Update time every minute
     this.dateUpdateInterval = setInterval(() => this.updateDateTime(), 60000); 
     this.loadDoctor()
-    this.loadAppointments();  } 
+    this.loadAppointments();  
+    
+  } 
 
 loadDoctor(): void {
   // const sub = this.doctorService.getDoctorProfile().subscribe({
@@ -121,14 +125,14 @@ loadAppointments(): void {
   } 
  
   // Getters 
-  get doctorInitials(): string { 
-    const firstInitial = this.doctor?.firstName.charAt(this.doctor.firstName.indexOf(' ') + 1) ||  
+  // get doctorInitials(): string { 
+  //   const firstInitial = this.doctor?.firstName.charAt(this.doctor.firstName.indexOf(' ') + 1) ||  
  
-    this.doctor?.firstName.charAt(0); 
-    const lastInitial = this.doctor?.lastName.charAt(0); 
-    const flag = firstInitial!=null && lastInitial!=null
-    return flag?firstInitial + lastInitial : ''; 
-  } 
+  //   this.doctor?.firstName.charAt(0); 
+  //   const lastInitial = this.doctor?.lastName.charAt(0); 
+  //   const flag = firstInitial!=null && lastInitial!=null
+  //   return flag?firstInitial + lastInitial : ''; 
+  // } 
 
   get doctorFullName(): string { 
     return `${this.doctor?.firstName} ${this.doctor?.lastName}`; 
@@ -284,9 +288,8 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
   // } 
  
   openProfile(): void { 
-    this.showToast('Opening profile settings...', 'info'); 
+    this.AccountDropdownState = !this.AccountDropdownState;
   } 
- 
   manageSlots(): void { 
     this.router.navigate(['/doctor-availablity-management']);
     this.showToast('Opening availability management...', 'info'); 
@@ -326,4 +329,13 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
   trackByAppointmentId(index: number, appointment: Appointment): number { 
     return appointment.id; 
   } 
+
+  goToUserProfile()
+  {
+    this.router.navigate(['/doctorProfiles']);
+  }
+  logout()
+  {
+    this.router.navigate(['/login-doctor']);
+  }
 }
