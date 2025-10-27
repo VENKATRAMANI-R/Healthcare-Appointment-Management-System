@@ -52,7 +52,7 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
     const Patienttoken = localStorage.getItem('Patienttoken') ;//|| '';
     const headers = new HttpHeaders().set('Authorization',  `Bearer ${Patienttoken}`);
     
-    const email = localStorage.getItem('patientId') //|| '';
+    const email = localStorage.getItem('patientEmail') //|| '';
     console.log("Fetching patient profile for email:", email);  
     return this.http.get(`${this.baseUrl1}/get/${email}`, { headers });
   }

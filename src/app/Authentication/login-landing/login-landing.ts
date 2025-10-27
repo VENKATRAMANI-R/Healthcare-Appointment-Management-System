@@ -11,10 +11,12 @@ export class LoginLanding {
 constructor(private router: Router) {}
 
   loginAsDoctor(): void {
+    localStorage.clear();
     this.router.navigate(['/login-doctor']);
   }
 
   loginAsPatient(): void {
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 

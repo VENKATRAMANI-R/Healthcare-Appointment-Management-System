@@ -158,6 +158,7 @@ patientDashboard = [
   logout(){
     //configurations need to be done!
     this.router.navigate(['/login']);
+    localStorage.clear();
   }
   AccountDropdown(){
     this.AccountDropdownState = !this.AccountDropdownState;

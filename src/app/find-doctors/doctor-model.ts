@@ -1,10 +1,7 @@
-
 export interface Doctor {
+  id: number;
   name: string;
-  position: string;
+  specialization: string;
   qualification: string;
-  image: string;
-  hours: string[];
-  specialties: string[];
-  availability: string[];
+  experience: number;
 }
