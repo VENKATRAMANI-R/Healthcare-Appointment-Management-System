@@ -39,7 +39,7 @@ export class Logindoctor {
       next: (response: any) => {
         console.log('Login successful****', response);
         localStorage.setItem('token', response.token); // Store the token
-
+        localStorage.setItem('doctorId', response.doctorId);
         localStorage.setItem('doctorEmail', response.doctorEmail);
         localStorage.setItem('doctorName', response.doctorName);
         // this.doctorEmail = response.doctorEmail; // Store the email

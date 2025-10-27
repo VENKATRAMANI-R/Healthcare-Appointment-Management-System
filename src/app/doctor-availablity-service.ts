@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface AvailabilitySlot {
@@ -28,28 +28,41 @@ export interface Doctor {
   providedIn: 'root'
 })
 export class DoctorService {
-  private apiUrl = 'http://localhost:8080/api/doctors'; // Spring Boot base URL
+  private apiUrl = 'http://localhost:8081/api/doctors'; // Spring Boot base URL
   currentSlot=0;
   constructor(private http: HttpClient) {}
 
+  private getToken(): string {
+      console.log('Retrieving token from localStorage');
+      console.log('Token:', localStorage.getItem('Patienttoken'));
+      return localStorage.getItem('Patienttoken') || '';
+  }
   // Doctor Info
   getDoctor(id: number): Observable<Doctor> {
     // console.log("I tried")
-    return this.http.get<Doctor>(`${this.apiUrl}/${id}`);
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Doctor>(`${this.apiUrl}/${id}`,{ headers});
   }
 
   // Availability
   getAvailabilitySlots(doctorId: number): Observable<AvailabilitySlot[]> {
-    return this.http.get<AvailabilitySlot[]>(`${this.apiUrl}/${doctorId}/availablity`);
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<AvailabilitySlot[]>(`${this.apiUrl}/${doctorId}/availablity`,{ headers});
   }
 
   addAvailability(doctorId: number, newSlot: AvailabilitySlot): Observable<AvailabilitySlot> {
-    return this.http.post<AvailabilitySlot>(`${this.apiUrl}/${doctorId}/availablity`, newSlot);
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<AvailabilitySlot>(`${this.apiUrl}/${doctorId}/availablity`, newSlot ,{ headers});
   }
 
 removeAvailability(slotId: number): Observable<void> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
  
-  return this.http.delete<void>(`${this.apiUrl}/availablity/${slotId}`);
+    return this.http.delete<void>(`${this.apiUrl}/availablity/${slotId}`,{headers});
 }
 
   // Appointments
