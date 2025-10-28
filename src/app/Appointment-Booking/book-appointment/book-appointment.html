@@ -5,29 +5,42 @@
       <span>
         <label for="PatientID">Patient ID</label>
         <input type="text" id="Patient" formControlName="patientId"  />
-        <small style="color: gray;">Auto-generated. Cannot be edited.</small>
+        <!-- <small style="color: gray;">Auto-generated. Cannot be edited.</small> -->
       </span>
-      <!-- <br> -->
+      <br>
       <span>
         <label for="Patient">Patient Name</label>
         <input type="text" id="Patient Name" formControlName="patientName"/>
-        <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small>
+        <!-- <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small> -->
       </span>
-      <!-- <br> -->
+      <br>
        <span>
         <label for="Doctor">Doctor Name</label>
         <input type="text" id="Doctor Name" formControlName="doctorName"  />
-        <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small>
+        <!-- <small style="color: gray;"></small> -->
       </span>
-      <!-- <br> -->
+      <br>
       <span>
         <label for="Date">Date</label>
         <input type="date" id="Date" formControlName="date" />
             <small style="color: gray;">Select a date within the next 30 days.</small>
       </span>
+      <div class="time-inputs">
+        <span class="start-time">
+          <label for="StartTime">Start Time</label>
+          <input type="time" id="StartTime" formControlName="startTime" />
+              <small style="color: gray;">Select the start time for your appointment.</small>
+        </span>
+        <span class="end-time">
+          <label for="EndTime">End Time</label>
+          <input type="time" id="EndTime" formControlName="endTime" />
+              <small style="color: gray;">Select the end time for your appointment.</small>
+        </span>
+      </div>
       <!-- <br> -->
-      <span>
-        <label for="timeSlots">Time Slots</label>
+      <!-- <span> -->
+      
+       <!-- <label for="timeSlots">Time Slots</label>
         <select id="timeSlots" formControlName="timeSlot">
           <option value="">-- Select a Time Slot --</option>
           <option value="9to10">09AM - 10AM</option>
@@ -43,8 +56,17 @@
           <option value="7to8">07PM - 08PM</option>
         </select>
         <small style="color: gray;">Choose a preferred time slot for your appointment.</small>
-      </span>
+      </span> -->
       <!-- <br> -->
+      <!-- <span>
+        <label for="timeSlots">Time Slots</label>
+        <select id="timeSlots" formControlName="timeSlot">
+          <option value="">-- Select a Time Slot --</option>
+          <option *ngFor="let slot of timeSlots" [value]="slot.value">{{ slot.display }}</option>
+        </select>
+        <small style="color: gray;">Choose a preferred time slot for your appointment.</small>
+       </span> -->
+      
       <span>
         <label for="Problem">Problem</label>
         <input type="text" id="Problem" formControlName="problem" placeholder="Problem in 50 words" />
@@ -52,10 +74,10 @@
       </span>
       <!-- <br> -->
       <div>
-        <button type="submit">Book Now</button>
+        <button class="btn btn-outline" type="submit">Book Now</button>
         <!--<button type="button" (click)="onClose()">Close</button>-->
        <!----<button type="submit">View Appointment</button>-->
-        <button type="button" (click)=" onClick()">View Appointment</button>"
+        <button class="btn btn-outline" type="button" (click)=" onClick()">View Appointment</button>
       </div>
     </div>
   </form>

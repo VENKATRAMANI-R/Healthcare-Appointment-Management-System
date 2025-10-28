@@ -15,7 +15,8 @@ import { AppointmentService } from '../appointment-service';
 // }
 export class BookAppointment implements OnInit {
   appointmentForm!: FormGroup;
-
+  availableSlots: string[] = [];
+  doctorHours: string[] = [];
    //constructor(private fb: FormBuilder) {}
 
   // ngOnInit(): void {
@@ -42,12 +43,17 @@ export class BookAppointment implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    const doctorData = history.state;
+    this.availableSlots = doctorData.availability || [];
+    this.doctorHours = doctorData.hours || [];
+
     this.appointmentForm = this.fb.group({
       patientId: [ '', Validators.required ],
       patientName: [ '', Validators.required ],
       doctorName: ['', Validators.required],
       date: ['', Validators.required],
-      timeSlot: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
       problem: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
@@ -55,6 +61,7 @@ export class BookAppointment implements OnInit {
   //ngOnInit(): void {
    // throw new Error('Method not implemented.');
   //}
+
 
   onSubmit(): void {
     if (this.appointmentForm.valid) {

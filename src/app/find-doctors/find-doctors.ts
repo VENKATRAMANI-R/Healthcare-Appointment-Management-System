@@ -4,6 +4,7 @@ import { BookAppointment } from '../Appointment-Booking/book-appointment/book-ap
 import { MatDialog } from '@angular/material/dialog';
 import { DoctorService } from '../doctor-service';
 import { Doctor } from './doctor-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-doctors',
@@ -22,10 +23,19 @@ export class FindDoctors implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private doctorService: DoctorService
+    private doctorService: DoctorService,
+    private router: Router
   ) {}
 
   // doctors = this.doctorService.getDoctors();
+  selectDoctor(doctor: Doctor) {
+  this.router.navigate(['/bookAppointment'], {
+    state: {
+      doctorName: doctor.name,
+      availability: doctor.availability
+    }
+  });
+}
 
   ngOnInit() {
     this.doctors = this.doctorService.getDoctors();

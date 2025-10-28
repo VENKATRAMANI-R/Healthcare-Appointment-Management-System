@@ -83,7 +83,9 @@
             <p *ngFor="let hour of doctor.hours">{{ hour }}</p>
         </div>
         </div>
-        <button class="book-button" routerLink="bookAppointment">Book Appointment</button>
+        <!--<button class="book-button" routerLink="bookAppointment">Book Appointment</button>-->
+        <button class="book-button" (click)="selectDoctor(doctor)">Book Appointment</button>
+
     </article>
     </main>
 </div>
