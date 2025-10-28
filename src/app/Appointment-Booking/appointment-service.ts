@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppointmentService {
-  private baseurl = 'http://localhost:8082/appointments'; // Spring Boot base URL
+  private baseurl = 'http://localhost:8083/appointments'; // Spring Boot base URL
 
   constructor(private http: HttpClient) {  }
 //   Appointment:any= {

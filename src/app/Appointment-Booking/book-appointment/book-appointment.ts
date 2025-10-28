@@ -8,7 +8,7 @@ import { AppointmentService } from '../appointment-service';
   selector: 'app-book-appointment',
   imports: [ReactiveFormsModule],
   templateUrl: './book-appointment.html',
-  styleUrl: './book-appointment.css'
+  styleUrl: './book-appointment.css' 
 })
 // export class BookAppointment {
 
