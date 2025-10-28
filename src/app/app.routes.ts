@@ -26,6 +26,7 @@ import { ConsultationForm } from './consultation-form/consultation-form';
 import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
 import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 import { DoctorLandingPage } from './doctor-landing-page/doctor-landing-page';
+import { NotificationPanal } from './notification-panal/notification-panal';
 export const routes: Routes = [
     {
         path:'',
@@ -114,6 +115,11 @@ export const routes: Routes = [
     {
         path:'patientProfiles',
         component:PatientProfiles
+    },
+    {
+        path:'notifications',
+        component:NotificationPanal
+
     },
     {
         path:'doctorLandingPage',
