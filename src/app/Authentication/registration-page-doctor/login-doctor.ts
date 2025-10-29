@@ -40,12 +40,13 @@ export class Logindoctor {
         console.log('Login successful****', response);
         localStorage.setItem('token', response.token); // Store the token
 
+        localStorage.setItem('doctorId', response.doctorId.toString());
         localStorage.setItem('doctorEmail', response.doctorEmail);
         localStorage.setItem('doctorName', response.doctorName);
         // this.doctorEmail = response.doctorEmail; // Store the email
         // this.doctorName = response.doctorPassword; // Store the name
         alert('Login successful!');
-        this.router.navigate(['landingpage']); // Navigate to landingPage
+        this.router.navigate(['doctorLandingPage']); // Navigate to landingPage
       },
       error: (error: any) => {
         console.error('There was an error during login!', error);

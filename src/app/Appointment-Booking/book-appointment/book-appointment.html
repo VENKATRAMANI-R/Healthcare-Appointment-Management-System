@@ -1,87 +1,93 @@
 <h1 style="text-align: center; color: rgb(46, 47, 47);">Book an Appointment</h1>
+
 <div id="container">
   <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
     <div id="getDetails" class="form-group">
+
       <span>
         <label for="PatientID">Patient ID</label>
-        <input type="text" id="Patient" formControlName="patientId"  />
-        <!-- <small style="color: gray;">Auto-generated. Cannot be edited.</small> -->
+        <input type="text" id="PatientID" formControlName="patId" readonly />
       </span>
       <br>
+
       <span>
-        <label for="Patient">Patient Name</label>
-        <input type="text" id="Patient Name" formControlName="patientName"/>
-        <!-- <small style="color: gray;">Your registered name & Auto-generated. Cannot be edited.</small> -->
+        <label for="PatientName">Patient Name</label>
+        <input type="text" id="PatientName" formControlName="patientName" readonly />
       </span>
       <br>
-       <span>
-        <label for="Doctor">Doctor Name</label>
-        <input type="text" id="Doctor Name" formControlName="doctorName"  />
-        <!-- <small style="color: gray;"></small> -->
+
+      <span>
+        <label for="DoctorName">Doctor Name</label>
+        <input type="text" id="DoctorName" formControlName="doctorName" readonly />
       </span>
       <br>
+
       <span>
         <label for="Date">Date</label>
-        <input type="date" id="Date" formControlName="date" />
-            <small style="color: gray;">Select a date within the next 30 days.</small>
+        <input 
+          type="date" 
+          id="Date" 
+          formControlName="date" 
+          (change)="onDateSelected()"
+          [min]="getTodayDate()"
+          required
+        />
+        <small style="color: gray;">Select a date within the next 30 days.</small>
       </span>
+
       <div class="time-inputs">
         <span class="start-time">
           <label for="StartTime">Start Time</label>
-          <input type="time" id="StartTime" formControlName="startTime" />
-              <small style="color: gray;">Select the start time for your appointment.</small>
+          <select 
+            id="StartTime"
+            formControlName="startTime"
+            (change)="onTimeSelected()"
+            [disabled]="!availableStartTimes.length"
+            required
+          >
+            <option value="">Select start time</option>
+            <option *ngFor="let time of availableStartTimes" [value]="time">
+              {{ time }}
+            </option>
+          </select>
+
+          <div *ngIf="isLoadingSlots" class="loading-text">
+            Loading available slots...
+          </div>
+
+          <div 
+            *ngIf="!isLoadingSlots && availableStartTimes.length === 0 && appointmentForm.get('date')?.value" 
+            class="no-slots-text"
+          >
+            No available slots for selected date
+          </div>
         </span>
+
         <span class="end-time">
           <label for="EndTime">End Time</label>
-          <input type="time" id="EndTime" formControlName="endTime" />
-              <small style="color: gray;">Select the end time for your appointment.</small>
+          <input type="text" id="EndTime" formControlName="endTime" readonly />
         </span>
       </div>
-      <!-- <br> -->
-      <!-- <span> -->
-      
-       <!-- <label for="timeSlots">Time Slots</label>
-        <select id="timeSlots" formControlName="timeSlot">
-          <option value="">-- Select a Time Slot --</option>
-          <option value="9to10">09AM - 10AM</option>
-          <option value="10to11">10AM - 11AM</option>
-          <option value="11to12">11AM - 12PM</option>
-          <option value="12to01">12PM - 01PM</option>
-          <option value="1to2">01PM - 02PM</option>
-          <option value="2to3">02PM - 03PM</option>
-          <option value="3to4">03PM - 04PM</option>
-          <option value="4to5">04PM - 05PM</option>
-          <option value="5to6">05PM - 06PM</option>
-          <option value="6to7">06PM - 07PM</option>
-          <option value="7to8">07PM - 08PM</option>
-        </select>
-        <small style="color: gray;">Choose a preferred time slot for your appointment.</small>
-      </span> -->
-      <!-- <br> -->
-      <!-- <span>
-        <label for="timeSlots">Time Slots</label>
-        <select id="timeSlots" formControlName="timeSlot">
-          <option value="">-- Select a Time Slot --</option>
-          <option *ngFor="let slot of timeSlots" [value]="slot.value">{{ slot.display }}</option>
-        </select>
-        <small style="color: gray;">Choose a preferred time slot for your appointment.</small>
-       </span> -->
-      
+
       <span>
         <label for="Problem">Problem</label>
-        <input type="text" id="Problem" formControlName="problem" placeholder="Problem in 50 words" />
-            <small style="color: gray;">Briefly describe your issue (max 50 words).</small>
+        <input 
+          type="text"
+          id="Problem"
+          formControlName="problem"
+          maxlength="50"
+          placeholder="Problem in 50 characters"
+        />
+        <small style="color: gray;">
+          {{ appointmentForm.get('problem')?.value?.length || 0 }}/50
+        </small>
       </span>
-      <!-- <br> -->
+
       <div>
-        <button class="btn btn-outline" type="submit">Book Now</button>
-        <!--<button type="button" (click)="onClose()">Close</button>-->
-       <!----<button type="submit">View Appointment</button>-->
-        <button class="btn btn-outline" type="button" (click)=" onClick()">View Appointment</button>
+        <button class="btn btn-outline" type="submit" [disabled]="!appointmentForm.valid">Book Now</button>
+        <button class="btn btn-outline" type="button" (click)="onClick()">View Appointment</button>
       </div>
+
     </div>
   </form>
 </div>
-
-
-    

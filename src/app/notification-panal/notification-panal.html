@@ -1,0 +1,20 @@
+<div class="notification">
+    <div class="notification-panel">
+  <h2>🔔 Notifications</h2>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <ul *ngIf="!loading && notifications.length > 0">
+    <li *ngFor="let note of notifications" class="notification-item">
+      <p>{{ note.message }}</p>
+      <p class="timeStamp">{{ note.timestamp | date:'h:mm a' }}</p>
+    </li>
+  </ul>
+
+  <div *ngIf="!loading && notifications.length === 0">
+    <p>No notifications found.</p>
+  </div>
+</div>
+
+</div>

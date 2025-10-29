@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { BookAppointment } from './Appointment-Booking/book-appointment/book-appointment';
 import { App } from './app';
-import { FindDoctors } from './find-doctors/find-doctors';
+// import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
 import { AboutUs } from './about-us/about-us';
 import { Excellence } from './excellence/excellence';
@@ -26,6 +26,8 @@ import { ConsultationForm } from './consultation-form/consultation-form';
 import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
 import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 import { DoctorLandingPage } from './doctor-landing-page/doctor-landing-page';
+import { FindDoctors } from './find-doctors/find-doctors';
+import { NotificationPanal } from './notification-panal/notification-panal';
 export const routes: Routes = [
     {
         path:'',
@@ -86,7 +88,7 @@ export const routes: Routes = [
         component:ConsultationList
     },
     {
-        path:'consultation-form',
+        path:'consultation-form/:appointmentId',
         component:ConsultationForm
 
     },
@@ -114,6 +116,11 @@ export const routes: Routes = [
     {
         path:'patientProfiles',
         component:PatientProfiles
+    },
+    {
+        path:'notifications',
+        component:NotificationPanal
+
     },
     {
         path:'doctorLandingPage',
