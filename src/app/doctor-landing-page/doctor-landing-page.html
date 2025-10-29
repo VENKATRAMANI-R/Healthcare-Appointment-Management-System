@@ -1,231 +1,228 @@
-<div class="dashboard-wrapper"> 
-  <!-- Top Navigation Bar --> 
-  <header class="top-bar"> 
-    <div class="brand"> 
-      <div class="brand-logo"> 
-        <img src="assets/images/healwell-logo.png" alt="HealWell Hospital" class="logo" />
-      </div> 
-      <span class="brand-name">HealWell Doctor</span> 
-    </div> 
-    <div class="context-info"> 
-      <span class="material-icons">event</span> 
-      <span class="date-display">{{ formattedDate }}</span> 
-    </div> 
-    <div class="profile-section"> 
-      <button class="profile-btn" (click)="openProfile()"> 
-        <div class="profile-avatar">{{ doctorInitials }}</div> 
-        <span>{{ doctorFullName }}</span> 
-        <span class="material-icons">keyboard_arrow_down</span> 
-      </button> 
-    </div> 
-  </header> 
-  <!-- Main Content --> 
-  <main class="main-content"> 
-    <!-- Hero Cards Section --> 
-    <section class="hero-section"> 
-      <!-- Availability Card --> 
-      <div class="card availability-card"> 
-        <div class="card-header"> 
-          <div class="status-dot" [class.unavailable]="!isAvailable"></div> 
-          <h3>Current Status</h3> 
-        </div> 
-        <div class="card-content"> 
-          <div class="status-display"> 
-            <span class="material-icons status-icon" [class.unavailable]="!isAvailable"> 
-              {{ statusIcon }} 
-            </span> 
-            <div class="status-info"> 
-              <div class="status-label">{{ statusText }}</div> 
-              <div class="status-subtitle">Visible to patients and staff</div> 
-            </div> 
-          </div> 
-          <div class="availability-controls"> 
-            <button class="btn btn-primary" (click)="setAvailability(true)"> 
-              <span class="material-icons">play_circle</span> 
-              Available 
-            </button> 
-            <button class="btn btn-secondary" (click)="setAvailability(false)"> 
-              <span class="material-icons">pause_circle</span> 
-              Unavailable 
-            </button> 
-            <button class="btn btn-outline" (click)="manageSlots()"> 
-              <span class="material-icons">schedule</span> 
-              Manage Slots 
-            </button> 
-            <button class="btn btn-outline" (click)="listConsultation()"> 
-              <span class="material-icons">list_alt</span> 
-              Consultations
-            </button> 
-          </div> 
-        </div> 
-      </div> 
-      <!-- Next Appointment Card --> 
-      <div class="card next-appointment-card" *ngIf="nextAppointment"> 
-        <div class="card-header"> 
-          <!-- <div class="patient-avatar">{{ getPatientInitial(nextAppointment.gender) }}</div>  -->
-          <div class="appointment-header"> 
-            <h3>Next Appointment</h3> 
-            <span class="appointment-time">{{ nextAppointment.time || 'NA' }} • {{ nextAppointment.type || 'NA'}}</span> 
-          </div> 
-        </div> 
-        <div class="card-content"> 
-          <div class="appointment-details"> 
-            <div class="detail-row"> 
-              <span class="material-icons detail-icon">person</span> 
-              <span>{{ nextAppointment.patientName || 'NA' }} • {{ nextAppointment.age || 'NA'}}y • {{ nextAppointment.gender || 'NA'}}</span> 
-            </div> 
-            <div class="detail-row"> 
-              <span class="material-icons detail-icon">local_hospital</span> 
-              <span>{{ nextAppointment.reason || 'NA'}}</span> 
-            </div> 
-            <div class="detail-row"> 
-              <span class="material-icons detail-icon">location_on</span> 
-              <span>{{ nextAppointment.mode === 'In-person' ? nextAppointment.room : 'Teleconsultation' }}</span> 
-            </div> 
-          </div> 
-        </div> 
-        <div class="card-actions"> 
-          <!-- <button class="btn btn-primary" (click)="openChart(nextAppointment)">  -->
-            <button class="btn btn-primary" > 
-            <span class="material-icons">folder_open</span> 
-            Open Chart 
-          </button> 
-          <!-- <button class="btn btn-outline" (click)="callPatient()"> 
-            <span class="material-icons">phone</span> 
-            Call 
-          </button>  -->
-        </div> 
-      </div> 
-    </section> 
-    <!-- Today's Appointments Section --> 
-    <section class="appointments-section"> 
-      <div class="section-header"> 
-        <h2>Today's Schedule</h2> 
-        <div class="section-controls"> 
-          <div class="search-box"> 
-            <span class="material-icons search-icon">search</span> 
-            <input
-              type="text"  
-              placeholder="Search patients..."  
-              (input)="onSearch($event)" 
-              class="search-input"> 
-          </div> 
-          <div class="view-toggle"> 
-            <button  
-              class="toggle-btn" 
-              [class.active]="currentView === 'list'" 
-              (click)="onViewChange('list')"> 
-              <span class="material-icons">view_list</span> 
-            </button> 
-            <button  
-              class="toggle-btn" 
-              [class.active]="currentView === 'compact'" 
-              (click)="onViewChange('compact')"> 
-              <span class="material-icons">table_rows</span> 
-            </button> 
-          </div> 
-        </div> 
+<div class="dashboard-wrapper">
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-logo">
+        assets/images/healwell-logo.png
       </div>
-      <div class="appointments-container"> 
-        <div class="appointments-table-wrapper"> 
-          <table class="appointments-table" [class.compact]="currentView === 'compact'"> 
- 
-            <thead> 
-              <tr> 
-                <th (click)="onSort('time')" class="sortable"> 
-                  Time  
-                  <span class="material-icons sort-indicator">{{ getSortIcon('time') }}</span> 
-                </th> 
-                <th (click)="onSort('patientName')" class="sortable"> 
-                  Patient  
-                  <span class="material-icons sort-indicator">{{ getSortIcon('patientName') }}</span> 
-                </th> 
-                <th (click)="onSort('reason')" class="sortable"> 
-                  Reason  
-                  <span class="material-icons sort-indicator">{{ getSortIcon('reason') }}</span> 
-                </th> 
-                <th (click)="onSort('status')" class="sortable"> 
-                  Status  
-                  <span class="material-icons sort-indicator">{{ getSortIcon('status') }}</span> 
-                </th> 
-                <th>Actions</th> 
-              </tr> 
-            </thead> 
-            <tbody> 
-              <tr *ngFor="let appointment of currentPageAppointments; trackBy: trackByAppointmentId"> 
-                <td>{{ appointment.time }}</td> 
-                <td> 
-                  <div class="patient-info"> 
-                    <div class="patient-avatar">{{ getPatientInitial(appointment.patientName) }}</div> 
- 
-                    <div class="patient-details"> 
-                      <div class="patient-name">{{ appointment.patientName }}</div> 
-                      <div class="patient-meta">{{ appointment.age }}y • {{ appointment.gender }}</div> 
-                    </div> 
-                  </div> 
-                </td> 
-                <td>{{ appointment.reason }}</td> 
-                <td> 
-                  <span [class]="getStatusBadgeClass(appointment.status)">{{ appointment.status }}</span> 
-                </td> 
-                <td> 
-                  <div class="table-actions"> 
-                    <button class="btn btn-primary" (click)="openChart(appointment)"> 
-                      <span class="material-icons">folder_open</span> 
- 
-                      Open 
-                    </button> 
-                    <button class="btn btn-outline"> 
-                      <span class="material-icons">event</span> 
-                      Reschedule 
-                    </button> 
-                  </div> 
-                </td> 
-              </tr> 
-            </tbody> 
-          </table> 
+      <span class="brand-name">HealWell Doctor</span>
+    </div>
+    <div class="context-info">
+      <span class="material-icons">event</span>
+      <span class="date-display">{{ formattedDate }}</span>
+    </div>
+    <div class="profile-section">
+      <button class="profile-btn" (click)="openProfile()">
+        <div class="profile-avatar">{{ doctorInitials }}</div>
+        <span>{{ doctorFullName }}</span>
+        <span class="material-icons">keyboard_arrow_down</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Cards Section -->
+    <section class="hero-section">
+      <!-- Availability Card -->
+      <div class="card availability-card">
+        <div class="card-header">
+          <div class="status-dot" [class.unavailable]="!isAvailable"></div>
+          <h3>Current Status</h3>
+        </div>
+        <div class="card-content">
+          <div class="status-display">
+            <span class="material-icons status-icon" [class.unavailable]="!isAvailable">
+              {{ statusIcon }}
+            </span>
+            <div class="status-info">
+              <div class="status-label">{{ statusText }}</div>
+              <div class="status-subtitle">Visible to patients and staff</div>
+            </div>
+          </div>
+          <div class="availability-controls">
+            <button class="btn btn-primary" (click)="setAvailability(true)">
+              <span class="material-icons">play_circle</span>
+              Available
+            </button>
+            <button class="btn btn-secondary" (click)="setAvailability(false)">
+              <span class="material-icons">pause_circle</span>
+              Unavailable
+            </button>
+            <button class="btn btn-outline" (click)="manageSlots()">
+              <span class="material-icons">schedule</span>
+              Manage Slots
+            </button>
+            <button class="btn btn-outline" (click)="listConsultation()">
+              <span class="material-icons">list_alt</span>
+              Consultations
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Appointment Card -->
+      <div class="card next-appointment-card" *ngIf="nextAppointment">
+        <div class="card-header">
+          <div class="appointment-header">
+            <h3>Next Appointment</h3>
+            <span class="appointment-time">{{ nextAppointment.time || 'NA' }}</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="appointment-details">
+            <div class="detail-row">
+              <span class="material-icons detail-icon">person</span>
+              <span>{{ nextAppointment.patientName || 'NA' }} • {{ nextAppointment.age || 'NA'}}y • {{ nextAppointment.gender || 'NA'}}</span>
+            </div>
+            <div class="detail-row">
+              <span class="material-icons detail-icon">local_hospital</span>
+              <span>{{ nextAppointment.reason || 'NA'}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary">
+            <span class="material-icons">folder_open</span>
+            Open Chart
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Today's Appointments Section -->
+    <section class="appointments-section">
+      <div class="section-header">
+        <h2>Today's Schedule</h2>
+        <div class="section-controls">
+          <div class="search-box">
+            <span class="material-icons search-icon">search</span>
+            <input
+              type="text"
+              placeholder="Search patients..."
+              (input)="onSearch($event)"
+              class="search-input">
+          </div>
+          <div class="view-toggle">
+            <button
+              class="toggle-btn"
+              [class.active]="currentView === 'list'"
+              (click)="onViewChange('list')">
+              <span class="material-icons">view_list</span>
+            </button>
+            <button
+              class="toggle-btn"
+              [class.active]="currentView === 'compact'"
+              (click)="onViewChange('compact')">
+              <span class="material-icons">table_rows</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="appointments-container">
+        <div class="appointments-table-wrapper">
+          <table class="appointments-table" [class.compact]="currentView === 'compact'">
+            <thead>
+              <tr>
+                <th (click)="onSort('time')" class="sortable">
+                  Time
+                  <span class="material-icons sort-indicator">{{ getSortIcon('time') }}</span>
+                </th>
+                <th (click)="onSort('patientName')" class="sortable">
+                  Patient
+                  <span class="material-icons sort-indicator">{{ getSortIcon('patientName') }}</span>
+                </th>
+                <th (click)="onSort('reason')" class="sortable">
+                  Reason
+                  <span class="material-icons sort-indicator">{{ getSortIcon('reason') }}</span>
+                </th>
+                <th (click)="onSort('status')" class="sortable">
+                  Status
+                  <span class="material-icons sort-indicator">{{ getSortIcon('status') }}</span>
+                </th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of currentPageAppointments; trackBy: trackByAppointmentId">
+                <td>{{ appointment.time }}</td>
+                <td>
+                  <div class="patient-info">
+                    <div class="patient-avatar">{{ getPatientInitial(appointment.patientName) }}</div>
+                    <div class="patient-details">
+                      <div class="patient-name">{{ appointment.patientName }}</div>
+                      <div class="patient-meta">{{ appointment.age }}y • {{ appointment.gender }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ appointment.reason }}</td>
+                <td>
+                  <span [class]="getStatusBadgeClass(appointment.status)">{{ appointment.status }}</span>
+                </td>
+                <td>
+                  <div class="table-actions">
+                    <button class="btn btn-primary" (click)="openChart(appointment)">
+                      <span class="material-icons">folder_open</span>
+                      Open
+                    </button>
+                    <button class="btn btn-outline">
+                      <span class="material-icons">event</span>
+                      Reschedule
+                    </button>
+                    <!-- Consultation Form -->
+                    <button class="btn btn-outline" (click)="openConsultationForm(appointment)">
+                      <span class="material-icons">assignment</span>
+                      Consultation Form
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <!-- Pagination --> 
-        <div class="pagination" *ngIf="totalPages > 1"> 
-          <button 
-            (click)="previousPage()"  
-            [disabled]="currentPage === 1" 
-            class="pagination-btn"> 
-            <span class="material-icons">keyboard_arrow_left</span> 
-            Previous 
-          </button> 
-          <span class="page-info"> 
-            Page {{ currentPage }} of {{ totalPages }} 
-          </span> 
-          <button  
-            (click)="nextPage()"  
-            [disabled]="currentPage === totalPages" 
-            class="pagination-btn"> 
-            Next 
-            <span class="material-icons">keyboard_arrow_right</span> 
-          </button> 
-        </div> 
-      </div> 
-    </section> 
-  </main> 
+        <!-- Pagination -->
+        <div class="pagination" *ngIf="totalPages > 1">
+          <button
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+            class="pagination-btn">
+            <span class="material-icons">keyboard_arrow_left</span>
+            Previous
+          </button>
+          <span class="page-info">
+            Page {{ currentPage }} of {{ totalPages }}
+          </span>
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="pagination-btn">
+            Next
+            <span class="material-icons">keyboard_arrow_right</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <!-- Floating Action Button -->
-  <button class="fab" (click)="goToCalendar()" title="Go to Calendar"> 
-    <span class="material-icons">calendar_month</span> 
-  </button> 
-  <!-- Toast Notifications --> 
-  <div class="toast-container"> 
-    <div *ngFor="let toast of toasts"  
-         [class]="'toast toast-' + toast.type" 
-         [@slideIn]> 
-      <span class="material-icons"> 
-        {{ toast.type === 'success' ? 'check_circle' : toast.type === 'error' ? 'error'  
-: 'info' }} 
-      </span> 
-      <span>{{ toast.message }}</span> 
-      <button class="toast-close" (click)="removeToast(toast.id)"> 
-        <span class="material-icons">close</span> 
-      </button> 
-    </div> 
-  </div> 
-</div> 
+  <button class="fab" (click)="goToCalendar()" title="Go to Calendar">
+    <span class="material-icons">calendar_month</span>
+  </button>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container">
+    <div *ngFor="let toast of toasts"
+         [class]="'toast toast-' + toast.type"
+         [@slideIn]>
+      <span class="material-icons">
+        {{ toast.type === 'success' ? 'check_circle' : toast.type === 'error' ? 'error' : 'info' }}
+      </span>
+      <span>{{ toast.message }}</span>
+      <button class="toast-close" (click)="removeToast(toast.id)">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+  </div>
+</div>

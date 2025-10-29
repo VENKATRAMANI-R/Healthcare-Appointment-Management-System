@@ -32,7 +32,7 @@ export class ConsultationService {
 
   // private baseUrl = 'http://localhost:8080/consultations';
 
-  private baseUrl = 'http://localhost:8080/api/consultations';
+  private baseUrl = 'http://localhost:8088/api/consultations';
 
   constructor(private http: HttpClient) {}
 
@@ -46,6 +46,12 @@ export class ConsultationService {
     console.log('Saving consultation:', consultation);
     return this.http.post<Consultation[]>(this.baseUrl, consultation);
   }
+
+  
+updateAppointmentStatus(appointmentId: number, status: string): Observable<any> {
+  return this.http.put(`http://your-api-url/api/appointments/${appointmentId}/status`, { status });
+}
+
 
   // Get a consultation by ID
   getConsultationById(id: string): Observable<Consultation> {
