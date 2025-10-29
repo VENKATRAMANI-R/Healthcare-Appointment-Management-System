@@ -32,7 +32,7 @@ export class ConsultationService {
 
   // private baseUrl = 'http://localhost:8080/consultations';
 
-  private baseUrl = 'http://localhost:8080/api/consultations';
+  private baseUrl = 'http://localhost:8088/api/consultations';
 
   constructor(private http: HttpClient) {}
 
