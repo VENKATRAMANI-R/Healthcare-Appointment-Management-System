@@ -12,8 +12,11 @@ export interface AvailabilitySlotDTO {
 
 export interface Appointment {
   id?: number;
-  patId: number;
-  docId: number;
+  patientId: number;
+  doctorId: number;
+  patientName: string;
+  doctorName: string;
+  problem: string;
   slotId: number;
   date: string; // Format: "YYYY-MM-DD"
   startTime: string; // Format: "HH:MM"

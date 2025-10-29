@@ -111,8 +111,11 @@ export class BookAppointment implements OnInit {
       const formData = this.appointmentForm.getRawValue();
       
       const appointmentData: Appointment = {
-        patId: parseInt(formData.patId),
-        docId: this.selectedDoctorId,
+        patientId: parseInt(formData.patId),
+        doctorId: this.selectedDoctorId,
+        doctorName: formData.doctorName,
+        patientName: formData.patientName,
+        problem: formData.problem,
         slotId: this.selectedSlotId,
         date: formData.date,
         startTime: formData.startTime,
