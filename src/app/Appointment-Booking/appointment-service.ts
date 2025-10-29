@@ -59,7 +59,7 @@ export class AppointmentService {
   // ✅ Book an appointment
   bookAppointment(appointmentData: Appointment): Observable<Appointment> {
     return this.http.post<Appointment>(
-      `${this.baseUrl}/book/${appointmentData.docId}`,
+      `${this.baseUrl}/book/${appointmentData.slotId}`,
       appointmentData,
       { headers: this.getAuthHeaders() }
     );
