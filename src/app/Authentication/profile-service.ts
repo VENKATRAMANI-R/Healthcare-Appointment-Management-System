@@ -29,7 +29,7 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
   // Get doctor profile
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', token);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
  
     // Optional: backend could get email from token, but if not, you can send it
     const email = localStorage.getItem('doctorEmail') || '';
