@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -22,11 +22,20 @@ export class AppointmentService {
 //   status: string | undefined;
 
   bookAppointment(appointmentData: any): Observable<any> {
-    return this.http.post(`${this.baseurl}/book`, appointmentData);
+    
+    const Patienttoken = localStorage.getItem('Patienttoken');// || '';
+    console.log("Token:",Patienttoken);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${Patienttoken}`);
+    return this.http.post(`${this.baseurl}/book/7`, appointmentData, { headers });
   }
 
-  GetAppointmentsByPatientId(patientId: string): Observable<any> {
-    return this.http.get(`${this.baseurl}/patient/${patientId}`);
+  GetAppointmentsByPatientId(): Observable<any> {
+    const patientId = localStorage.getItem('patientId') || '';
+    console.log("Patient ID:",patientId);
+    const Patienttoken = localStorage.getItem('Patienttoken');// || '';
+    console.log("Token:",Patienttoken);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${Patienttoken}`);
+    return this.http.get(`${this.baseurl}/${patientId}`,{ headers });
   }
 
   updateAppointmentStatus(appointmentId: number, status: 'confirmed' | 'rejected' | 'cancelled'): Observable<any> {

@@ -1,6 +1,6 @@
 import { Component,OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppointmentService } from '../../appointment-service';
+import { AppointmentService } from '../appointment-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,27 +10,39 @@ import { Router } from '@angular/router';
   templateUrl: './my-appointments.html',
   styleUrl: './my-appointments.css'
 })
-export class MyAppointments  {
+export class MyAppointments implements OnInit {
            
-  Appointment: any[]=  [
+  Appointment : any[]=[
     {
-      appointmentId:1,
-      patientId: 'PAT12345',
-      doctorId : 'DOC12345',
-      doctorName: 'Dr.Guru Sakthi',
-      date: '2025-10-10',
-      timeSlot:'8:30 AM - 9:00 AM',
-      problem: 'Fever',
-      status: 'Scheduled',
+      id:'',
+      patientId: '',
+      doctorId : '',
+      doctorName: '',
+      date: '',
+      startTime:'',
+      endTime:'',
+      problem: '',
+      status: '',
   }
   ];
+
     
  
-  constructor( private router: Router) {}
+  constructor( private router: Router, private appointmentService: AppointmentService) {}
+
+  ngOnInit(): void {
+  
+  this.appointmentService.GetAppointmentsByPatientId().subscribe(data => {
+    this.Appointment = data;
+    console.log('Appointments fetched:', this.Appointment);
+  }, error => {
+    console.error('Error fetching appointments:', error);
+  });
+}
  
   rescheduleAppointment(appt: any) :void {
-    const date = new Date(appt.date);
-    alert(`Reschedule requested for:\nDate: ${date.toDateString()}\nTime Slot: ${appt.timeSlot}`);
+    // const date = new Date(appt.date);
+    // alert(`Reschedule requested for:\nDate: ${date.toDateString()}\nTime Slot: ${appt.timeSlot}`);
     this.router.navigate(['/bookAppointment']);
   }
    
