@@ -32,6 +32,9 @@ export class Header {
   navigateBooking(){
     this.router.navigate(['bookAppointment']);
   }
+  openNotifications(): void {
+    this.router.navigate(['notifications']);
+  }
   @HostListener('window:scroll')
   onWindowScroll(): void {
     this.isScrolled = window.pageYOffset > 100;

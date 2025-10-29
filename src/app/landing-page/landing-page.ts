@@ -136,7 +136,9 @@ patientDashboard = [
   navigateToDepartment(route: string): void {
     this.router.navigate([route]);
   }
- 
+  openNotifications(): void {
+    this.router.navigate(['notifications']);
+  }
   bookAppointment(): void {
     this.router.navigate(['bookAppointment']);
   }
