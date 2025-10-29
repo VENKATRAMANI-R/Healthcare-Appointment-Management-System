@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookAppointment } from '../Appointment-Booking/book-appointment/book-appointment';
-import { MatDialog } from '@angular/material/dialog';
+// import { BookAppointment } from '../Appointment-Booking/book-appointment/book-appointment';
+// import { MatDialog } from '@angular/material/dialog';
 import { DoctorService } from '../doctor-service';
 import { Doctor } from './doctor-model';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-find-doctors',
@@ -12,25 +15,73 @@ import { Doctor } from './doctor-model';
   templateUrl: './find-doctors.html',
   styleUrls: ['./find-doctors.css']
 })
-export class FindDoctors implements OnInit {
+export class FindDoctors implements OnInit,OnDestroy {
   searchQuery: string = '';
   activeFilters: Set<string> = new Set();
+  doctors: Doctor[] = [];
+  filteredDoctors: Doctor[] = [];
+  isLoading: boolean = false;
+  errorMessage: string = '';
+  hasSearched: boolean = false;
 
-  doctors : Doctor []=[];
-  filteredDoctors : Doctor [] = [];
-  img1="";
+  // Available specializations for filtering
+  specializations: string[] = [
+    'Cardiology',
+    'Neurology',
+    'Pediatrics',
+    'Orthopedics',
+    'Dermatology',
+    'Surgery',
+    'General Medicine'
+  ];
+
+  private doctorsSubscription: Subscription = new Subscription();
 
   constructor(
-    public dialog: MatDialog,
-    private doctorService: DoctorService
+    private doctorService: DoctorService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  // doctors = this.doctorService.getDoctors();
-
   ngOnInit() {
-    this.doctors = this.doctorService.getDoctors();
-    this.filteredDoctors = [...this.doctors];
-    this.img1 = this.doctorService.getImage();
+    this.loadDoctors();
+    this.cdr.detectChanges();
+  }
+
+  ngOnDestroy() {
+    this.doctorsSubscription.unsubscribe();
+  }
+
+  loadDoctors(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.hasSearched = false;
+
+    this.doctorsSubscription = this.doctorService.getDoctors().subscribe({
+      next: (doctors) => {
+        this.doctors = doctors;
+        this.filteredDoctors = [...this.doctors];
+        console.log('Fetched doctors:', doctors);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.errorMessage = 'Unable to load doctors. Please try again later.';
+        this.isLoading = false;
+        this.doctors = [];
+        this.filteredDoctors = [];
+      }
+    });
+    this.cdr.detectChanges();
+  }
+
+  selectDoctor(doctor: Doctor) {
+    this.router.navigate(['/bookAppointment'], {
+      state: {
+        doctorId: doctor.id,
+        doctorName: doctor.name,
+        specialization: doctor.specialization
+      }
+    });
   }
 
   onSearch(event: Event) {
@@ -40,36 +91,45 @@ export class FindDoctors implements OnInit {
   }
 
   performSearch() {
+    this.hasSearched = true;
     this.applyFilters();
   }
 
-  toggleFilter(filter: string) {
-    if (this.activeFilters.has(filter)) {
-      this.activeFilters.delete(filter);
+  toggleFilter(specialization: string) {
+    if (this.activeFilters.has(specialization)) {
+      this.activeFilters.delete(specialization);
     } else {
-      this.activeFilters.add(filter);
+      this.activeFilters.add(specialization);
     }
     this.applyFilters();
   }
 
-
+  clearFilters() {
+    this.activeFilters.clear();
+    this.searchQuery = '';
+    this.filteredDoctors = [...this.doctors];
+    this.hasSearched = false;
+  }
 
   applyFilters() {
-    const query = this.searchQuery.toLowerCase();
+    const query = this.searchQuery.toLowerCase().trim();
 
     this.filteredDoctors = this.doctors.filter(doctor => {
-      const matchesQuery =
+      // Text search filter
+      const matchesQuery = query === '' || 
         doctor.name.toLowerCase().includes(query) ||
-        doctor.position.toLowerCase().includes(query) ||
+        doctor.specialization.toLowerCase().includes(query) ||
         doctor.qualification.toLowerCase().includes(query);
 
-      const matchesFilters =
-        this.activeFilters.size === 0 ||
-        Array.from(this.activeFilters).every(filter =>
-          doctor.specialties.includes(filter) || doctor.availability.includes(filter)
-        );
+      // Specialization filter
+      const matchesFilters = this.activeFilters.size === 0 || 
+        this.activeFilters.has(doctor.specialization);
 
       return matchesQuery && matchesFilters;
     });
+  }
+
+  getYearsOfExperience(experience: number): string {
+    return experience === 1 ? '1 year' : `${experience} years`;
   }
 }
