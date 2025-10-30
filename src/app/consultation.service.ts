@@ -33,13 +33,16 @@ export class ConsultationService {
   // private baseUrl = 'http://localhost:8080/consultations';
 
   private baseUrl = 'http://localhost:8088/api/consultations';
+  userId = localStorage.getItem('patientId');
 
-  constructor(private http: HttpClient) {}
+constructor(private http: HttpClient) {}
 
-  // Get all consultations
-  getConsultations(): Observable<Consultation[]> {
-    return this.http.get<Consultation[]>(this.baseUrl);
-  }
+// Get consultations for the logged-in patient
+getConsultations(): Observable<Consultation[]> {
+  console.log('Fetching consultations for patient ID:', this.userId);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${this.userId}`);
+}
+
 
   // Save a new consultation
   saveConsultation(consultation: Consultation[]): Observable<Consultation[]> {

@@ -12,8 +12,10 @@ import { DoctorConsultationList } from '../doctor-consultation-list/doctor-consu
 })
 export class DoctorConsultations implements OnInit {
   consultations: Consultation[] = [];
+  selectedConsultation: Consultation | null = null;
+  showDetail = false;
   isLoading: boolean = true;
-  doctorId: number = 202; // Hardcoded for now
+  doctorId: number = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
 
   constructor(
     private consultationService: ConsultationService,

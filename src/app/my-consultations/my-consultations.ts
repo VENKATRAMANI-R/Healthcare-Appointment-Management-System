@@ -16,7 +16,7 @@ export class MyConsultations implements OnInit {
   selectedConsultation: Consultation | null = null;
   showDetail = false;
   isLoading: boolean = true;
-  patientId: number = 301; // Hardcoded for now
+  patientId: number = localStorage.getItem('patientId') ? +localStorage.getItem('patientId')! : 0;
 
   constructor(
     private consultationService: ConsultationService,
