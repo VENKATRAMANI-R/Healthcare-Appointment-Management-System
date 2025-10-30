@@ -1,6 +1,6 @@
-import { Component,OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component,OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppointmentService } from '../../appointment-service';
+import { AppointmentService } from '../appointment-service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,38 +10,43 @@ import { Router } from '@angular/router';
   templateUrl: './my-appointments.html',
   styleUrl: './my-appointments.css'
 })
-export class MyAppointments  {
-           
-  Appointment: any[]=  [
-    {
-      appointmentId:1,
-      patientId: 'PAT12345',
-      doctorId : 'DOC12345',
-      doctorName: 'Dr.Guru Sakthi',
-      date: '2025-10-10',
-      timeSlot:'8:30 AM - 9:00 AM',
-      problem: 'Fever',
-      status: 'Scheduled',
-  }
-  ];
+export class MyAppointments implements OnInit {
+      Appointment: any[] = [];
+
     
  
-  constructor( private router: Router) {}
+  constructor( private router: Router, private appointmentService: AppointmentService,private cdr:ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+  
+  this.appointmentService.GetAppointmentsByPatientId().subscribe(data => {
+    this.Appointment = data;
+    this.cdr.markForCheck();
+    console.log('Appointments fetched:', this.Appointment);
+  }, error => {
+    console.error('Error fetching appointments:', error);
+  });
+  
+}
  
   rescheduleAppointment(appt: any) :void {
-    const date = new Date(appt.date);
-    alert(`Reschedule requested for:\nDate: ${date.toDateString()}\nTime Slot: ${appt.timeSlot}`);
+    // const date = new Date(appt.date);
+    // alert(`Reschedule requested for:\nDate: ${date.toDateString()}\nTime Slot: ${appt.timeSlot}`);
     this.router.navigate(['/bookAppointment']);
   }
    
  
   cancelAppointment(appt: any) :void {
     const date = new Date(appt.date);
-   const confirmCancel = confirm(`Are you sure you want to cancel the appointment on ${date.toDateString()} at ${appt.timeSlot}?`);
+    const confirmCancel = confirm(`Are you sure you want to cancel the appointment on ${date.toDateString()} at ${appt.timeSlot}?`);
     if (confirmCancel) {
       appt.status = 'Cancelled';
+      this.appointmentService.cancelAppointment(appt.id).subscribe(response => {
+        console.log('Appointment cancelled:', response);
+      });
       alert(`Appointment on ${date.toDateString()} has been cancelled`);
     }
+
   }
 }
 

@@ -10,7 +10,7 @@ import { Appointment, AppointmentService, AvailabilitySlotDTO } from '../appoint
   selector: 'app-book-appointment',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './book-appointment.html',
-  styleUrl: './book-appointment.css'
+  styleUrl: './book-appointment.css' 
 })
 export class BookAppointment implements OnInit {
   appointmentForm!: FormGroup;
@@ -23,8 +23,8 @@ export class BookAppointment implements OnInit {
   private selectedDoctorId: number = 0;
   private selectedDoctorName: string = '';
   private selectedSlotId: number = 0;
-  private patientId: number = 0;
-  private patientName: string = '';
+  private patId: number = 0;
+  private patName: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -44,8 +44,8 @@ export class BookAppointment implements OnInit {
     // console.log("Patient Id:", localStorage.getItem('patientId'));
     console.log("Form Case Runs");
     this.appointmentForm = this.fb.group({
-      patId: [this.patientId, [Validators.required, Validators.pattern('^[0-9]+$')]],
-      patientName: [this.patientName, Validators.required],
+      patId: [this.patId, [Validators.required, Validators.pattern('^[0-9]+$')]],
+      patientName: [this.patName, Validators.required],
       doctorName: [this.selectedDoctorName, Validators.required],
       date: ['', Validators.required],
       startTime: ['', Validators.required],
@@ -86,9 +86,9 @@ export class BookAppointment implements OnInit {
   // Auto-fill end time and slotId when start time is selected
 
   getPatientDetails(){
-    this.patientId = localStorage.getItem('patientId') ? parseInt(localStorage.getItem('patientId')!) : 0;
-    this.patientName = localStorage.getItem('patientName') || '';
-    console.log("Patient Details Fetched:", this.patientId, this.patientName);
+    this.patId = localStorage.getItem('patientId') ? parseInt(localStorage.getItem('patientId')!) : 0;
+    this.patName = localStorage.getItem('patientName') || '';
+    console.log("Patient Details Fetched:", this.patId, this.patName);
   }
 
   onTimeSelected(): void {
@@ -113,8 +113,8 @@ export class BookAppointment implements OnInit {
       const appointmentData: Appointment = {
         patientId: parseInt(formData.patId),
         doctorId: this.selectedDoctorId,
-        doctorName: formData.doctorName,
         patientName: formData.patientName,
+        doctorName: formData.doctorName,
         problem: formData.problem,
         slotId: this.selectedSlotId,
         date: formData.date,
@@ -134,9 +134,8 @@ export class BookAppointment implements OnInit {
           alert('Failed to book appointment. Please try again.');
           console.error('Error booking appointment:', error);
         }
-      });
-    } else {
-      alert('Please fill all required fields and select a time slot.');
+      }
+      );
     }
   }
 
@@ -148,3 +147,4 @@ export class BookAppointment implements OnInit {
     return new Date().toISOString().split('T')[0];
   }
 }
+    

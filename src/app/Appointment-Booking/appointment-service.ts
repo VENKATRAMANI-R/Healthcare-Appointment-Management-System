@@ -61,6 +61,7 @@ export class AppointmentService {
 
   // ✅ Book an appointment
   bookAppointment(appointmentData: Appointment): Observable<Appointment> {
+    console.log("Patient Id in Service:",appointmentData.patientId);  
     return this.http.post<Appointment>(
       `${this.baseUrl}/book/${appointmentData.slotId}`,
       appointmentData,
@@ -69,11 +70,15 @@ export class AppointmentService {
   }
 
   // ✅ Get appointments by patient ID
-  getAppointmentsByPatientId(patientId: string): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(
-      `${this.baseUrl}/patient/${patientId}`,
-      { headers: this.getAuthHeaders() }
-    );
+  GetAppointmentsByPatientId(): Observable<Appointment[]> {
+    const patientId = localStorage.getItem('patientId') || '';
+    console.log("Patient ID:",patientId);
+    const Patienttoken = localStorage.getItem('Patienttoken');// || '';
+    console.log("Token:",Patienttoken);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${Patienttoken}`);
+    console.log("Headers:",headers);
+    console.log(this.http.get(`${this.baseUrl}/${patientId}`,{ headers }));
+    return this.http.get<Appointment[]>(`${this.baseUrl}/${patientId}`,{ headers });
   }
 
   // ✅ Update appointment status
@@ -87,8 +92,8 @@ export class AppointmentService {
 
   // ✅ Cancel an appointment
   cancelAppointment(appointmentId: number): Observable<any> {
-    return this.http.put(
-      `${this.baseUrl}/${appointmentId}/cancel`,
+    return this.http.patch<Appointment>(
+      `${this.baseUrl}/cancel/patient/${appointmentId}`,
       {},
       { headers: this.getAuthHeaders() }
     );

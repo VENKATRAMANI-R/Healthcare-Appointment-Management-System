@@ -13,7 +13,7 @@ import { Appointment, AvailabilitySlot, Doctor, DoctorService } from '../doctor-
 })
 export class DoctorAvailablityManagement implements OnInit{ 
 
-  doctorId: number = 101; // hardcoded for now, later from login/session
+  doctorId: number = Number(localStorage.getItem('doctorId')); // hardcoded for now, later from login/session
   doctor?: Doctor;
   submitted = false;
   availabilitySlots: AvailabilitySlot[] = [];
