@@ -109,7 +109,18 @@ export class BookAppointment implements OnInit {
   onSubmit(): void {
     if (this.appointmentForm.valid && this.selectedSlotId) {
       const formData = this.appointmentForm.getRawValue();
+      const selectedDate = formData.date;
       
+      this.appointmentService.getAvailableSlots(this.selectedDoctorId, selectedDate).subscribe({
+      next: (latestSlots: AvailabilitySlotDTO[]) => {
+        const stillAvailable = latestSlots.find(slot => slot.id === this.selectedSlotId);
+
+        if (!stillAvailable) {
+          alert('This time slot has already been booked. Please choose another one.');
+          this.onDateSelected(); // Refresh UI
+          return;
+        }}
+        });
       const appointmentData: Appointment = {
         patientId: parseInt(formData.patId),
         doctorId: this.selectedDoctorId,
@@ -134,10 +145,11 @@ export class BookAppointment implements OnInit {
           alert('Failed to book appointment. Please try again.');
           console.error('Error booking appointment:', error);
         }
-      }
-      );
+      });
     }
   }
+
+
 
   onClick(): void {
     this.router.navigate(['my-appointments']);
@@ -147,4 +159,5 @@ export class BookAppointment implements OnInit {
     return new Date().toISOString().split('T')[0];
   }
 }
+
     
