@@ -118,6 +118,10 @@ export const routes: Routes = [
         component:PatientProfiles
     },
     {
+        path:'doctorProfiles',
+        component:DoctorProfiles
+    },
+    {
         path:'notifications',
         component:NotificationPanal
 

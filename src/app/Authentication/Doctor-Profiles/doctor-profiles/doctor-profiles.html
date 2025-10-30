@@ -1,9 +1,9 @@
 <div class="profile-container">
-  <h2 *ngIf="!isProfileSaved">Complete Doctor Profile</h2>
+  <h2 *ngIf="!isProfileSaved" class="center">Complete Doctor Profile</h2>
   <h2 *ngIf="isProfileSaved" class="center">Doctor Profile</h2>
  
   <!-- FORM SECTION -->
-  <form *ngIf="!isProfileSaved" [formGroup]="doctorForm" (ngSubmit)="saveDoctorProfile()">
+  <form *ngIf="isEditSaved" [formGroup]="doctorForm" (ngSubmit)="saveDoctorProfile()">
     <div class="form-group">
       <label>Specialization</label>
       <input type="text" formControlName="specialization" placeholder="e.g., Cardiologist">
@@ -33,7 +33,7 @@
   </form>
  
   <!-- PROFILE VIEW SECTION -->
-  <div *ngIf="isProfileSaved" class="profile-view">
+  <div *ngIf="!isEditSaved" class="profile-view">
     <img src="https://cdn-icons-png.flaticon.com/512/387/387561.png" alt="Doctor" class="profile-img" />
     <h3>{{ savedDoctor?.doctorName }}</h3>
     <h4>{{ savedDoctor?.specialization }}</h4>
