@@ -13,10 +13,14 @@
     </div>
     <div class="profile-section">
       <button class="profile-btn" (click)="openProfile()">
-        <div class="profile-avatar">{{ doctorInitials }}</div>
-        <span>{{ doctorFullName }}</span>
+        <div class="profile-avatar"></div>
+        <span>Dr.{{ doctorName }}</span>
         <span class="material-icons">keyboard_arrow_down</span>
       </button>
+    </div>
+    <div class="profile-dropdown" *ngIf="AccountDropdownState">
+          <a class="dropdown-link" >Account Details</a>
+          <a class="dropdown-link" >Logout</a>
     </div>
   </header>
 

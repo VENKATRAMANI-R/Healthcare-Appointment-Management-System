@@ -11,7 +11,9 @@ export class ProfileService {
   private baseUrl1 = 'http://localhost:8082/patient';
 
  
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    if(!this.isBrowser()) return;
+  }
  
   // Add or update doctor profile
 saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
@@ -27,18 +29,20 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
   // Get doctor profile
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', token);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
  
     // Optional: backend could get email from token, but if not, you can send it
     const email = localStorage.getItem('doctorEmail') || '';
+    console.log("Fetching patient profile for email:", email);  
     return this.http.get(`${this.baseUrl}/get/${email}`, { headers });
   }
 
+  //Save patient profile
   saveProfilePatient(patientEmail: string, patientData: any): Observable<any> {
-  const Patienttoken = localStorage.getItem('Patienttoken') || '';
+  const Patienttoken = localStorage.getItem('Patienttoken')// || '';
   const headers = new HttpHeaders().set('Authorization', `Bearer ${Patienttoken}`);
 
-  console.log("Sending doctor profile data:");
+  console.log("Sending Patient profile data:");
   console.log(patientData);
   console.log(`${this.baseUrl}/profile/${patientEmail}`);
   return this.http.post(`${this.baseUrl1}/profile/${patientEmail}`, patientData, { headers });
@@ -46,11 +50,14 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
  
   // Get patient profile
   getProfilePatient(): Observable<any> {
-    const Patienttoken = localStorage.getItem('Patienttoken') || '';
+    const Patienttoken = localStorage.getItem('Patienttoken') ;//|| '';
     const headers = new HttpHeaders().set('Authorization',  `Bearer ${Patienttoken}`);
- 
-    // Optional: backend could get email from token, but if not, you can send it
-    const email = localStorage.getItem('patientEmail') || '';
+    
+    const email = localStorage.getItem('patientEmail') //|| '';
+    console.log("Fetching patient profile for email:", email);  
     return this.http.get(`${this.baseUrl1}/get/${email}`, { headers });
+  }
+   isBrowser(): boolean {
+    return typeof window !== 'undefined';
   }
 }
