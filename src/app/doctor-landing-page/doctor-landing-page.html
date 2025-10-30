@@ -19,8 +19,8 @@
       </button>
     </div>
     <div class="profile-dropdown" *ngIf="AccountDropdownState">
-          <a class="dropdown-link" >Account Details</a>
-          <a class="dropdown-link" >Logout</a>
+          <a class="dropdown-link" (click)="goToUserProfile()">Account Details</a>
+          <a class="dropdown-link" (click)="logout()">Logout</a>
     </div>
   </header>
 
