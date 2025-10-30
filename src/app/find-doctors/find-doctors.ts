@@ -60,6 +60,7 @@ export class FindDoctors implements OnInit,OnDestroy {
     this.doctorsSubscription = this.doctorService.getDoctors().subscribe({
       next: (doctors) => {
         this.doctors = doctors;
+        this.cdr.markForCheck();
         this.filteredDoctors = [...this.doctors];
         console.log('Fetched doctors:', doctors);
         this.isLoading = false;
