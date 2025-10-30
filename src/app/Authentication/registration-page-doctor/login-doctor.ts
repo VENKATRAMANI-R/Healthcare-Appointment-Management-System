@@ -40,6 +40,7 @@ export class Logindoctor {
         console.log('Login successful****', response);
         localStorage.setItem('token', response.token); // Store the token
 
+        localStorage.setItem('doctorId', response.doctorId.toString());
         localStorage.setItem('doctorEmail', response.doctorEmail);
         localStorage.setItem('doctorName', response.doctorName);
         // this.doctorEmail = response.doctorEmail; // Store the email
