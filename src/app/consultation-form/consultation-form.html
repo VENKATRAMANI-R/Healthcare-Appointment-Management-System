@@ -17,6 +17,21 @@
  * This field is required
  </small>
  </div>
+
+  <!-- Appointment ID -->
+ <label for="appointmentId">Appointment ID:</label>
+ <input id="appointmentId" type="appointmentId" formControlName="appointmentId" />
+ <div
+ *ngIf="
+ consultationForm.controls['appointmentId'].invalid &&
+ (consultationForm.controls['appointmentId'].touched ||
+ consultationForm.controls['appointmentId'].dirty)
+ "
+ >
+ <small *ngIf="consultationForm.controls['appointmentId'].errors?.['required']">
+ * This field is required
+ </small>
+ </div>
  
  <!-- Patient ID -->
  <label for="patientId">Patient ID:</label>
