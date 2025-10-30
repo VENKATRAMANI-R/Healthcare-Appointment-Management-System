@@ -1,90 +1,140 @@
-<header>
+<header class="professional-header">
   <div class="header-content">
-    <h1>Find a Doctor</h1>
+    <div class="header-text">
+      <h1>Find Your Healthcare Specialist</h1>
+      <p>Connect with experienced medical professionals for your healthcare needs</p>
+    </div>
     <div class="search-container">
-      <input
-        type="text"
-        placeholder="Search for doctors by name or specialty..."
-        (input)="onSearch($event)"
-      />
-      <button (click)="performSearch()">Search</button>
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Search by doctor name, specialization, or qualification..."
+          (input)="onSearch($event)"
+          [value]="searchQuery"
+          class="search-input"
+        />
+        <button (click)="performSearch()" class="search-btn">
+          <span class="search-icon">🔍</span>
+          Search
+        </button>
+      </div>
     </div>
   </div>
 </header>
 
 <div class="container">
-  <aside class="filters">
-    <h2>Filter Doctors</h2>
+  <aside class="filters-sidebar">
+    <div class="filters-header">
+      <h2>Filter by Specialty</h2>
+      <button *ngIf="activeFilters.size > 0 || searchQuery" 
+              (click)="clearFilters()" 
+              class="clear-filters-btn">
+        Clear All
+      </button>
+    </div>
 
     <div class="filter-group">
-      <h3>Availability</h3>
-      <ul class="availability-options">
-        <li>
-          <input type="checkbox" id="morning" (change)="toggleFilter('morning')" />
-          <label for="morning">Morning (8AM - 12PM)</label>
-        </li>
-        <li>
-          <input type="checkbox" id="afternoon" (change)="toggleFilter('afternoon')" />
-          <label for="afternoon">Afternoon (12PM - 5PM)</label>
-        </li>
-        <li>
-          <input type="checkbox" id="evening" (change)="toggleFilter('evening')" />
-          <label for="evening">Evening (5PM - 9PM)</label>
-        </li>
-        <li>
-          <input type="checkbox" id="weekend" (change)="toggleFilter('weekend')" />
-          <label for="weekend">Weekend Availability</label>
+      <ul class="specialization-options">
+        <li *ngFor="let specialization of specializations">
+          <label class="filter-option">
+            <input 
+              type="checkbox" 
+              [checked]="activeFilters.has(specialization)"
+              (change)="toggleFilter(specialization)" 
+            />
+            <span class="checkmark"></span>
+            {{ specialization }}
+          </label>
         </li>
       </ul>
     </div>
 
-    <div class="filter-group">
-      <h3>Field of Expertise</h3>
-      <ul class="expertise-options">
-        <li>
-          <input type="checkbox" id="cardiology" (change)="toggleFilter('cardiology')" />
-          <label for="cardiology">Cardiology</label>
-        </li>
-        <li>
-          <input type="checkbox" id="neurology" (change)="toggleFilter('neurology')" />
-          <label for="neurology">Neurology</label>
-        </li>
-        <li>
-          <input type="checkbox" id="pediatrics" (change)="toggleFilter('pediatrics')" />
-          <label for="pediatrics">Pediatrics</label>
-        </li>
-        <li>
-          <input type="checkbox" id="orthopedics" (change)="toggleFilter('orthopedics')" />
-          <label for="orthopedics">Orthopedics</label>
-        </li>
-        <li>
-          <input type="checkbox" id="dermatology" (change)="toggleFilter('dermatology')" />
-          <label for="dermatology">Dermatology</label>
-        </li>
-        <li>
-          <input type="checkbox" id="surgery" (change)="toggleFilter('surgery')" />
-          <label for="surgery">Surgery</label>
-        </li>
-      </ul>
+    <div class="active-filters" *ngIf="activeFilters.size > 0">
+      <h3>Active Filters:</h3>
+      <div class="filter-tags">
+        <span *ngFor="let filter of activeFilters" class="filter-tag">
+          {{ filter }}
+        </span>
+      </div>
     </div>
   </aside>
 
-    <main class="doctors-list">
-    <article class="doctor-card" *ngFor="let doctor of filteredDoctors">
-        <div class="doctor-image">
-        <img [src]="doctor.image ? doctor.image : img1" [alt]="doctor.name" />
-        </div>
-        <div class="doctor-info">
-        <h2 class="doctor-name">{{ doctor.name }}</h2>
-        <!-- <p class="doctor-position">{{ doctor.position }}</p> -->
-        <!-- <p class="doctor-qualification">{{ doctor.qualification }}</p> -->
-        <div class="doctor-hours">
-            <h4>Working Hours</h4>
-            <p *ngFor="let hour of doctor.hours">{{ hour }}</p>
-        </div>
-        </div>
-        <button class="book-button" routerLink="bookAppointment">Book Appointment</button>
-    </article>
-    </main>
-</div>
+  <main class="doctors-main">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading healthcare professionals...</p>
+    </div>
 
+    <!-- Error State -->
+    <div *ngIf="errorMessage && !isLoading" class="error-state">
+      <div class="error-icon">⚠️</div>
+      <h3>Unable to Load Doctors</h3>
+      <p>{{ errorMessage }}</p>
+      <button (click)="loadDoctors()" class="retry-btn">Try Again</button>
+    </div>
+
+    <!-- No Results State -->
+    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length === 0 && hasSearched" 
+         class="no-results-state">
+      <div class="no-results-icon">👨‍⚕️</div>
+      <h3>No Doctors Found</h3>
+      <p>We couldn't find any doctors matching your search criteria.</p>
+      <button (click)="clearFilters()" class="clear-search-btn">Clear Search & Filters</button>
+    </div>
+
+    <!-- Empty State (initial) -->
+    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length === 0 && !hasSearched" 
+         class="empty-state">
+      <div class="empty-icon">🏥</div>
+      <h3>No Doctors Available</h3>
+      <p>Currently, there are no doctors available in our system.</p>
+    </div>
+
+    <!-- Doctors Grid -->
+    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length > 0" class="doctors-grid">
+      <div class="results-info">
+        <p>Showing {{ filteredDoctors.length }} of {{ doctors.length }} healthcare professionals</p>
+      </div>
+      
+      <div class="doctors-list">
+        <article *ngFor="let doctor of filteredDoctors" class="doctor-card professional-card">
+          <div class="doctor-image-container">
+            <img 
+              [src]="doctor.image || 'public/images/doctor-default.png'" 
+              [alt]="'Photo of ' + doctor.name"
+              class="doctor-photo"
+              (error)="doctor.image = 'public/images/doctor-default.png'"
+            />
+            <div class="experience-badge">
+              {{ getYearsOfExperience(doctor.experience) }} exp
+            </div>
+          </div>
+          
+          <div class="doctor-info">
+            
+            <h2 class="doctor-name">{{ doctor.name }}</h2>
+            <p class="doctor-specialization">{{ doctor.specialization }}</p>
+            <p class="doctor-qualification">{{ doctor.qualification }}</p>
+            
+            <div class="doctor-meta">
+              <span class="meta-item">
+                <strong>ID:</strong> {{ doctor.id }}
+              </span>
+              <span class="meta-item">
+                <strong>Experience:</strong> {{ getYearsOfExperience(doctor.experience) }}
+              </span>
+            </div>
+          </div>
+          
+          <button 
+            (click)="selectDoctor(doctor)" 
+            class="book-appointment-btn"
+          >
+            Book Consultation
+          </button>
+        </article>
+      </div>
+    </div>
+  </main>
+</div>

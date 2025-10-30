@@ -34,8 +34,8 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 }
 .dropdown-link:hover {
   cursor: pointer;
-  background: var(--ink);
-  color: var(--bg);
+  background: #0f172a;
+  color: #ffffff;
   border-radius: 5px;
 }
 .logo {

@@ -1,10 +1,10 @@
-/* 
+/*
 #container{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+ 
 #getDetails{
     background-color: antiquewhite;
     border-radius: 3px;
@@ -18,7 +18,7 @@
 } */
  *{
   max-width: 1200px;
-  
+ 
  }
  body{
    margin: 0;
@@ -30,27 +30,35 @@
    background-color: white;
  }
 #container {
-  /* display: flex;
+  /* display: flex; */
   align-items: center;
-  justify-content: center; */
-  margin: 0 10px 0 10px;
+  justify-content: center;
+  margin-left: 250px;
   border-radius: 3px;
-
+  max-width: 700px;
+ 
 }
-
+.time-inputs{
+  display: flex;
+  gap: 40px;
+  margin-right: 3px;
+}
+ 
 #getDetails {
   margin-bottom: 5px;
   border-radius: 3px;
   padding: 18px 36px;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
 }
 input{
   width: 100%;
   padding: 10px;
   border-radius: 3px;
-  
+ 
   border: 1px black solid;
 }
 input:hover{
@@ -67,9 +75,9 @@ select:hover{
   display: flex;
   justify-content: space-evenly;
 }
-#getDetails div button{
+/* #getDetails div button{
   padding: 10px 50px;
-  color: rgb(43, 112, 168);
+  color: rgb(9, 137, 242);
   border: rgb(59, 104, 156) solid;
   border-radius: 3px;
   background-color: white;
@@ -78,23 +86,61 @@ select:hover{
   cursor: pointer;
   color: white;
   background-color: rgb(91, 144, 228);
-}
+} */
 #getDetails span {
   display: block;
   width: 100%;
 }
 #getDetails span select option{
   color: rgb(63, 165, 228);
-
+ 
 }
  .form-group small {
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-
+ 
   .form-group input:hover + small,
   .form-group input:focus + small {
     visibility: visible;
     opacity: 1;
   }
+ 
+  /* .button {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  } */
+ 
+  .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+ 
+.btn-primary {
+  background: linear-gradient(135deg, #19A7CE, #1189ad);
+  color: #fff;
+}
+ 
+.btn-outline {
+  background: transparent;
+  border-color: #19A7CE;
+  color: #19A7CE;
+}
+.btn-outline:hover {
+  background: #19A7CE;
+  color: #fff;
+}
+ 
+ 

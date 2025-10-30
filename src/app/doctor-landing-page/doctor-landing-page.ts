@@ -5,25 +5,29 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DoctorService } from '../doctor-service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-interface Doctor { 
-  id: number; 
-  firstName: string; 
 
+
+
+import { ScheduleService } from '../schedule.service'; 
+
+
+
+export interface Doctor { 
+  doctorId: number;
+  firstName: string; 
   lastName: string; 
   specialty: string; 
   email: string; 
 } 
-interface Appointment { 
+export interface Appointment { 
   id: number; 
   time: string; 
+  patientId: number;
   patientName: string; 
   age: number; 
   gender: 'Male' | 'Female' | 'Other'; 
   reason: string; 
-  status: 'Confirmed' | 'Pending' | 'Completed' | 'Cancelled'; 
-  type: 'Consultation' | 'Follow-up' | 'Emergency' | 'Check-up'; 
-  mode: 'In-person' | 'Teleconsultation'; 
-  room: string; 
+  status: 'Confirmed' | 'Pending' | 'Completed' | 'Cancelled'
 } 
 type ViewMode = 'list' | 'compact'; 
 type SortDirection = 'asc' | 'desc'; 
@@ -43,9 +47,19 @@ export class DoctorLandingPage implements OnInit, OnDestroy{
   nextAppointment: Appointment | null = null;
   showAlert = false;
   private subs: Subscription[] = [];
-  constructor(private doctorService: DoctorService,private router: Router
-    // private appointmentService: AppointmentService
-  ) {}
+
+  // constructor(private doctorService: DoctorService,private router: Router
+  //   // private appointmentService: AppointmentService
+  // ) 
+  
+  
+constructor(private doctorService: DoctorService,
+            private scheduleService: ScheduleService,
+            private router: Router) 
+
+  {}
+
+  
 
   // UI State 
   isAvailable = true; 
@@ -84,39 +98,56 @@ export class DoctorLandingPage implements OnInit, OnDestroy{
   } 
 
 loadDoctor(): void {
-  // const sub = this.doctorService.getDoctorProfile().subscribe({
-  // next:(doc: Doctor | null) => {
-  //   this.doctor = doc;
-  // },
-  // error:(err: any) => {
-  //   console.error('Failed to load doctor profile', err);
-  // }
-  // });
-  // this.subs.push(sub);
+  const sub = this.scheduleService.getDoctorProfile().subscribe({
+    next: (doc: Doctor | null) => {
+      this.doctor = doc;
+    },
+    error: (err: any) => {
+      console.error('Failed to load doctor profile', err);
+    }
+  });
+  this.subs.push(sub);
 }
+// loadAppointments(): void {
+// // const sub = this.appointmentService.getTodayAppointments().subscribe({
+// // next: (appts: Appointment[]) => {
+// // this.appointments = appts;
+// // this.filteredAppointments = [...appts];
+// // this.updateNextAppointment();
+// // },
+// // error: (err: any) => {
+// // console.error('Failed to load appointments', err);
+// // }
+// // });
+// // this.subs.push(sub);
+// }
+// // updateNextAppointment(): void {
+// // const now = new Date();
+// // this.nextAppointment = this.appointments.find(apt => {
+// // // Assuming time format HH:mm
+// // const [hours, minutes] = apt.time.split(':').map(Number);
+// // const aptTime = new Date();
+// // aptTime.setHours(hours, minutes, 0, 0);
+// // return aptTime >= now && apt.status !== 'Completed';
+// // }) || this.appointments[0] || null;
+// // }
+
+
+
 loadAppointments(): void {
-// const sub = this.appointmentService.getTodayAppointments().subscribe({
-// next: (appts: Appointment[]) => {
-// this.appointments = appts;
-// this.filteredAppointments = [...appts];
-// this.updateNextAppointment();
-// },
-// error: (err: any) => {
-// console.error('Failed to load appointments', err);
-// }
-// });
-// this.subs.push(sub);
+  this.scheduleService.getTodayAppointments().subscribe({
+    next: (appts) => {
+      this.appointments = appts;
+      this.filteredAppointments = [...appts];
+      this.updateNextAppointment();
+      this.calculateTotalPages();
+    },
+    error: (err) => console.error('Failed to load appointments', err)
+  });
 }
-// updateNextAppointment(): void {
-// const now = new Date();
-// this.nextAppointment = this.appointments.find(apt => {
-// // Assuming time format HH:mm
-// const [hours, minutes] = apt.time.split(':').map(Number);
-// const aptTime = new Date();
-// aptTime.setHours(hours, minutes, 0, 0);
-// return aptTime >= now && apt.status !== 'Completed';
-// }) || this.appointments[0] || null;
-// }
+
+
+
   ngOnDestroy(): void { 
     if (this.dateUpdateInterval) { 
       clearInterval(this.dateUpdateInterval); 
@@ -278,7 +309,15 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
     this.showAlert = false;
   }
 
-  
+openConsultationForm(appointment: Appointment): void {
+  this.router.navigate(['/consultation-form', appointment.id], {
+    state: {
+      appointment,
+      doctor: this.doctor,
+      date: this.currentDate
+    }
+  });
+}
 
  
   // callPatient(): void { 
