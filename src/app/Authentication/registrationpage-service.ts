@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RegistrationpageService {
-  private url = "http://localhost:8082/doctor/register";
+  private url = "http://localhost:8086/authentication/doctor/register";
 
-  private url1 = "http://localhost:8082/patient/register";
+  private url1 = "http://localhost:8086/authentication/patient/register";
     
   constructor(private http : HttpClient) {}
 

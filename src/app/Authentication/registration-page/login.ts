@@ -37,9 +37,10 @@ export class Login {
       next: (response: any) => {
         console.log('Login successful****', response);
         localStorage.setItem('Patienttoken', response.token); // Store the token
-        localStorage.setItem('patientId', response.patientId);
-        localStorage.setItem('patientEmail', response.patientEmail);
-        localStorage.setItem('patientName', response.patientName);
+        localStorage.setItem('patientUserId',response.userId);
+        localStorage.setItem('patientId', response.id);
+        // localStorage.setItem('patientEmail', response.patientEmail);
+        localStorage.setItem('patientName', response.name);
         // this.doctorEmail = response.doctorEmail; // Store the email
         // this.doctorName = response.doctorPassword; // Store the name
         alert('Login successful!');

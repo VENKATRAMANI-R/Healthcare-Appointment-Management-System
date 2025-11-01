@@ -54,9 +54,9 @@ export class PatientProfiles implements OnInit {
   if (this.patientForm.valid) {
     const patientData = { ...this.patientForm.value }; // No email or name in the model
 
-    const patientEmail = localStorage.getItem('patientEmail') || '';
+    const patientId = Number(localStorage.getItem('patientId'));
 
-    this.patientService.saveProfilePatient(patientEmail, patientData).subscribe({
+    this.patientService.saveProfilePatient(patientId, patientData).subscribe({
       next: (res) => {
         console.log('Profile saved:', res);
         this.savedPatient = res;
