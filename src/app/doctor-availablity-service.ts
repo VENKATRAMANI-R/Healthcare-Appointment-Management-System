@@ -47,6 +47,7 @@ export class DoctorAvailablityService {
 
   // Availability
   getAvailabilitySlots(doctorId: number): Observable<AvailabilitySlot[]> {
+    console.log("Getting Availability for Doctor ID:", doctorId);
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<AvailabilitySlot[]>(`${this.apiUrl}/${doctorId}/availability`,{ headers });
@@ -55,6 +56,8 @@ export class DoctorAvailablityService {
   addAvailability(newSlot: AvailabilitySlot): Observable<AvailabilitySlot> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    console.log(newSlot);
+    console.log(`${this.apiUrl}/availability`);
     return this.http.post<AvailabilitySlot>(`${this.apiUrl}/availability`, newSlot,{ headers });
   }
 
@@ -62,7 +65,7 @@ removeAvailability(slotId: number): Observable<string> {
   const token = localStorage.getItem('token') || '';
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
  
-  return this.http.delete<string>(`${this.apiUrl}/availablity/${slotId}`,{ headers });
+  return this.http.delete<string>(`${this.apiUrl}/availability/${slotId}`,{ headers });
 }
 
   // Appointments
