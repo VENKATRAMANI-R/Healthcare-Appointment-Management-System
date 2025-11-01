@@ -29,6 +29,7 @@ export class NotificationPanal implements OnInit {
       .subscribe({
         next: data => {
           this.notifications = data;
+          this.cdr.markForCheck();
           this.loading = false;
           this.cdr.markForCheck();
         },
