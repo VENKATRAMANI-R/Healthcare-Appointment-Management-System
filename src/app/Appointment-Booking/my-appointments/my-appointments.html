@@ -1,30 +1,30 @@
 <div class="my-appointments">
   <h2>Upcoming Appointments</h2>
  
-  <div *ngIf="Appointment.length > 0; else noAppointments">
-    <div class="appointment-card" *ngFor="let appt of Appointment">
+   <div *ngIf="Appointment.length > 0; else noAppointments">
+     <div *ngFor="let appt of Appointment" class="appointment-card">
       <div class="appointment-header">
         <h3>{{ appt.date | date:'EEE, dd MMM yyyy' }}</h3>
-        <!-- <span class="status" [ngClass]="appt.status.toLowerCase()">
+        <span class="status" [ngClass]="appt.status?.toLowerCase()">
           {{ appt.status }}
-        </span> -->
+        </span>
       </div>
  
       <div class="appointment-body">
-        <p><strong>Appointment ID:</strong> {{ appt.appointmentId }}</p>
+        <p><strong>Appointment ID:</strong> {{ appt.id }}</p>
         <p><strong>Patient ID:</strong> {{ appt.patientId }}</p>
         <p><strong>Doctor Name:</strong> {{appt.doctorName}}</p>
         <p><strong>Date:</strong> {{ appt.date }}</p>
-        <p><strong>TimeSlot:</strong> {{ appt.timeSlot }}</p>
+        <p><strong>StartTime:</strong> {{ appt.startTime }}</p>
+        <p><strong>EndTime:</strong> {{ appt.endTime }}</p>
         <p><strong>Problem:</strong> {{ appt.problem }} </p>
         <p><strong>Status:</strong> {{ appt.status }} </p>
-
       </div>
- 
-      <div class="appointment-actions">
-        <button class="btn reschedule" type="button" (click)="rescheduleAppointment(appt)">Reschedule</button>
-        <button class="btn cancel" (click)="cancelAppointment(appt)">Cancel</button>
-      </div>
+    
+    <div class="appointment-actions">
+      <button class="btn reschedule" type="button" (click)="rescheduleAppointment(appt)">Reschedule</button>
+      <button class="btn cancel" (click)="cancelAppointment(appt)">Cancel</button>
+    </div>
     </div>
   </div>
  

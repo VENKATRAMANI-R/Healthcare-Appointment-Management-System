@@ -11,16 +11,16 @@ export interface PrescriptionItem {
 }
 
 export interface Consultation {
-  id?: string;
-  appointmentId?: string;
-  patientId: string;
+  id?: number;
+  appointmentId?: number;
+  patientId: number;
   patientName?: string;
   doctorId?: number;
   doctorName: string;
   date: string;
   notes?: string;
   prescriptions?: PrescriptionItem[];
-  createdAt?: string;
+  createdAt?: String;
   // updatedAt?: string;
   // attachments?: { filename: string; size: number; mimeType: string }[];
 }
@@ -34,12 +34,15 @@ export class ConsultationService {
 
   private baseUrl = 'http://localhost:8088/api/consultations';
 
-  constructor(private http: HttpClient) {}
+constructor(private http: HttpClient) {}
+userId: number = localStorage.getItem('userId') ? +localStorage.getItem('userId')! : 0;
 
-  // Get all consultations
-  getConsultations(): Observable<Consultation[]> {
-    return this.http.get<Consultation[]>(this.baseUrl);
-  }
+// Get consultations for the logged-in patient
+getConsultations(): Observable<Consultation[]> {
+  console.log('Fetching consultations for patient ID:', this.userId);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${this.userId}`);
+}
+
 
   // Save a new consultation
   saveConsultation(consultation: Consultation[]): Observable<Consultation[]> {
@@ -47,13 +50,20 @@ export class ConsultationService {
     return this.http.post<Consultation[]>(this.baseUrl, consultation);
   }
 
+  
+updateAppointmentStatus(appointmentId: number, status: string): Observable<any> {
+  return this.http.put(`http://your-api-url/api/appointments/${appointmentId}/status`, { status });
+}
+
+
   // Get a consultation by ID
   getConsultationById(id: string): Observable<Consultation> {
     return this.http.get<Consultation>(`${this.baseUrl}/${id}`);
   }
 
   getConsultationsByDoctor(doctorId: number): Observable<Consultation[]> {
-  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${doctorId}`);
+    console.log('Fetching consultations for doctor ID:', doctorId);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${1}`);
   }
   getConsultationsByPatient(patientId: number): Observable<Consultation[]> {
   return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${patientId}`);

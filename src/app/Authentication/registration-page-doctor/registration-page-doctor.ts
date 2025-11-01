@@ -16,10 +16,10 @@ export class RegistrationPageDoctor {
 userForm: FormGroup;
   constructor(private router: Router, private Service : RegistrationpageService ) {
     this.userForm = new FormGroup({
-      doctorName: new FormControl ('', [Validators.required]),
-      doctorEmail: new FormControl('', [Validators.required, Validators.email]),
-      doctorMobileNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
-      doctorPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)]),
+      name: new FormControl ('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      mobileNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)]),
       confirmpassword: new FormControl('', [Validators.required]) }, { validators: this.passwordMatchValidator 
 
       });

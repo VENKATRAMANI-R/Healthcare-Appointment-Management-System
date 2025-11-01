@@ -7,33 +7,33 @@
     <h1 class="center">Registration Page</h1>
       <form [formGroup]="userForm">
     <div class="margin">
-        <input type="text" class="form-control" formControlName="patientName" placeholder="patientName">
-        <div class="text-danger" *ngIf="userForm.controls['patientName'].invalid && (userForm.controls['patientName'].touched || userForm.controls['patientName'].dirty)">
-            <span *ngIf="userForm.controls['patientName'].errors?.['required']">
+        <input type="text" class="form-control" formControlName="name" placeholder="patientName">
+        <div class="text-danger" *ngIf="userForm.controls['name'].invalid && (userForm.controls['name'].touched || userForm.controls['name'].dirty)">
+            <span *ngIf="userForm.controls['name'].errors?.['required']">
               <small>This is Required</small></span>
         </div>
     </div>
  
     
      <div class="margin">
-        <input type="text" class="form-control" formControlName="patientEmail" placeholder="patientEmail">
-       <div class="text-danger" *ngIf="userForm.controls['patientEmail'].invalid  && (userForm.controls['patientEmail'].touched || userForm.controls['patientEmail'].dirty)">
-            <span *ngIf="userForm.controls['patientEmail'].errors?.['required']"> This is Required </span>
-            <span *ngIf="userForm.controls['patientEmail'].errors?.['email']"> Email Is Not Proper </span>
+        <input type="text" class="form-control" formControlName="email" placeholder="Patient Email">
+       <div class="text-danger" *ngIf="userForm.controls['email'].invalid  && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+            <span *ngIf="userForm.controls['email'].errors?.['required']"> This is Required </span>
+            <span *ngIf="userForm.controls['email'].errors?.['email']"> Email Is Not Proper </span>
         </div>
     </div>
       <div class="margin">
-        <input type="tel" class="form-control" formControlName="patientPhonenumber" placeholder="patientPhoneNumber">
-       <div class="text-danger" *ngIf="userForm.controls['patientPhonenumber'].invalid  && (userForm.controls['patientPhonenumber'].touched || userForm.controls['patientPhonenumber'].dirty)">
-            <span *ngIf="userForm.controls['patientPhonenumber'].errors?.['required']"> This is Required </span>
-            <span *ngIf="userForm.controls['patientPhonenumber'].errors?.['pattern']"> It should have 10 digits </span>
+        <input type="tel" class="form-control" formControlName="mobileNumber" placeholder="Patient MobileNumber">
+       <div class="text-danger" *ngIf="userForm.controls['mobileNumber'].invalid  && (userForm.controls['mobileNumber'].touched || userForm.controls['mobileNumber'].dirty)">
+            <span *ngIf="userForm.controls['mobileNumber'].errors?.['required']"> This is Required </span>
+            <span *ngIf="userForm.controls['mobileNumber'].errors?.['pattern']"> It should have 10 digits </span>
         </div>
     </div> 
      <div class="margin">
-        <input type="password" class="form-control" formControlName="patientPassword" placeholder="patientPassword">
-       <div class="text-danger" *ngIf="userForm.controls['patientPassword'].invalid  && (userForm.controls['patientPassword'].touched || userForm.controls['patientPassword'].dirty)">
-            <span *ngIf="userForm.controls['patientPassword'].errors?.['required']"> This IS Required </span>
-            <span *ngIf="userForm.controls['patientPassword'].errors?.['pattern']"> password should have 10 charactor(atleast have one small,capital,special charactor)</span>
+        <input type="password" class="form-control" formControlName="password" placeholder="patientPassword">
+       <div class="text-danger" *ngIf="userForm.controls['password'].invalid  && (userForm.controls['password'].touched || userForm.controls['password'].dirty)">
+            <span *ngIf="userForm.controls['password'].errors?.['required']"> This IS Required </span>
+            <span *ngIf="userForm.controls['password'].errors?.['pattern']"> password should have 10 charactor(atleast have one small,capital,special charactor)</span>
         </div>
     </div>
      <div class="margin">
