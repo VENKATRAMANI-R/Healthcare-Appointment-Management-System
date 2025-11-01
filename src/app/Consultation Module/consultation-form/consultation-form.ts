@@ -5,7 +5,7 @@ import { ConsultationService } from '../consultation.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Appointment } from '../schedule.service';
-import { Doctor } from '../doctor-landing-page/doctor-landing-page';
+import { Doctor } from '../../doctor-landing-page/doctor-landing-page';
 
 interface ConsultationNavigationState {
   appointment: Appointment;

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 
 
-import { ScheduleService } from '../schedule.service'; 
+import { ScheduleService } from '../Consultation Module/schedule.service'; 
 
 
 
@@ -40,7 +40,7 @@ type SortDirection = 'asc' | 'desc';
 export class DoctorLandingPage implements OnInit, OnDestroy{
   doctor: Doctor | null = null;
   doctorName = "";
-
+  doctorId = Number(localStorage.getItem('doctorId'));
 
   
 
@@ -138,7 +138,7 @@ loadDoctor(): void {
 
 
 loadAppointments(): void {
-  this.scheduleService.getTodayAppointments().subscribe({
+  this.scheduleService.getTodayAppointments(this.doctorId).subscribe({
     next: (appts) => {
       this.appointments = appts;
       this.filteredAppointments = [...appts];
