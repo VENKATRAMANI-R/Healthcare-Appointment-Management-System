@@ -24,6 +24,7 @@ export class ScheduleService {
   getDoctorProfile(): Observable<Doctor> {
     return this.http.get<Doctor>(this.doctorProfileUrl);
   }
+  
 
   private appointments: Appointment[] = [
     {
