@@ -61,7 +61,8 @@ export class AppointmentService {
 
   // ✅ Book an appointment
   bookAppointment(appointmentData: Appointment): Observable<Appointment> {
-    console.log("Patient Id in Service:",appointmentData.patientId);  
+    console.log("Patient Id in Service:",appointmentData.patientId); 
+    console.log("Slot Id in Service:",appointmentData.slotId); 
     return this.http.post<Appointment>(
       `${this.baseUrl}/book/${appointmentData.slotId}`,
       appointmentData,

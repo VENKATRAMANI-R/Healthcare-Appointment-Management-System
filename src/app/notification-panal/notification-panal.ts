@@ -16,6 +16,7 @@ export class NotificationPanal implements OnInit {
   notifications: UserNotification[] = [];
   loading = true;
   error = '';
+  patientId: number =0;
 
   constructor(
     private notificationService: NotificationService,
@@ -24,7 +25,8 @@ export class NotificationPanal implements OnInit {
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.notificationService.getNotifications()
+    this.patientId = localStorage.getItem('patientId') ? Number(localStorage.getItem('patientId')) : 0;
+    this.notificationService.getNotifications(this.patientId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: data => {

@@ -333,6 +333,9 @@ openConsultationForm(appointment: Appointment): void {
   openProfile(): void { 
     this.AccountDropdownState = !this.AccountDropdownState;
   } 
+  openNotifications(): void {
+    this.router.navigate(['doctorNotifications']);
+  }
   manageSlots(): void { 
     this.router.navigate(['/doctor-availablity-management']);
     this.showToast('Opening availability management...', 'info'); 

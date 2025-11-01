@@ -3,16 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserNotification } from './UserNotification';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationService {
-  private apiUrl = "http://localhost:8085/notification/patient";
+export class NotificationServiceDoctor {
+  private apiUrl = "http://localhost:8085/notification/doctor";
 
   constructor(private http: HttpClient) {}
   
 
-  getNotifications(patientId:number): Observable<UserNotification[]> {
-    return this.http.get<UserNotification[]>(`${this.apiUrl}/${patientId}`);
+  getNotifications(doctorId:number): Observable<UserNotification[]> {
+    return this.http.get<UserNotification[]>(`${this.apiUrl}/${doctorId}`);
   }
 }

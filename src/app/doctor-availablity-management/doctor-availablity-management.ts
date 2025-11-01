@@ -29,10 +29,11 @@ export class DoctorAvailablityManagement implements OnInit {
 
   ngOnInit() {
     // ✅ Fix: Guard localStorage access to avoid SSR crash
+    console.log("In Init");
     if (typeof window !== 'undefined' && localStorage) {
       this.doctorId = Number(localStorage.getItem('doctorId')) || 0;
     }
-
+    console.log("Doctor ID:", this.doctorId);
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
     this.newAvailability.date = this.minDate;
@@ -59,13 +60,22 @@ export class DoctorAvailablityManagement implements OnInit {
 
   addAvailability(): void {
     this.submitted = true;
+    console.log("New Availability Data:", this.newAvailability);
+    this.newAvailability.doctorId = this.doctorId;
+    // Basic validation
+    if (!this.newAvailability.date || !this.newAvailability.startTime || !this.newAvailability.endTime) {
+      alert('Please fill in all fields');
+      return;
+    }
+
     if (this.newAvailability.startTime >= this.newAvailability.endTime) {
       alert('End time must be after start time');
       return;
     }
-
+    console.log("Adding Availability:", this.newAvailability);
     this.doctorService.addAvailability(this.newAvailability).subscribe(() => {
       this.newAvailability = { date: this.minDate, startTime: '', endTime: '', doctorId: this.doctorId };
+      console.log("Problem")
       console.log('Availability added successfully');
       this.availabilityForm.resetForm({ date: this.minDate, startTime: '', endTime: '' });
       this.submitted = false;
@@ -82,6 +92,7 @@ export class DoctorAvailablityManagement implements OnInit {
     }
 
     if (confirm('Are you sure you want to remove this availability slot?')) {
+      console.log("Removing Slot ID:", slot.slotid);
       this.doctorService.removeAvailability(slot.slotid).subscribe(() => {
         this.availabilitySlots = this.availabilitySlots.filter(s => s.slotid !== slot.slotid);
         this.loadAvailability();

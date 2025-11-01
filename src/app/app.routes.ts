@@ -30,6 +30,7 @@ import { DoctorAvailablityManagement } from './doctor-availablity-management/doc
 import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 import { DoctorLandingPage } from './doctor-landing-page/doctor-landing-page';
 import { NotificationPanal } from './notification-panal/notification-panal';
+import { NotificationPanalDoctor } from './notification-panal-doctor/notification-panal-doctor';
 export const routes: Routes = [
     {
         path:'',
@@ -127,6 +128,10 @@ export const routes: Routes = [
         path:'notifications',
         component:NotificationPanal
 
+    },
+    {
+        path:'doctorNotifications',
+        component:NotificationPanalDoctor
     },
     {
         path:'doctorLandingPage',
