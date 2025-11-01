@@ -27,6 +27,8 @@ export class DoctorConsultations implements OnInit {
     this.doctorId = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
     this.consultationService.getConsultationsByDoctor(this.doctorId).subscribe({
 
+
+      // Need to be in the method
     next: (data) => {
       this.consultations = data;
       this.cdr.markForCheck(); // Force view update
