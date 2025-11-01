@@ -313,6 +313,7 @@ openConsultationForm(appointment: Appointment): void {
   this.router.navigate(['/consultation-form', appointment.id], {
     state: {
       appointment,
+      doctorName: localStorage.getItem('doctorName') || '',
       doctor: this.doctor,
       date: this.currentDate
     }

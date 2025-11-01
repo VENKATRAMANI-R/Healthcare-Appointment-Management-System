@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { BookAppointment } from './Appointment-Booking/book-appointment/book-appointment';
 import { App } from './app';
-// import { FindDoctors } from './find-doctors/find-doctors';
+import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
 import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
@@ -29,7 +29,6 @@ import { LoginLanding } from './Authentication/login-landing/login-landing';
 import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
 import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 import { DoctorLandingPage } from './doctor-landing-page/doctor-landing-page';
-import { FindDoctors } from './find-doctors/find-doctors';
 import { NotificationPanal } from './notification-panal/notification-panal';
 export const routes: Routes = [
     {
@@ -123,10 +122,6 @@ export const routes: Routes = [
     {
         path:'doctorProfiles',
         component:DoctorProfiles
-<<<<<<< HEAD
-
-=======
->>>>>>> 5e52111ab1ae4f50d5d6f61b70b45771d0c8afcf
     },
     {
         path:'notifications',

@@ -11,16 +11,16 @@ export interface PrescriptionItem {
 }
 
 export interface Consultation {
-  id?: string;
-  appointmentId?: string;
-  patientId: string;
+  id?: number;
+  appointmentId?: number;
+  patientId: number;
   patientName?: string;
   doctorId?: number;
   doctorName: string;
   date: string;
   notes?: string;
   prescriptions?: PrescriptionItem[];
-  createdAt?: string;
+  createdAt?: String;
   // updatedAt?: string;
   // attachments?: { filename: string; size: number; mimeType: string }[];
 }
@@ -34,6 +34,7 @@ export class ConsultationService {
 
   private baseUrl = 'http://localhost:8088/api/consultations';
   userId = localStorage.getItem('patientId');
+  docId= localStorage.getItem('doctorId');
 
 constructor(private http: HttpClient) {}
 
@@ -62,7 +63,8 @@ updateAppointmentStatus(appointmentId: number, status: string): Observable<any> 
   }
 
   getConsultationsByDoctor(doctorId: number): Observable<Consultation[]> {
-  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${doctorId}`);
+    console.log('Fetching consultations for doctor ID:', doctorId);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${1}`);
   }
   getConsultationsByPatient(patientId: number): Observable<Consultation[]> {
   return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${patientId}`);

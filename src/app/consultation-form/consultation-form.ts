@@ -44,9 +44,9 @@ export class ConsultationForm implements OnInit {
       date: new FormControl(this.formatDate(nav.date), Validators.required),
       patientId: new FormControl(nav.appointment?.patientId || '', Validators.required),
       patientName: new FormControl(nav.appointment?.patientName || '', Validators.required),
-      doctorId: new FormControl(nav.doctor?.doctorId || '', Validators.required),
+      doctorId: new FormControl(this.doctorId || '', Validators.required),
       doctorName: new FormControl(
-        `${nav.doctor?.firstName} ${nav.doctor?.lastName}` || '',
+        `${this.doctorName}` || '',
         Validators.required
       ),
       notes: new FormControl(''),
