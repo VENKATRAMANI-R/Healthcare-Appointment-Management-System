@@ -54,7 +54,7 @@ export class AppointmentService {
   // ✅ Get available slots for a doctor on a specific date
   getAvailableSlots(doctorId: number, date: string): Observable<AvailabilitySlotDTO[]> {
     return this.http.get<AvailabilitySlotDTO[]>(
-      `${this.availablityUrl}/${doctorId}/${date}/availablity`,
+      `${this.availablityUrl}/${doctorId}/${date}/availability`,
       { headers: this.getAuthHeaders() }
     );
   }

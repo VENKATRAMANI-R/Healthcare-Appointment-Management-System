@@ -39,9 +39,11 @@ type SortDirection = 'asc' | 'desc';
 })
 export class DoctorLandingPage implements OnInit, OnDestroy{
   doctor: Doctor | null = null;
+  doctorName = "";
 
-  doctorName = localStorage.getItem('doctorName');
+
   
+
   appointments: Appointment[] = [];
   filteredAppointments: Appointment[] = [];
   nextAppointment: Appointment | null = null;
@@ -94,6 +96,7 @@ constructor(private doctorService: DoctorService,
     this.dateUpdateInterval = setInterval(() => this.updateDateTime(), 60000); 
     this.loadDoctor()
     this.loadAppointments();  
+    this.doctorName=localStorage.getItem('doctorName')||'';
     
   } 
 
@@ -313,6 +316,7 @@ openConsultationForm(appointment: Appointment): void {
   this.router.navigate(['/consultation-form', appointment.id], {
     state: {
       appointment,
+      doctorName: localStorage.getItem('doctorName') || '',
       doctor: this.doctor,
       date: this.currentDate
     }

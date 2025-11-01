@@ -22,6 +22,8 @@ interface ConsultationNavigationState {
 })
 export class ConsultationForm implements OnInit {
   consultationForm!: FormGroup;
+  doctorName: string = '';
+  doctorId: number = 0;
 
 
   constructor(
@@ -32,16 +34,19 @@ export class ConsultationForm implements OnInit {
 
   ngOnInit(): void {
     const nav = this.location.getState() as ConsultationNavigationState;
-    console.log('Received doctor:', nav.doctor)
+    console.log('Received doctor:', nav.doctor);
+    this.doctorName = localStorage.getItem('doctorName') || '';
+    this.doctorId = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
+    
 
     this.consultationForm = new FormGroup({
       appointmentId: new FormControl(nav.appointment?.id || '', Validators.required),
       date: new FormControl(this.formatDate(nav.date), Validators.required),
       patientId: new FormControl(nav.appointment?.patientId || '', Validators.required),
       patientName: new FormControl(nav.appointment?.patientName || '', Validators.required),
-      doctorId: new FormControl(nav.doctor?.doctorId || '', Validators.required),
+      doctorId: new FormControl(this.doctorId || '', Validators.required),
       doctorName: new FormControl(
-        `${nav.doctor?.firstName} ${nav.doctor?.lastName}` || '',
+        `${this.doctorName}` || '',
         Validators.required
       ),
       notes: new FormControl(''),

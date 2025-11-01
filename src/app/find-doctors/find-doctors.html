@@ -101,10 +101,10 @@
         <article *ngFor="let doctor of filteredDoctors" class="doctor-card professional-card">
           <div class="doctor-image-container">
             <img 
-              [src]="doctor.image || 'public/images/doctor-default.png'" 
+              [src]="doctor.image || 'assets\doctor-default.png'" 
               [alt]="'Photo of ' + doctor.name"
               class="doctor-photo"
-              (error)="doctor.image = 'public/images/doctor-default.png'"
+              (error)="doctor.image = 'assets\doctor-default.png'"
             />
             <div class="experience-badge">
               {{ getYearsOfExperience(doctor.experience) }} exp

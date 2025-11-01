@@ -1,32 +1,34 @@
 import { Routes } from '@angular/router';
 import { BookAppointment } from './Appointment-Booking/book-appointment/book-appointment';
 import { App } from './app';
-// import { FindDoctors } from './find-doctors/find-doctors';
+import { FindDoctors } from './find-doctors/find-doctors';
 import { LandingPage } from './landing-page/landing-page';
-import { AboutUs } from './about-us/about-us';
-import { Excellence } from './excellence/excellence';
 import { Departments } from './departments/departments';
 import { ContactUs } from './contact-us/contact-us';
 import { RegistrationPage } from './Authentication/registration-page/registration-page';
 
 import { E } from '@angular/cdk/keycodes';
 
+
+import { AboutUs } from './about-us/about-us';
+import { Excellence } from './excellence/excellence';
 import { PatientCare } from './patient-care/patient-care';
 import { MyConsultations } from './my-consultations/my-consultations';
+import { ConsultationForm } from './consultation-form/consultation-form';
 import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
 import { DoctorConsultations } from './doctor-consultations/doctor-consultations';
 import { DoctorConsultationList } from './doctor-consultation-list/doctor-consultation-list';
+
+
 import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';
 import { Login } from './Authentication/registration-page/login';
 import { Logindoctor } from './Authentication/registration-page-doctor/login-doctor';
 import { DoctorProfiles } from './Authentication/Doctor-Profiles/doctor-profiles/doctor-profiles';
 import { PatientProfiles } from './Authentication/Patient-Profiles/patient-profiles/patient-profiles';
 import { LoginLanding } from './Authentication/login-landing/login-landing';
-import { ConsultationForm } from './consultation-form/consultation-form';
 import { DoctorAvailablityManagement } from './doctor-availablity-management/doctor-availablity-management';
 import { MyAppointments } from './Appointment-Booking/my-appointments/my-appointments';
 import { DoctorLandingPage } from './doctor-landing-page/doctor-landing-page';
-import { FindDoctors } from './find-doctors/find-doctors';
 import { NotificationPanal } from './notification-panal/notification-panal';
 export const routes: Routes = [
     {

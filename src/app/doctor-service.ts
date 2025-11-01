@@ -9,7 +9,7 @@ import { Doctor } from './find-doctors/doctor-model';
 })
 export class DoctorService {
   private readonly apiUrl = 'http://localhost:8082/doctor/getAllDoctors';
-  private readonly defaultImage = 'public/images/doctor-default.jpg';
+  private readonly defaultImage = 'assets\doctor-default.png';
 
   constructor(private http: HttpClient) {}
 

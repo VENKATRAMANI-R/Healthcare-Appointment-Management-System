@@ -62,6 +62,7 @@ export class FindDoctors implements OnInit,OnDestroy {
         this.doctors = doctors;
         this.cdr.markForCheck();
         this.filteredDoctors = [...this.doctors];
+        this.cdr.markForCheck();
         console.log('Fetched doctors:', doctors);
         this.isLoading = false;
       },

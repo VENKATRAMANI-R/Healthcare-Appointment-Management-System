@@ -140,7 +140,7 @@ patientDashboard = [
     this.router.navigate(['notifications']);
   }
   bookAppointment(): void {
-    this.router.navigate(['bookAppointment']);
+    this.router.navigate(['FindDoctors']);
   }
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
