@@ -63,7 +63,7 @@ updateAppointmentStatus(appointmentId: number, status: string): Observable<any> 
 
   getConsultationsByDoctor(doctorId: number): Observable<Consultation[]> {
     console.log('Fetching consultations for doctor ID:', doctorId);
-  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${1}`);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${doctorId}`);
   }
   getConsultationsByPatient(patientId: number): Observable<Consultation[]> {
   return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${patientId}`);

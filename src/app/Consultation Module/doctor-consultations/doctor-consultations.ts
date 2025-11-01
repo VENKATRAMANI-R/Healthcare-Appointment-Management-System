@@ -29,8 +29,9 @@ export class DoctorConsultations implements OnInit {
 
     next: (data) => {
       this.consultations = data;
+      this.cdr.markForCheck(); // Force view update
       console.log('Fetched consultations:', data);
-      this.isLoading = true;
+      this.isLoading = false;
       this.cdr.markForCheck(); // Force view update
     },
     error: (err) => {

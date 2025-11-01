@@ -4,8 +4,9 @@ import { Doctor } from '../doctor-landing-page/doctor-landing-page';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 export interface Appointment {
   id: number;
-  time: string;
-  patientId: number;
+  startTime: string;
+  endTime : string;
+  patId: number;
   patientName: string;
   age: number;
   gender: 'Male' | 'Female' | 'Other';
@@ -17,14 +18,14 @@ export interface Appointment {
   providedIn: 'root'
 })
 export class ScheduleService {
-  private doctorProfileUrl = 'http://your-api-url/api/doctors/profile';
+  // private doctorProfileUrl = 'http://your-api-url/api/doctors/profile';
   private appointmentsUrl = 'http://localhost:8083/appointments/doctor/fetch';
   
   constructor(private http: HttpClient) {}
 
-  getDoctorProfile(): Observable<Doctor> {
-    return this.http.get<Doctor>(this.doctorProfileUrl);
-  }
+  // getDoctorProfile(): Observable<Doctor> {
+  //   return this.http.get<Doctor>(this.doctorProfileUrl);
+  // }
   
 
   // private appointments: Appointment[] = [
@@ -71,6 +72,8 @@ export class ScheduleService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     // const doctorId = localStorage.getItem('doctorId') || '';
-    return this.http.get<Appointment[]>(`{this.appointmentsUrl}/doctorId`, { headers });
+    console.log('Fetching appointments for doctorId:', doctorId);
+    console.log('url:', `${this.appointmentsUrl}/${doctorId}`); 
+    return this.http.get<Appointment[]>(`${this.appointmentsUrl}/${doctorId}`, { headers });
   }
 }

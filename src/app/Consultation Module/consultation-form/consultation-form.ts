@@ -42,7 +42,7 @@ export class ConsultationForm implements OnInit {
     this.consultationForm = new FormGroup({
       appointmentId: new FormControl(nav.appointment?.id || '', Validators.required),
       date: new FormControl(this.formatDate(nav.date), Validators.required),
-      patientId: new FormControl(nav.appointment?.patientId || '', Validators.required),
+      patientId: new FormControl(nav.appointment?.patId || '', Validators.required),
       patientName: new FormControl(nav.appointment?.patientName || '', Validators.required),
       doctorId: new FormControl(this.doctorId || '', Validators.required),
       doctorName: new FormControl(
