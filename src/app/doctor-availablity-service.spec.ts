@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-
 import { DoctorAvailablityService } from './doctor-availablity-service';
+
 
 describe('DoctorAvailablityService', () => {
   let service: DoctorAvailablityService;
