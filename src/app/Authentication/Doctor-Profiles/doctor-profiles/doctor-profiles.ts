@@ -198,9 +198,9 @@ saveDoctorProfile() {
   if (this.doctorForm.valid) {
     const doctorData = { ...this.doctorForm.value }; // No email or name in the model
 
-    const doctorEmail = localStorage.getItem('doctorEmail') || '';
+    const doctorId : number = Number(localStorage.getItem('doctorId'));
 
-    this.doctorService.saveProfile(doctorEmail, doctorData).subscribe({
+    this.doctorService.saveProfile(doctorId, doctorData).subscribe({
       next: (res) => {
         console.log('Profile saved:', res);
         this.savedDoctor = res;
