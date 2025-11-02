@@ -30,7 +30,7 @@ export interface Doctor {
   providedIn: 'root'
 })
 export class DoctorAvailablityService {
-  private apiUrl = 'http://localhost:8081/api/doctors'; // Spring Boot base URL
+  private apiUrl = 'http://localhost:8080/api/doctors'; // Spring Boot base URL
   currentSlot=0;
   constructor(private http: HttpClient) {}
   

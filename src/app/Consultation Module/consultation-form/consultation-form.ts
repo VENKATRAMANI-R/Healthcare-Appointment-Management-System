@@ -93,7 +93,7 @@ export class ConsultationForm implements OnInit {
 
         // Update appointment status to 'Complete
         
-this.consultationService.updateAppointmentStatus(formData.appointmentId, 'Completed').subscribe({
+this.consultationService.updateAppointmentStatus(formData.appointmentId).subscribe({
         next: () => {
           console.log('Appointment marked as completed');
 

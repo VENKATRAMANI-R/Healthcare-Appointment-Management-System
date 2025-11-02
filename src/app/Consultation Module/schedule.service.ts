@@ -19,7 +19,7 @@ export interface Appointment {
 })
 export class ScheduleService {
   // private doctorProfileUrl = 'http://your-api-url/api/doctors/profile';
-  private appointmentsUrl = 'http://localhost:8083/appointments/doctor/fetch';
+  private appointmentsUrl = 'http://localhost:8080/appointments/doctor/fetch';
   
   constructor(private http: HttpClient) {}
 

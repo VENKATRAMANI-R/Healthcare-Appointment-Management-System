@@ -42,8 +42,8 @@ export interface PatientDTO {
   providedIn: 'root'
 })
 export class AppointmentService {
-  private baseUrl = 'http://localhost:8083/appointments';
-  private availablityUrl = 'http://localhost:8081/api/doctors' // Spring Boot base URL
+  private baseUrl = 'http://localhost:8080/appointments';
+  private availablityUrl = 'http://localhost:8080/api/doctors' // Spring Boot base URL
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -93,7 +93,7 @@ export class AppointmentService {
 
   // ✅ Cancel an appointment
   cancelAppointment(appointmentId: number): Observable<any> {
-    return this.http.patch<Appointment>(
+    return this.http.put<Appointment>(
       `${this.baseUrl}/cancel/patient/${appointmentId}`,
       {},
       { headers: this.getAuthHeaders() }

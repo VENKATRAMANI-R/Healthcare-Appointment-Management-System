@@ -7,7 +7,7 @@ import { UserNotification } from './UserNotification';
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = "http://localhost:8085/notification/patient";
+  private apiUrl = "http://localhost:8080/notification/patient";
 
   constructor(private http: HttpClient) {}
   
