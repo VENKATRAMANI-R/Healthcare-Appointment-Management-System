@@ -1,0 +1,24 @@
+<header class="top-bar">
+    <div class="brand">
+      <div class="brand-logo">
+        assets/images/healwell-logo.png
+      </div>
+      <span class="brand-name">HealWell Doctor</span>
+    </div>
+    
+    <div class="actions">
+        <i class="material-icons notification" (click)="openNotifications()">notifications</i>
+        <button class="btn btn-outline" (click)="docHome()">Home</button>
+        <button class="btn btn-outline" (click)="manageSlots()">Manage Slots</button>
+        <button class="btn btn-outline" (click)="listConsultation()">Consultations</button>
+    </div>
+    <div class="profile-section">
+      <button class="profile-btn" (click)="openProfile()">
+        <div class="profile-avatar material-icons">account_circle</div>
+      </button>
+    </div>
+    <div class="profile-dropdown" *ngIf="AccountDropdownState">
+          <a class="dropdown-link" (click)="goToUserProfile()">Account Details</a>
+          <a class="dropdown-link " (click)="logout()">Logout</a>
+    </div>
+  </header>

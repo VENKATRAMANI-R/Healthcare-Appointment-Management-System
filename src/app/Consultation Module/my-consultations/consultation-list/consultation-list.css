@@ -58,6 +58,9 @@
   max-height: 90vh;
   overflow-y: auto;
 }
+.popup-content h2 {
+  text-align: center;
+}
  
 .prescription-table {
   width: 100%;

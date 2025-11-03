@@ -16,5 +16,14 @@
 ){
   <app-header></app-header>
 }
+@if(router.url =='/doctor-consultations' ||
+ router.url =='/doctor-availablity-management' ||
+ router.url =='/doctorProfiles' ||
+ router.url =='/doctorNotifications'
+){
+  <app-header-doctor></app-header-doctor>
+}
+
+
  <router-outlet></router-outlet>
 

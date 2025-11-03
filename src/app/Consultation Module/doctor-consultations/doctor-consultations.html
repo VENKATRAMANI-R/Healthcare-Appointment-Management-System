@@ -1,16 +1,29 @@
-<div class="doctor-consultations-shell">
+
+ <div class="doctor-consultations-shell">
+  <h1 class="center-heading">Consultations Made</h1>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search by Patient ID" [(ngModel)]="searchPatientId" (input)="filterConsultations()">
+    <input type="text" placeholder="Search by Patient Name" [(ngModel)]="searchPatientName" (input)="filterConsultations()">
+    <input type="date" [(ngModel)]="searchDate" (change)="filterConsultations()">
+    <button class="clear-btn" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="isLoading">Loading consultations...</div>
+  <div *ngIf="!isLoading && consultations.length === 0">No consultations found.</div>
+
+  <app-doctor-consultation-list
+    *ngIf="!isLoading && filteredConsultations.length > 0"
+    [consultations]="filteredConsultations">
+  </app-doctor-consultation-list>
+</div>
+
+
+
+<!-- <div class="doctor-consultations-shell">
   <h1 style="text-align: center;">Consultations Made</h1>
   
-<!-- <ng-container *ngIf="consultations$ | async as consultations">
-<app-doctor-consultation-list [consultations]="consultations"></app-doctor-consultation-list>
-</ng-container> -->
-
-<!-- <div *ngIf="isLoading">Loading consultations...</div>
-<div *ngIf="!isLoading && consultations.length === 0">No consultations found.</div>
-<app-doctor-consultation-list
-  *ngIf="!isLoading && consultations.length > 0"
-  [consultations]="consultations">
-</app-doctor-consultation-list> -->
 
 
 <div *ngIf="isLoading">Loading consultations...</div>
@@ -23,4 +36,4 @@
 </div>
 
 
-
+ -->

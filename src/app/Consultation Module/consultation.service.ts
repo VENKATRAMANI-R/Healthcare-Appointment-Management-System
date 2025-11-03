@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface PrescriptionItem {
@@ -14,15 +14,13 @@ export interface Consultation {
   id?: number;
   appointmentId?: number;
   patientId: number;
-  patientName?: string;
-  doctorId?: number;
+  patientName: string;
+  doctorId: number;
   doctorName: string;
   date: string;
   notes?: string;
   prescriptions?: PrescriptionItem[];
   createdAt?: String;
-  // updatedAt?: string;
-  // attachments?: { filename: string; size: number; mimeType: string }[];
 }
 
 @Injectable({
@@ -30,42 +28,54 @@ export interface Consultation {
 })
 export class ConsultationService {
 
-  // private baseUrl = 'http://localhost:8080/consultations';
 
   private baseUrl = 'http://localhost:8080/api/consultations';
 
 constructor(private http: HttpClient) {}
 userId: number = localStorage.getItem('userId') ? +localStorage.getItem('userId')! : 0;
 
+
 // Get consultations for the logged-in patient
 getConsultations(): Observable<Consultation[]> {
   console.log('Fetching consultations for patient ID:', this.userId);
-  return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${this.userId}`);
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${this.userId}`,{ headers } );
 }
 
 
   // Save a new consultation
   saveConsultation(consultation: Consultation[]): Observable<Consultation[]> {
     console.log('Saving consultation:', consultation);
-    return this.http.post<Consultation[]>(this.baseUrl, consultation);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<Consultation[]>(this.baseUrl, consultation,{ headers });
   }
 
   
 updateAppointmentStatus(appointmentId: number): Observable<any> {
-  return this.http.post(`http://localhost:8080/appointments/doctor/completed/${appointmentId}`,{});
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.post(`http://localhost:8080/appointments/doctor/completed/${appointmentId}`,{},{ headers } );
 }
 
 
   // Get a consultation by ID
   getConsultationById(id: string): Observable<Consultation> {
-    return this.http.get<Consultation>(`${this.baseUrl}/${id}`);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Consultation>(`${this.baseUrl}/${id}`,{ headers });
   }
 
   getConsultationsByDoctor(doctorId: number): Observable<Consultation[]> {
     console.log('Fetching consultations for doctor ID:', doctorId);
-  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${doctorId}`);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${doctorId}`,{ headers } );
   }
   getConsultationsByPatient(patientId: number): Observable<Consultation[]> {
-  return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${patientId}`);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${patientId}`,{ headers } );
 }
 }
