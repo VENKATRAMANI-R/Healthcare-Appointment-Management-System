@@ -20,13 +20,22 @@
         <p><strong>Problem:</strong> {{ appt.problem }} </p>
         <p><strong>Status:</strong> {{ appt.status }} </p>
       </div>
-    
-    <div class="appointment-actions">
-      <button class="btn reschedule" type="button" (click)="rescheduleAppointment(appt)">Reschedule</button>
-      <button class="btn cancel" (click)="cancelAppointment(appt)">Cancel</button>
-    </div>
-    </div>
-  </div>
+  
+  <div class="appointment-actions">
+  <button class="btn reschedule" type="button"
+          [disabled]="appt.status?.toLowerCase().includes('cancel')"
+          (click)="rescheduleAppointment(appt)">
+    Reschedule
+  </button>
+
+  <button class="btn cancel" type="button"
+          [disabled]="appt.status?.toLowerCase().includes('cancel')"
+          (click)="cancelAppointment(appt)">
+    Cancel
+  </button>
+</div>
+</div> 
+</div>
  
   <ng-template #noAppointments>
     <p class="no-appointments">No upcoming appointments found</p>

@@ -86,3 +86,10 @@ h2 {
   color: #777;
   font-style: italic;
 }
+
+
+.appointment-actions.btn:disabled {
+  background-color: #ccc;
+  /* color: red; */
+  cursor: not-allowed;
+}

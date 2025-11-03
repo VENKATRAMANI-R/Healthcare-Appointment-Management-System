@@ -40,8 +40,9 @@ export class MyAppointments implements OnInit {
     const date = new Date(appt.date);
     const confirmCancel = confirm(`Are you sure you want to cancel the appointment on ${date.toDateString()} at ${appt.timeSlot}?`);
     if (confirmCancel) {
-      appt.status = 'Cancelled';
       this.appointmentService.cancelAppointment(appt.id).subscribe(response => {
+        appt.status = 'Cancelled';
+        this.cdr.markForCheck(); 
         console.log('Appointment cancelled:', response);
       });
       alert(`Appointment on ${date.toDateString()} has been cancelled`);
