@@ -32,11 +32,10 @@ export class ConsultationService {
 
   // private baseUrl = 'http://localhost:8080/consultations';
 
-  private baseUrl = 'http://localhost:8088/api/consultations';
-  userId = localStorage.getItem('patientId');
-  docId= localStorage.getItem('doctorId');
+  private baseUrl = 'http://localhost:8080/api/consultations';
 
 constructor(private http: HttpClient) {}
+userId: number = localStorage.getItem('userId') ? +localStorage.getItem('userId')! : 0;
 
 // Get consultations for the logged-in patient
 getConsultations(): Observable<Consultation[]> {
@@ -52,8 +51,8 @@ getConsultations(): Observable<Consultation[]> {
   }
 
   
-updateAppointmentStatus(appointmentId: number, status: string): Observable<any> {
-  return this.http.put(`http://your-api-url/api/appointments/${appointmentId}/status`, { status });
+updateAppointmentStatus(appointmentId: number): Observable<any> {
+  return this.http.post(`http://localhost:8080/appointments/doctor/completed/${appointmentId}`,{});
 }
 
 
@@ -64,7 +63,7 @@ updateAppointmentStatus(appointmentId: number, status: string): Observable<any> 
 
   getConsultationsByDoctor(doctorId: number): Observable<Consultation[]> {
     console.log('Fetching consultations for doctor ID:', doctorId);
-  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${1}`);
+  return this.http.get<Consultation[]>(`${this.baseUrl}/doctor/${doctorId}`);
   }
   getConsultationsByPatient(patientId: number): Observable<Consultation[]> {
   return this.http.get<Consultation[]>(`${this.baseUrl}/patient/${patientId}`);

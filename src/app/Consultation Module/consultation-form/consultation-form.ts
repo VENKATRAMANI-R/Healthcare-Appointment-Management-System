@@ -5,7 +5,7 @@ import { ConsultationService } from '../consultation.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Appointment } from '../schedule.service';
-import { Doctor } from '../doctor-landing-page/doctor-landing-page';
+import { Doctor } from '../../doctor-landing-page/doctor-landing-page';
 
 interface ConsultationNavigationState {
   appointment: Appointment;
@@ -42,7 +42,7 @@ export class ConsultationForm implements OnInit {
     this.consultationForm = new FormGroup({
       appointmentId: new FormControl(nav.appointment?.id || '', Validators.required),
       date: new FormControl(this.formatDate(nav.date), Validators.required),
-      patientId: new FormControl(nav.appointment?.patientId || '', Validators.required),
+      patientId: new FormControl(nav.appointment?.patId || '', Validators.required),
       patientName: new FormControl(nav.appointment?.patientName || '', Validators.required),
       doctorId: new FormControl(this.doctorId || '', Validators.required),
       doctorName: new FormControl(
@@ -93,7 +93,7 @@ export class ConsultationForm implements OnInit {
 
         // Update appointment status to 'Complete
         
-this.consultationService.updateAppointmentStatus(formData.appointmentId, 'Completed').subscribe({
+this.consultationService.updateAppointmentStatus(formData.appointmentId).subscribe({
         next: () => {
           console.log('Appointment marked as completed');
 

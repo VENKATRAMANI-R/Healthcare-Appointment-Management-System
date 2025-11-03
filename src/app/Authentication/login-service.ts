@@ -19,14 +19,16 @@ export class LoginService {
 //       return false; 
 //     }
 
-  private url = 'http://localhost:8086/authentication/login';
+  private url = 'http://localhost:8080/authentication/login';
 
   // private url1 = 'http://localhost:8086/login';
 
   constructor(private http: HttpClient) { }
   login(email: string, password: string) {
     const body = { email, password };
-    return this.http.post(`${this.url}`, body );
+    console.log(body);
+    console.log(this.http.post(`${this.url}`, body));
+    return this.http.post(`${this.url}`, body);
   }
 
   loginPatient(email: string, password: string) {

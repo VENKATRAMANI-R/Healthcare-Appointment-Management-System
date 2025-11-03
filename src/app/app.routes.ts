@@ -13,11 +13,11 @@ import { E } from '@angular/cdk/keycodes';
 import { AboutUs } from './about-us/about-us';
 import { Excellence } from './excellence/excellence';
 import { PatientCare } from './patient-care/patient-care';
-import { MyConsultations } from './my-consultations/my-consultations';
-import { ConsultationForm } from './consultation-form/consultation-form';
-import { ConsultationList } from './my-consultations/consultation-list/consultation-list';
-import { DoctorConsultations } from './doctor-consultations/doctor-consultations';
-import { DoctorConsultationList } from './doctor-consultation-list/doctor-consultation-list';
+import { MyConsultations } from './Consultation Module/my-consultations/my-consultations';
+import { ConsultationForm } from './Consultation Module/consultation-form/consultation-form';
+import { ConsultationList } from './Consultation Module/my-consultations/consultation-list/consultation-list';
+import { DoctorConsultations } from './Consultation Module/doctor-consultations/doctor-consultations';
+import { DoctorConsultationList } from './Consultation Module/doctor-consultation-list/doctor-consultation-list';
 
 
 import { RegistrationPageDoctor } from './Authentication/registration-page-doctor/registration-page-doctor';

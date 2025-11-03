@@ -15,7 +15,8 @@ export class DoctorConsultations implements OnInit {
   selectedConsultation: Consultation | null = null;
   showDetail = false;
   isLoading: boolean = true;
-  doctorId: number = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
+  doctorId: number = 0;
+  
 
   constructor(
     private consultationService: ConsultationService,
@@ -23,12 +24,16 @@ export class DoctorConsultations implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  this.consultationService.getConsultationsByDoctor(this.doctorId).subscribe({
+    this.doctorId = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
+    this.consultationService.getConsultationsByDoctor(this.doctorId).subscribe({
 
+
+      // Need to be in the method
     next: (data) => {
       this.consultations = data;
+      this.cdr.markForCheck(); // Force view update
       console.log('Fetched consultations:', data);
-      this.isLoading = true;
+      this.isLoading = false;
       this.cdr.markForCheck(); // Force view update
     },
     error: (err) => {
