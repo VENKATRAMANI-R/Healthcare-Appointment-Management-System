@@ -20,20 +20,46 @@ export class MyAppointments implements OnInit {
   ngOnInit(): void {
   
   this.appointmentService.GetAppointmentsByPatientId().subscribe(data => {
-    this.Appointment = data;
-    this.cdr.markForCheck();
-    console.log('Appointments fetched:', this.Appointment);
-  }, error => {
-    console.error('Error fetching appointments:', error);
+  this.Appointment = data.sort((a, b) => {
+    // Prioritize status: 'booked' comes before others
+    if (a.status === 'booked' && b.status !== 'booked') return -1;
+    if (a.status !== 'booked' && b.status === 'booked') return 1;
+
+    // If status is the same, sort by date and time (latest first)
+    const dateA = new Date(`${a.date}T${a.startTime}`);
+    const dateB = new Date(`${b.date}T${b.startTime}`);
+    return dateB.getTime() - dateA.getTime();
   });
+
+  this.cdr.markForCheck();
+  console.log('Appointments fetched:', this.Appointment);
+}, error => {
+  console.error('Error fetching appointments:', error);
+});
+
   
 }
  
-  rescheduleAppointment(appt: any) :void {
-    // const date = new Date(appt.date);
-    // alert(`Reschedule requested for:\nDate: ${date.toDateString()}\nTime Slot: ${appt.timeSlot}`);
-    this.router.navigate(['/bookAppointment']);
+  rescheduleAppointment(appt: any): void {
+  const confirmReschedule = confirm(`Do you want to reschedule the appointment on ${appt.date}?`);
+  if (confirmReschedule) {
+    this.appointmentService.rescheduleAppointment(appt.id).subscribe({
+      next: (response) => {
+        appt.status = 'Rescheduled';
+        this.Appointment = this.Appointment.filter(a => a.id !== appt.id);
+        this.cdr.markForCheck();
+        console.log('Appointment rescheduled:', response);
+        alert('Appointment has been marked as rescheduled.');
+        this.router.navigate(['/bookAppointment'], { state: { doctorId: appt.doctorId, doctorName: appt.doctorName } });
+      },
+      error: (error) => {
+        console.error('Error rescheduling appointment:', error);
+        alert('Failed to reschedule appointment. Please try again.');
+      }
+    });
   }
+}
+
    
  
   cancelAppointment(appt: any) :void {

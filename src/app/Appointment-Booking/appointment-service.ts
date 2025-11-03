@@ -99,4 +99,12 @@ export class AppointmentService {
       { headers: this.getAuthHeaders() }
     );
   }
+
+  rescheduleAppointment(appointmentId: number): Observable<Appointment> {
+  return this.http.put<Appointment>(
+    `${this.baseUrl}/update/${appointmentId}`,
+    {},
+    { headers: this.getAuthHeaders() }
+  );
+}
 }
