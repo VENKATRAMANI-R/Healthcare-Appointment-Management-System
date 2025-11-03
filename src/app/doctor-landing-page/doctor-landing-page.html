@@ -164,7 +164,7 @@
                     <div class="patient-avatar">{{ getPatientInitial(appointment.patientName) }}</div>
                     <div class="patient-details">
                       <div class="patient-name">{{ appointment.patientName }}</div>
-                      <div class="patient-meta">{{ appointment.age }}y • {{ appointment.gender }}</div>
+                      <!-- <div class="patient-meta">{{ appointment.age }}y • {{ appointment.gender }}</div> -->
                     </div>
                   </div>
                 </td>
@@ -174,14 +174,14 @@
                 </td>
                 <td>
                   <div class="table-actions">
-                    <button class="btn btn-primary" (click)="openChart(appointment)">
+                    <!-- <button class="btn btn-primary" (click)="openChart(appointment)">
                       <span class="material-icons">folder_open</span>
                       Open
-                    </button>
-                    <button class="btn btn-outline">
+                    </button> -->
+                    <!-- <button class="btn btn-outline">
                       <span class="material-icons">event</span>
                       Reschedule
-                    </button>
+                    </button> -->
                     <!-- Consultation Form -->
                     <button class="btn btn-outline" (click)="openConsultationForm(appointment)">
                       <span class="material-icons">assignment</span>

@@ -14,8 +14,8 @@ export interface Consultation {
   id?: number;
   appointmentId?: number;
   patientId: number;
-  patientName?: string;
-  doctorId?: number;
+  patientName: string;
+  doctorId: number;
   doctorName: string;
   date: string;
   notes?: string;
