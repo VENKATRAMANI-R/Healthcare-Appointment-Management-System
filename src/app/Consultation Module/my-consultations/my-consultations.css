@@ -1,17 +1,19 @@
 .center-heading {
   text-align: center;
   width: 100%;
-  margin: 0 auto 1rem auto;
+  margin: 1rem auto 1rem auto;
 }
 
-/* .search-bar {
+.search-bar {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .search-bar input {
-  padding: 0.4rem;
-  font-size: 1rem;
-  width: 250px;
-} */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}

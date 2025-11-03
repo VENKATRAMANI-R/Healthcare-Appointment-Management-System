@@ -14,6 +14,7 @@ export class DoctorConsultationList {
   selectedConsultation: Consultation | null = null;
   showPopup: boolean = false;
 
+
   viewDetails(consultation: Consultation) {
     this.selectedConsultation = consultation;
     this.showPopup = true;

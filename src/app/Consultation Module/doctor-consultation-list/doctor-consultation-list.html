@@ -26,16 +26,16 @@
 <!-- Popup for Consultation Details -->
 <div class="popup" *ngIf="showPopup">
   <div class="popup-content">
-    <h3>Consultation Details</h3>
+    <h2>Consultation Details</h2>
     <p><strong>Date:</strong> {{ selectedConsultation?.date }}</p>
-    <p><strong>Patient:</strong> {{ selectedConsultation?.patientName }} ({{ selectedConsultation?.patientId }})</p>
+    <p><strong>Patient:</strong> {{ selectedConsultation?.patientName }} </p>
     <p><strong>Doctor:</strong> {{ selectedConsultation?.doctorName }}</p>
 
     <h4>Notes:</h4>
     <p>{{ selectedConsultation?.notes }}</p>
 
     <div *ngIf="selectedConsultation?.prescriptions?.length">
-      <h4>Prescription:</h4>
+      <h4>Prescriptions:</h4>
       <table class="prescription-table">
         <thead>
           <tr>
