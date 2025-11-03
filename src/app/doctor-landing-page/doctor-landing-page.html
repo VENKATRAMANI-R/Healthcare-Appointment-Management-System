@@ -68,33 +68,6 @@
         </div>
       </div>
 
-      <!-- Next Appointment Card -->
-      <div class="card next-appointment-card" *ngIf="nextAppointment">
-        <div class="card-header">
-          <div class="appointment-header">
-            <h3>Next Appointment</h3>
-            <span class="appointment-time">{{ nextAppointment.startTime || 'NA' }}</span>
-          </div>
-        </div>
-        <div class="card-content">
-          <div class="appointment-details">
-            <div class="detail-row">
-              <span class="material-icons detail-icon">person</span>
-              <span>{{ nextAppointment.patientName || 'NA' }} • {{ nextAppointment.age || 'NA'}}y • {{ nextAppointment.gender || 'NA'}}</span>
-            </div>
-            <div class="detail-row">
-              <span class="material-icons detail-icon">local_hospital</span>
-              <span>{{ nextAppointment.reason || 'NA'}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <button class="btn btn-primary">
-            <span class="material-icons">folder_open</span>
-            Open Chart
-          </button>
-        </div>
-      </div>
     </section>
 
     <!-- Today's Appointments Section -->
@@ -110,47 +83,31 @@
               (input)="onSearch($event)"
               class="search-input">
           </div>
-          <div class="view-toggle">
-            <button
-              class="toggle-btn"
-              [class.active]="currentView === 'list'"
-              (click)="onViewChange('list')">
-              <span class="material-icons">view_list</span>
-            </button>
-            <button
-              class="toggle-btn"
-              [class.active]="currentView === 'compact'"
-              (click)="onViewChange('compact')">
-              <span class="material-icons">table_rows</span>
-            </button>
-          </div>
         </div>
       </div>
 
       <div class="appointments-container">
         <div class="appointments-table-wrapper">
-          <table class="appointments-table" [class.compact]="currentView === 'compact'">
+          <table class="appointments-table" >
             <thead>
               <tr>
-                <th (click)="('startTime')" class="sortable">
+                <th (click)="('startTime')">
                   Start
                   <!-- <span class="material-icons sort-indicator">{{ ('startTime') }}</span> -->
                 </th>
-                <th (click)="('endTime')" class="sortable">
+                <th>
                   End
                   <!-- <span class="material-icons sort-indicator">{{ ('endTime') }}</span> -->
                 </th>
-                <th (click)="('patientName')" class="sortable">
+                <th>
                   Patient Name
                   <!-- <span class="material-icons sort-indicator">{{ ('patientName') }}</span> -->
                 </th>
-                <th (click)="onSort('reason')" class="sortable">
+                <th>
                   Reason
-                  <span class="material-icons sort-indicator">{{ ('reason') }}</span>
                 </th>
-                <th (click)="onSort('status')" class="sortable">
+                <th>
                   Status
-                  <span class="material-icons sort-indicator">{{ ('status') }}</span>
                 </th>
                 <th>Actions</th>
               </tr>
@@ -174,18 +131,13 @@
                 </td>
                 <td>
                   <div class="table-actions">
-                    <!-- <button class="btn btn-primary" (click)="openChart(appointment)">
-                      <span class="material-icons">folder_open</span>
-                      Open
-                    </button> -->
-                    <!-- <button class="btn btn-outline">
-                      <span class="material-icons">event</span>
-                      Reschedule
-                    </button> -->
-                    <!-- Consultation Form -->
-                    <button class="btn btn-outline" (click)="openConsultationForm(appointment)">
+                    <!--consultation-form-->
+                    <button
+                      class="btn btn-outline"
+                        (click)="openConsultationForm(appointment)"
+                        [disabled]="appointment.status.toLowerCase() === 'completed' || appointment.status.toLowerCase() === 'cancelled'">
                       <span class="material-icons">assignment</span>
-                      Consultation Form
+                       Consultation Form
                     </button>
                   </div>
                 </td>
@@ -193,35 +145,10 @@
             </tbody>
           </table>
         </div>
-
-        <!-- Pagination -->
-        <div class="pagination" *ngIf="totalPages > 1">
-          <button
-            (click)="previousPage()"
-            [disabled]="currentPage === 1"
-            class="pagination-btn">
-            <span class="material-icons">keyboard_arrow_left</span>
-            Previous
-          </button>
-          <span class="page-info">
-            Page {{ currentPage }} of {{ totalPages }}
-          </span>
-          <button
-            (click)="nextPage()"
-            [disabled]="currentPage === totalPages"
-            class="pagination-btn">
-            Next
-            <span class="material-icons">keyboard_arrow_right</span>
-          </button>
-        </div>
       </div>
     </section>
   </main>
 
-  <!-- Floating Action Button -->
-  <button class="fab" (click)="goToCalendar()" title="Go to Calendar">
-    <span class="material-icons">calendar_month</span>
-  </button>
 
   <!-- Toast Notifications -->
   <div class="toast-container">
