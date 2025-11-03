@@ -90,8 +90,30 @@ export class ConsultationForm implements OnInit {
     this.consultationService.saveConsultation(formData).subscribe({
       next: (res: any) => {
         console.log('Consultation submitted:', res);
-        alert('Consultation saved successfully.');
-        this.router.navigate(['/doctorLandingPage']);
+
+        // Update appointment status to 'Complete
+        
+this.consultationService.updateAppointmentStatus(formData.appointmentId).subscribe({
+        next: () => {
+          console.log('Appointment marked as completed');
+
+          // Show success message and navigate button
+          alert('Consultation submitted successfully!');
+          this.router.navigate(['/doctorLandingPage']);
+        },
+        error: err => {
+          console.error('Failed to update appointment status', err);
+          alert('Consultation saved, but failed to update appointment status.');
+        }
+      });
+
+        alert('Consultation submitted successfully!');
+        this.consultationForm.reset();
+        this.prescriptions.clear();
+      },
+      error: (err: any) => {
+        console.error('Error submitting consultation:', err);
+        alert('Failed to submit consultation.');
       }
     });
   }
