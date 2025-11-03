@@ -19,19 +19,21 @@ export class LoginService {
 //       return false; 
 //     }
 
-  private url = 'http://localhost:8082/doctor';
+  private url = 'http://localhost:8080/authentication/login';
 
-  private url1 = 'http://localhost:8082/patient';
+  // private url1 = 'http://localhost:8086/login';
 
   constructor(private http: HttpClient) { }
-  login(doctorEmail: string, doctorPassword: string) {
-    const body = { doctorEmail, doctorPassword };
-    return this.http.post(`${this.url}/login`, body );
+  login(email: string, password: string) {
+    const body = { email, password };
+    console.log(body);
+    console.log(this.http.post(`${this.url}`, body));
+    return this.http.post(`${this.url}`, body);
   }
 
-  loginPatient(patientEmail: string, patientPassword: string) {
-    const body = { patientEmail, patientPassword };
-    return this.http.post(`${this.url1}/login`, body );
+  loginPatient(email: string, password: string) {
+    const body = { email, password };
+    return this.http.post(`${this.url}`, body );
   }
   }
 

@@ -42,8 +42,8 @@ export interface PatientDTO {
   providedIn: 'root'
 })
 export class AppointmentService {
-  private baseUrl = 'http://localhost:8083/appointments';
-  private availablityUrl = 'http://localhost:8081/api/doctors' // Spring Boot base URL
+  private baseUrl = 'http://localhost:8080/appointments';
+  private availablityUrl = 'http://localhost:8080/api/doctors' // Spring Boot base URL
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
@@ -54,14 +54,15 @@ export class AppointmentService {
   // ✅ Get available slots for a doctor on a specific date
   getAvailableSlots(doctorId: number, date: string): Observable<AvailabilitySlotDTO[]> {
     return this.http.get<AvailabilitySlotDTO[]>(
-      `${this.availablityUrl}/${doctorId}/${date}/availablity`,
+      `${this.availablityUrl}/${doctorId}/${date}/availability`,
       { headers: this.getAuthHeaders() }
     );
   }
 
   // ✅ Book an appointment
   bookAppointment(appointmentData: Appointment): Observable<Appointment> {
-    console.log("Patient Id in Service:",appointmentData.patientId);  
+    console.log("Patient Id in Service:",appointmentData.patientId); 
+    console.log("Slot Id in Service:",appointmentData.slotId); 
     return this.http.post<Appointment>(
       `${this.baseUrl}/book/${appointmentData.slotId}`,
       appointmentData,
@@ -92,7 +93,7 @@ export class AppointmentService {
 
   // ✅ Cancel an appointment
   cancelAppointment(appointmentId: number): Observable<any> {
-    return this.http.patch<Appointment>(
+    return this.http.put<Appointment>(
       `${this.baseUrl}/cancel/patient/${appointmentId}`,
       {},
       { headers: this.getAuthHeaders() }

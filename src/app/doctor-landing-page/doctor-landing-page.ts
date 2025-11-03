@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 
 
-import { ScheduleService } from '../schedule.service'; 
+import { ScheduleService } from '../Consultation Module/schedule.service'; 
 
 
 
@@ -21,8 +21,9 @@ export interface Doctor {
 } 
 export interface Appointment { 
   id: number; 
-  time: string; 
-  patientId: number;
+  startTime: string;
+  endTime : string; 
+  patId: number;
   patientName: string; 
   age: number; 
   gender: 'Male' | 'Female' | 'Other'; 
@@ -39,9 +40,11 @@ type SortDirection = 'asc' | 'desc';
 })
 export class DoctorLandingPage implements OnInit, OnDestroy{
   doctor: Doctor | null = null;
+  doctorName = "";
+  doctorId = 0;
 
-  doctorName = localStorage.getItem('doctorName');
   
+
   appointments: Appointment[] = [];
   filteredAppointments: Appointment[] = [];
   nextAppointment: Appointment | null = null;
@@ -75,7 +78,7 @@ constructor(private doctorService: DoctorService,
   totalPages = 1; 
    
   // Sorting 
-  sortColumn: keyof Appointment = 'time'; 
+  // sortColumn: keyof Appointment = 'time'; 
   sortDirection: SortDirection = 'asc'; 
  
   // Toast messages 
@@ -84,30 +87,33 @@ constructor(private doctorService: DoctorService,
   private dateUpdateInterval: any; 
  
   ngOnInit(): void { 
+    this.doctorId=Number(localStorage.getItem('doctorId')); 
     this.filteredAppointments =  
  
 [...this.appointments]; 
     this.calculateTotalPages(); 
-    this.updateNextAppointment(); 
+    // this.updateNextAppointment(); 
     this.updateDateTime(); 
     // Update time every minute
     this.dateUpdateInterval = setInterval(() => this.updateDateTime(), 60000); 
-    this.loadDoctor()
-    this.loadAppointments();  
+    // this.loadDoctor()
+    this.loadAppointments(); 
+    
+    this.doctorName=localStorage.getItem('doctorName')||'';
     
   } 
 
-loadDoctor(): void {
-  const sub = this.scheduleService.getDoctorProfile().subscribe({
-    next: (doc: Doctor | null) => {
-      this.doctor = doc;
-    },
-    error: (err: any) => {
-      console.error('Failed to load doctor profile', err);
-    }
-  });
-  this.subs.push(sub);
-}
+// loadDoctor(): void {
+//   const sub = this.scheduleService.getDoctorProfile().subscribe({
+//     next: (doc: Doctor | null) => {
+//       this.doctor = doc;
+//     },
+//     error: (err: any) => {
+//       console.error('Failed to load doctor profile', err);
+//     }
+//   });
+//   this.subs.push(sub);
+// }
 // loadAppointments(): void {
 // // const sub = this.appointmentService.getTodayAppointments().subscribe({
 // // next: (appts: Appointment[]) => {
@@ -135,11 +141,12 @@ loadDoctor(): void {
 
 
 loadAppointments(): void {
-  this.scheduleService.getTodayAppointments().subscribe({
+
+  this.scheduleService.getTodayAppointments(this.doctorId).subscribe({
     next: (appts) => {
       this.appointments = appts;
       this.filteredAppointments = [...appts];
-      this.updateNextAppointment();
+      // this.updateNextAppointment();
       this.calculateTotalPages();
     },
     error: (err) => console.error('Failed to load appointments', err)
@@ -197,15 +204,15 @@ loadAppointments(): void {
     this.currentDate = new Date(); 
   } 
  
-  private updateNextAppointment(): void { 
-    const now = new Date(); 
-    this.nextAppointment = this.appointments.find(apt => { 
-      const [hours, minutes] = apt.time.split(':').map(Number); 
-      const aptTime = new Date(); 
-      aptTime.setHours(hours, minutes, 0, 0); 
-      return aptTime >= now && apt.status !== 'Completed'; 
-    }) || this.appointments[0] || null; 
-  } 
+  // private updateNextAppointment(): void { 
+  //   const now = new Date(); 
+  //   this.nextAppointment = this.appointments.find(apt => { 
+  //     const [hours, minutes] = apt.time.split(':').map(Number); 
+  //     const aptTime = new Date(); 
+  //     aptTime.setHours(hours, minutes, 0, 0); 
+  //     return aptTime >= now && apt.status !== 'Completed'; 
+  //   }) || this.appointments[0] || null; 
+  // } 
  
   private calculateTotalPages(): void { 
     this.totalPages =  
@@ -247,26 +254,26 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
   } 
  
   onSort(column: keyof Appointment): void { 
-    if (this.sortColumn === column) { 
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'; 
-    } else { 
-      this.sortColumn = column; 
-      this.sortDirection = 'asc'; 
-    } 
+    // if (this.sortColumn === column) { 
+    //   this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'; 
+    // } else { 
+    //   this.sortColumn = column; 
+    //   this.sortDirection = 'asc'; 
+    // } 
  
     this.filteredAppointments.sort((a, b) => { 
       let valueA: any = a[column]; 
       let valueB: any = b[column]; 
  
-      if (column === 'time') { 
-        valueA = new Date(`1970-01-01 ${valueA}`); 
-        valueB = new Date(`1970-01-01 $ 
+//       if (column === 'time') { 
+//         valueA = new Date(`1970-01-01 ${valueA}`); 
+//         valueB = new Date(`1970-01-01 $ 
  
-{valueB}`); 
-      } else if (typeof valueA === 'string') { 
-        valueA = valueA.toLowerCase(); 
-        valueB = valueB.toLowerCase(); 
-      } 
+// {valueB}`); 
+//       } else if (typeof valueA === 'string') { 
+//         valueA = valueA.toLowerCase(); 
+//         valueB = valueB.toLowerCase(); 
+//       } 
  
       const comparison = valueA < valueB ? -1 : valueA > valueB ? 1 : 0; 
       return this.sortDirection === 'asc' ? comparison : -comparison; 
@@ -274,13 +281,13 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
  } 
 
  
-  getSortIcon(column: keyof Appointment): string { 
-    if (this.sortColumn !== column) { 
-      return 'unfold_more'; 
-    } 
-    return this.sortDirection === 'asc' ? 'keyboard_arrow_up' : 'keyboard_arrow_down'; 
+  // getSortIcon(column: keyof Appointment): string { 
+  //   if (this.sortColumn !== column) { 
+  //     return 'unfold_more'; 
+  //   } 
+  //   return this.sortDirection === 'asc' ? 'keyboard_arrow_up' : 'keyboard_arrow_down'; 
  
-  } 
+  // } 
  
   previousPage(): void { 
     if (this.currentPage > 1) { 
@@ -313,6 +320,7 @@ openConsultationForm(appointment: Appointment): void {
   this.router.navigate(['/consultation-form', appointment.id], {
     state: {
       appointment,
+      doctorName: localStorage.getItem('doctorName') || '',
       doctor: this.doctor,
       date: this.currentDate
     }
@@ -329,6 +337,9 @@ openConsultationForm(appointment: Appointment): void {
   openProfile(): void { 
     this.AccountDropdownState = !this.AccountDropdownState;
   } 
+  openNotifications(): void {
+    this.router.navigate(['doctorNotifications']);
+  }
   manageSlots(): void { 
     this.router.navigate(['/doctor-availablity-management']);
     this.showToast('Opening availability management...', 'info'); 

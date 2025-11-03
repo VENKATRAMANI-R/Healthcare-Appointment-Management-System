@@ -16,7 +16,7 @@ export class MyConsultations implements OnInit {
   selectedConsultation: Consultation | null = null;
   showDetail = false;
   isLoading: boolean = true;
-  patientId: number = 301; // Hardcoded for now
+  patientId: number = 0;
 
   constructor(
     private consultationService: ConsultationService,
@@ -25,6 +25,7 @@ export class MyConsultations implements OnInit {
 
   ngOnInit(): void {
     // Delay the API call to ensure the component is fully initialized
+    this.patientId = localStorage.getItem('patientId') ? +localStorage.getItem('patientId')! : 0;
     setTimeout(() => {
       this.consultationService.getConsultationsByPatient(this.patientId).subscribe({
         next: (data: Consultation[]) => {

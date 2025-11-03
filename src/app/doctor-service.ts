@@ -8,7 +8,7 @@ import { Doctor } from './find-doctors/doctor-model';
   providedIn: 'root'
 })
 export class DoctorService {
-  private readonly apiUrl = 'http://localhost:8082/doctor/getAllDoctors';
+  private readonly apiUrl = 'http://localhost:8080/user/doctor/getAllDoctors';
   private readonly defaultImage = 'assets\doctor-default.png';
 
   constructor(private http: HttpClient) {}

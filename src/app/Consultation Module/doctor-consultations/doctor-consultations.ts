@@ -12,8 +12,11 @@ import { DoctorConsultationList } from '../doctor-consultation-list/doctor-consu
 })
 export class DoctorConsultations implements OnInit {
   consultations: Consultation[] = [];
+  selectedConsultation: Consultation | null = null;
+  showDetail = false;
   isLoading: boolean = true;
-  doctorId: number = 202; // Hardcoded for now
+  doctorId: number = 0;
+  
 
   constructor(
     private consultationService: ConsultationService,
@@ -21,22 +24,28 @@ export class DoctorConsultations implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.doctorId = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
+    this.consultationService.getConsultationsByDoctor(this.doctorId).subscribe({
+
+
+      // Need to be in the method
+    next: (data) => {
+      this.consultations = data;
+      this.cdr.markForCheck(); // Force view update
+      console.log('Fetched consultations:', data);
+      this.isLoading = false;
+      this.cdr.markForCheck(); // Force view update
+    },
+    error: (err) => {
+      console.error('Error fetching consultations:', err);
+      this.isLoading = false;
+      this.cdr.markForCheck();
+    }
+  });
+}
+
     // Delay the API call to ensure the component is fully initialized
-    setTimeout(() => {
-      this.consultationService.getConsultationsByDoctor(this.doctorId).subscribe({
-        next: (data) => {
-          this.consultations = data;
-          this.isLoading = false;
-          this.cdr.detectChanges(); // Force view update
-        },
-        error: (err) => {
-          console.error('Error fetching consultations:', err);
-          this.isLoading = false;
-          this.cdr.detectChanges();
-        }
-      });
-    });
-  }
+
 }
 
 

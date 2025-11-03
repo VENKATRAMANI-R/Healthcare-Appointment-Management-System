@@ -11,6 +11,9 @@
       <span class="material-icons">event</span>
       <span class="date-display">{{ formattedDate }}</span>
     </div>
+    <div>
+      <i class="material-icons btn" (click)="openNotifications()">notifications</i>
+    </div>
     <div class="profile-section">
       <button class="profile-btn" (click)="openProfile()">
         <div class="profile-avatar"></div>
@@ -70,7 +73,7 @@
         <div class="card-header">
           <div class="appointment-header">
             <h3>Next Appointment</h3>
-            <span class="appointment-time">{{ nextAppointment.time || 'NA' }}</span>
+            <span class="appointment-time">{{ nextAppointment.startTime || 'NA' }}</span>
           </div>
         </div>
         <div class="card-content">
@@ -129,28 +132,33 @@
           <table class="appointments-table" [class.compact]="currentView === 'compact'">
             <thead>
               <tr>
-                <th (click)="onSort('time')" class="sortable">
-                  Time
-                  <span class="material-icons sort-indicator">{{ getSortIcon('time') }}</span>
+                <th (click)="('startTime')" class="sortable">
+                  Start
+                  <!-- <span class="material-icons sort-indicator">{{ ('startTime') }}</span> -->
                 </th>
-                <th (click)="onSort('patientName')" class="sortable">
-                  Patient
-                  <span class="material-icons sort-indicator">{{ getSortIcon('patientName') }}</span>
+                <th (click)="('endTime')" class="sortable">
+                  End
+                  <!-- <span class="material-icons sort-indicator">{{ ('endTime') }}</span> -->
+                </th>
+                <th (click)="('patientName')" class="sortable">
+                  Patient Name
+                  <!-- <span class="material-icons sort-indicator">{{ ('patientName') }}</span> -->
                 </th>
                 <th (click)="onSort('reason')" class="sortable">
                   Reason
-                  <span class="material-icons sort-indicator">{{ getSortIcon('reason') }}</span>
+                  <span class="material-icons sort-indicator">{{ ('reason') }}</span>
                 </th>
                 <th (click)="onSort('status')" class="sortable">
                   Status
-                  <span class="material-icons sort-indicator">{{ getSortIcon('status') }}</span>
+                  <span class="material-icons sort-indicator">{{ ('status') }}</span>
                 </th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let appointment of currentPageAppointments; trackBy: trackByAppointmentId">
-                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.startTime }}</td>
+                <td>{{ appointment.endTime }}</td>
                 <td>
                   <div class="patient-info">
                     <div class="patient-avatar">{{ getPatientInitial(appointment.patientName) }}</div>

@@ -1,0 +1,73 @@
+/* Container centers the panel */
+.notification {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  /* background-color: #f0f2f5; */
+}
+
+/* Panel styling */
+.notification-panel {
+  width: 100%;
+  max-width: 700px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.notification-panel h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Error message */
+.error {
+  color: #d32f2f;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+/* List styling */
+.notification-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual notification card */
+.notification-item {
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.notification-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Message styling */
+.message {
+  flex: 1;
+  font-size: 1rem;
+  color: #444;
+  text-align: left;
+  padding-right: 1rem;
+}
+
+/* Timestamp styling */
+.timeStamp {
+  font-size: 0.85rem;
+  color: #888;
+  white-space: nowrap;
+}

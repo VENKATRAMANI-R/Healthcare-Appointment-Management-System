@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = 'http://localhost:8082/doctor';
-  private baseUrl1 = 'http://localhost:8082/patient';
+  private baseUrl = 'http://localhost:8080/user/doctor';
+  private baseUrl1 = 'http://localhost:808/user/patient';
 
  
   constructor(private http: HttpClient) {
@@ -16,14 +16,14 @@ export class ProfileService {
   }
  
   // Add or update doctor profile
-saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
+saveProfile(doctorId: number, doctorData: any): Observable<any> {
   const token = localStorage.getItem('token') || '';
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
   console.log("Sending doctor profile data:");
   console.log(doctorData);
-  console.log(`${this.baseUrl}/profile/${doctorEmail}`);
-  return this.http.post(`${this.baseUrl}/profile/${doctorEmail}`, doctorData, { headers });
+  console.log(`${this.baseUrl}/profile/${doctorId}`);
+  return this.http.post(`${this.baseUrl}/profile/${doctorId}`, doctorData, { headers });
 }
  
   // Get doctor profile
@@ -32,20 +32,20 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
  
     // Optional: backend could get email from token, but if not, you can send it
-    const email = localStorage.getItem('doctorEmail') || '';
-    console.log("Fetching patient profile for email:", email);  
-    return this.http.get(`${this.baseUrl}/get/${email}`, { headers });
+    const id = localStorage.getItem('doctorId') || '';
+    console.log("Fetching patient profile for email:", id);  
+    return this.http.get(`${this.baseUrl}/get/${id}`, { headers });
   }
 
   //Save patient profile
-  saveProfilePatient(patientEmail: string, patientData: any): Observable<any> {
+  saveProfilePatient(patientId: number, patientData: any): Observable<any> {
   const Patienttoken = localStorage.getItem('Patienttoken')// || '';
   const headers = new HttpHeaders().set('Authorization', `Bearer ${Patienttoken}`);
 
   console.log("Sending Patient profile data:");
   console.log(patientData);
-  console.log(`${this.baseUrl}/profile/${patientEmail}`);
-  return this.http.post(`${this.baseUrl1}/profile/${patientEmail}`, patientData, { headers });
+  console.log(`${this.baseUrl}/profile/${patientId}`);
+  return this.http.post(`${this.baseUrl1}/profile/${patientId}`, patientData, { headers });
 }
  
   // Get patient profile
@@ -53,9 +53,9 @@ saveProfile(doctorEmail: string, doctorData: any): Observable<any> {
     const Patienttoken = localStorage.getItem('Patienttoken') ;//|| '';
     const headers = new HttpHeaders().set('Authorization',  `Bearer ${Patienttoken}`);
     
-    const email = localStorage.getItem('patientEmail') //|| '';
-    console.log("Fetching patient profile for email:", email);  
-    return this.http.get(`${this.baseUrl1}/get/${email}`, { headers });
+    const id = localStorage.getItem('patientId') //|| '';
+    console.log("Fetching patient profile for email:", id);  
+    return this.http.get(`${this.baseUrl1}/get/${id}`, { headers });
   }
    isBrowser(): boolean {
     return typeof window !== 'undefined';
