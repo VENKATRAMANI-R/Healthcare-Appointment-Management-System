@@ -76,9 +76,11 @@ removeAvailability(slotId: number): Observable<string> {
   }
 
   updateAppointmentStatus(appointmentId: number, status: 'completed' | 'Cancel By Patient' | 'Cancel By Doctor'|'booked'): Observable<Appointment> {
+     const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<Appointment>(
       `${this.apiUrl}/delete/appointment/${appointmentId}`,
-      {}
+      { headers }
     );
   }
 }
