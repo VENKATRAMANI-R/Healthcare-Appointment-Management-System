@@ -110,15 +110,22 @@ export class DoctorAvailablityManagement implements OnInit {
   }
 
   // ✅ Only Cancel option remains
-  updateAppointmentStatus(id: number, status: 'booked' | 'Cancel By Patient' | 'Cancel By Doctor'): void {
-    console.log("Updating appointment ID:", id, "to status:", status);
-    this.doctorService.updateAppointmentStatus(id, status).subscribe(updated => {
-      const idx = this.appointments.findIndex(a => a.id === id);
-      if (idx > -1) this.appointments[idx] = updated;
-      this.loadAppointments();
-      this.cdr.markForCheck();
-    });
+updateAppointmentStatus(id: number, status: 'booked' | 'Cancel By Patient' | 'Cancel By Doctor'): void {
+  // Show confirmation only for cancellation actions
+  if (status === 'Cancel By Patient' || status === 'Cancel By Doctor') {
+    const confirmed = window.confirm(`Are you sure you want to cancel this appointment (${status})?`);
+    if (!confirmed) return; // Exit if user cancels
   }
+
+  console.log("Updating appointment ID:", id, "to status:", status);
+  this.doctorService.updateAppointmentStatus(id, status).subscribe(updated => {
+    const idx = this.appointments.findIndex(a => a.id === id);
+    if (idx > -1) this.appointments[idx] = updated;
+    this.loadAppointments();
+    this.cdr.markForCheck();
+  });
+}
+
 
   getPendingAppointmentsCount(): number {
     return this.appointments.filter(apt => apt.status === 'booked').length;
