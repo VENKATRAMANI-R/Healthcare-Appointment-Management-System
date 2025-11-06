@@ -19,6 +19,16 @@ export class Logindoctor {
       password: new FormControl('', Validators.required)
     });
   }
+  
+  private parseJwt(token: string): any {
+    try {
+      const payload = token.split('.')[1];
+      const decoded = atob(payload);
+      return JSON.parse(decoded);
+    } catch {
+      return null;
+    }
+  }
 
   onLogin() {
     // const username = this.userForm.get('doctorEmail')?.value;
@@ -37,10 +47,17 @@ export class Logindoctor {
 
     this.loginService.login(email, password).subscribe({
       next: (response: any) => {
-        console.log('Login successful****', response);
-        localStorage.setItem('token', response.token); // Store the token
+        const claims = this.parseJwt(response.token);
+        const userId = claims?.UserId;
+        const role = claims?.role;
+        console.log('claims: ',claims);
+        console.log('role',claims?.role);
+        console.log('userId',claims?.UserId);
 
-        localStorage.setItem('userId', response.userId.toString());
+        if(role=="ROLE_DOCTOR"){
+          console.log('Login successful****', response);
+        localStorage.setItem('token', response.token); // Store the token
+        localStorage.setItem('userId', userId);
         // localStorage.setItem('doctorEmail', response.doctorEmail);
         localStorage.setItem('doctorName', response.name);
         localStorage.setItem('doctorId',response.id);
@@ -48,7 +65,12 @@ export class Logindoctor {
         // this.doctorEmail = response.doctorEmail; // Store the email
         // this.doctorName = response.doctorPassword; // Store the name
         alert('Login successful!');
-        this.router.navigate(['/doctorLandingPage']); // Navigate to landingPage
+        this.router.navigate(['/doctorLandingPage']);
+        }
+        else{
+          alert('Invalid Credentials');
+        }
+         // Navigate to landingPage
       },
       error: (error: any) => {
         console.error('There was an error during login!', error);
