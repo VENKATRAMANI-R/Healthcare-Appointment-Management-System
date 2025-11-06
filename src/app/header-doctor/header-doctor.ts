@@ -45,6 +45,7 @@ export class HeaderDoctor {
   
   logout()
   {
+    localStorage.clear();
     this.router.navigate(['/login-doctor']);
   }
   goToUserProfile()

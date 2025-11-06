@@ -1,138 +1,84 @@
-<header class="professional-header">
+<header class="header">
   <div class="header-content">
-    <div class="header-text">
-      <h1>Find Your Healthcare Specialist</h1>
-      <p>Connect with experienced medical professionals for your healthcare needs</p>
-    </div>
-    <div class="search-container">
-      <div class="search-box">
-        <input
-          type="text"
-          placeholder="Search by doctor name, specialization, or qualification..."
-          (input)="onSearch($event)"
-          [value]="searchQuery"
-          class="search-input"
-        />
-        <button (click)="performSearch()" class="search-btn">
-          <span class="search-icon">🔍</span>
-          Search
-        </button>
-      </div>
+    <h1>Find Your Doctor</h1>
+    <p>Search and filter experienced medical professionals</p>
+
+    <div class="search-section">
+      <input
+        type="text"
+        placeholder="Search by name, specialization, or qualification..."
+        (input)="onSearch($event)"
+        [value]="searchQuery"
+        class="search-input"
+      />
+      <button (click)="performSearch()" class="btn search-btn">Search</button>
     </div>
   </div>
 </header>
 
-<div class="container">
-  <aside class="filters-sidebar">
-    <div class="filters-header">
-      <h2>Filter by Specialty</h2>
-      <button *ngIf="activeFilters.size > 0 || searchQuery" 
-              (click)="clearFilters()" 
-              class="clear-filters-btn">
-        Clear All
-      </button>
+<div class="main-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="filter-header">
+      <h3>Filter by Specialization</h3>
+      <button *ngIf="activeFilters.size > 0 || searchQuery"
+              (click)="clearFilters()" class="btn clear-btn">Clear</button>
     </div>
 
-    <div class="filter-group">
-      <ul class="specialization-options">
-        <li *ngFor="let specialization of specializations">
-          <label class="filter-option">
-            <input 
-              type="checkbox" 
-              [checked]="activeFilters.has(specialization)"
-              (change)="toggleFilter(specialization)" 
-            />
-            <span class="checkmark"></span>
-            {{ specialization }}
-          </label>
-        </li>
-      </ul>
-    </div>
+    <ul class="filter-list">
+      <li *ngFor="let specialization of specializations">
+        <label>
+          <input type="checkbox"
+                 [checked]="activeFilters.has(specialization)"
+                 (change)="toggleFilter(specialization)" />
+          {{ specialization }}
+        </label>
+      </li>
+    </ul>
 
-    <div class="active-filters" *ngIf="activeFilters.size > 0">
-      <h3>Active Filters:</h3>
-      <div class="filter-tags">
-        <span *ngFor="let filter of activeFilters" class="filter-tag">
-          {{ filter }}
-        </span>
+    <div *ngIf="activeFilters.size > 0" class="active-filters">
+      <h4>Active Filters</h4>
+      <div class="tags">
+        <span *ngFor="let filter of activeFilters" class="tag">{{ filter }}</span>
       </div>
     </div>
   </aside>
 
-  <main class="doctors-main">
-    <!-- Loading State -->
-    <div *ngIf="isLoading" class="loading-state">
-      <div class="loading-spinner"></div>
-      <p>Loading healthcare professionals...</p>
+  <!-- Doctors List -->
+  <main class="content">
+    <div *ngIf="isLoading" class="state-box">
+      <div class="spinner"></div>
+      <p>Loading doctors...</p>
     </div>
 
-    <!-- Error State -->
-    <div *ngIf="errorMessage && !isLoading" class="error-state">
-      <div class="error-icon">⚠️</div>
-      <h3>Unable to Load Doctors</h3>
+    <div *ngIf="errorMessage && !isLoading" class="state-box error">
+      <h3>⚠️ Failed to load doctors</h3>
       <p>{{ errorMessage }}</p>
-      <button (click)="loadDoctors()" class="retry-btn">Try Again</button>
+      <button (click)="loadDoctors()" class="btn retry-btn">Retry</button>
     </div>
 
-    <!-- No Results State -->
-    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length === 0 && hasSearched" 
-         class="no-results-state">
-      <div class="no-results-icon">👨‍⚕️</div>
-      <h3>No Doctors Found</h3>
-      <p>We couldn't find any doctors matching your search criteria.</p>
-      <button (click)="clearFilters()" class="clear-search-btn">Clear Search & Filters</button>
+    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length === 0 && hasSearched" class="state-box">
+      <h3>No Results</h3>
+      <p>No doctors found for your search.</p>
+      <button (click)="clearFilters()" class="btn retry-btn">Clear Search</button>
     </div>
 
-    <!-- Empty State (initial) -->
-    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length === 0 && !hasSearched" 
-         class="empty-state">
-      <div class="empty-icon">🏥</div>
-      <h3>No Doctors Available</h3>
-      <p>Currently, there are no doctors available in our system.</p>
-    </div>
+    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length > 0">
+      <p class="results-info">Showing {{ filteredDoctors.length }} of {{ doctors.length }} doctors</p>
 
-    <!-- Doctors Grid -->
-    <div *ngIf="!isLoading && !errorMessage && filteredDoctors.length > 0" class="doctors-grid">
-      <div class="results-info">
-        <p>Showing {{ filteredDoctors.length }} of {{ doctors.length }} healthcare professionals</p>
-      </div>
-      
-      <div class="doctors-list">
-        <article *ngFor="let doctor of filteredDoctors" class="doctor-card professional-card">
-          <div class="doctor-image-container">
-            <img 
-              [src]="doctor.image || 'assets\doctor-default.png'" 
-              [alt]="'Photo of ' + doctor.name"
-              class="doctor-photo"
-              (error)="doctor.image = 'assets\doctor-default.png'"
-            />
-            <div class="experience-badge">
-              {{ getYearsOfExperience(doctor.experience) }} exp
-            </div>
-          </div>
+      <div class="doctors-grid">
+        <article *ngFor="let doctor of filteredDoctors" class="doctor-card">
+          <img src="assets/doctor-default.png" alt="Doctor Photo" class="doctor-img" />
+
+          <div class="doctor-details">
+            <h2>{{ doctor.name }}</h2>
+            <p class="specialization">{{ doctor.specialization }}</p>
+            <p class="qualification">MBBS {{ doctor.qualification }}</p>
           
-          <div class="doctor-info">
-            
-            <h2 class="doctor-name">{{ doctor.name }}</h2>
-            <p class="doctor-specialization">{{ doctor.specialization }}</p>
-            <p class="doctor-qualification">{{ doctor.qualification }}</p>
-            
-            <div class="doctor-meta">
-              <span class="meta-item">
-                <strong>ID:</strong> {{ doctor.id }}
-              </span>
-              <span class="meta-item">
-                <strong>Experience:</strong> {{ getYearsOfExperience(doctor.experience) }}
-              </span>
-            </div>
+
+            <p><strong>Experience:</strong> {{ getYearsOfExperience(doctor.experience) }}</p>
+            <button (click)="selectDoctor(doctor)" class="btn book-btn">Book Appointment</button>
           </div>
-          
-          <button 
-            (click)="selectDoctor(doctor)" 
-            class="book-appointment-btn"
-          >
-            Book Consultation
-          </button>
         </article>
       </div>
     </div>

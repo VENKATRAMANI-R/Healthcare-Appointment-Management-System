@@ -1,12 +1,9 @@
-import { Component, OnInit ,OnDestroy, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { BookAppointment } from '../Appointment-Booking/book-appointment/book-appointment';
-// import { MatDialog } from '@angular/material/dialog';
 import { DoctorService } from '../doctor-service';
 import { Doctor } from './doctor-model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-find-doctors',
@@ -15,16 +12,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './find-doctors.html',
   styleUrls: ['./find-doctors.css']
 })
-export class FindDoctors implements OnInit,OnDestroy {
-  searchQuery: string = '';
-  activeFilters: Set<string> = new Set();
+export class FindDoctors implements OnInit, OnDestroy {
+  searchQuery = '';
+  activeFilters = new Set<string>();
   doctors: Doctor[] = [];
   filteredDoctors: Doctor[] = [];
-  isLoading: boolean = false;
-  errorMessage: string = '';
-  hasSearched: boolean = false;
-
-  // Available specializations for filtering
+  isLoading = false;
+  errorMessage = '';
+  hasSearched = false;
   specializations: string[] = [
     'Cardiology',
     'Neurology',
@@ -45,7 +40,6 @@ export class FindDoctors implements OnInit,OnDestroy {
 
   ngOnInit() {
     this.loadDoctors();
-    this.cdr.detectChanges();
   }
 
   ngOnDestroy() {
@@ -59,21 +53,20 @@ export class FindDoctors implements OnInit,OnDestroy {
 
     this.doctorsSubscription = this.doctorService.getDoctors().subscribe({
       next: (doctors) => {
-        this.doctors = doctors;
-        this.cdr.markForCheck();
+        // Force all to show default image
+        this.doctors = doctors.map(d => ({
+          ...d,
+          image: this.doctorService.getDefaultImage()
+        }));
         this.filteredDoctors = [...this.doctors];
-        this.cdr.markForCheck();
-        console.log('Fetched doctors:', doctors);
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
-      error: (error) => {
+      error: () => {
         this.errorMessage = 'Unable to load doctors. Please try again later.';
         this.isLoading = false;
-        this.doctors = [];
-        this.filteredDoctors = [];
       }
     });
-    this.cdr.detectChanges();
   }
 
   selectDoctor(doctor: Doctor) {
@@ -115,23 +108,22 @@ export class FindDoctors implements OnInit,OnDestroy {
 
   applyFilters() {
     const query = this.searchQuery.toLowerCase().trim();
-
-    this.filteredDoctors = this.doctors.filter(doctor => {
-      // Text search filter
-      const matchesQuery = query === '' || 
+    this.filteredDoctors = this.doctors.filter((doctor) => {
+      const matchesQuery =
+        query === '' ||
         doctor.name.toLowerCase().includes(query) ||
         doctor.specialization.toLowerCase().includes(query) ||
         doctor.qualification.toLowerCase().includes(query);
 
-      // Specialization filter
-      const matchesFilters = this.activeFilters.size === 0 || 
+      const matchesFilters =
+        this.activeFilters.size === 0 ||
         this.activeFilters.has(doctor.specialization);
 
       return matchesQuery && matchesFilters;
     });
   }
 
-  getYearsOfExperience(experience: number): string {
-    return experience === 1 ? '1 year' : `${experience} years`;
+  getYearsOfExperience(exp: number): string {
+    return exp === 1 ? '1 year' : `${exp} years`;
   }
 }

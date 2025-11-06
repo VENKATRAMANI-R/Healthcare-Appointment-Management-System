@@ -250,6 +250,7 @@ openConsultationForm(appointment: Appointment): void {
   }
   logout()
   {
+    localStorage.clear();
     this.router.navigate(['/login-doctor']);
   }
 }

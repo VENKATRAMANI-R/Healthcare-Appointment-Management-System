@@ -46,6 +46,7 @@ export class AppointmentService {
   private availablityUrl = 'http://localhost:8080/api/doctors' // Spring Boot base URL
   constructor(private http: HttpClient) {}
 
+  
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('Patienttoken');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);

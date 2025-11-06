@@ -31,55 +31,67 @@ export interface Doctor {
 })
 export class DoctorAvailablityService {
   private apiUrl = 'http://localhost:8080/api/doctors'; // Spring Boot base URL
-  currentSlot=0;
+  currentSlot = 0;
+
   constructor(private http: HttpClient) {}
-  
+
+  /** ✅ Helper method to get headers once */
+  private getAuthHeaders(): { headers: HttpHeaders } {
+    const token = localStorage.getItem('token') || '';
+    return {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    };
+  }
 
   // Doctor Info
   getDoctor(id: number): Observable<Doctor> {
-    // console.log("I tried")
-    const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    console.log("I tried"+id)
-    console.log(this.http.get<Doctor>(`${this.apiUrl}/${id}`,{ headers }));
-    return this.http.get<Doctor>(`${this.apiUrl}/${id}`,{ headers });
+    console.log("Fetching doctor info for ID:", id);
+    return this.http.get<Doctor>(`${this.apiUrl}/${id}`, this.getAuthHeaders());
   }
 
   // Availability
   getAvailabilitySlots(doctorId: number): Observable<AvailabilitySlot[]> {
     console.log("Getting Availability for Doctor ID:", doctorId);
-    const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<AvailabilitySlot[]>(`${this.apiUrl}/${doctorId}/availability`,{ headers });
+    return this.http.get<AvailabilitySlot[]>(
+      `${this.apiUrl}/${doctorId}/availability`,
+      this.getAuthHeaders()
+    );
   }
 
   addAvailability(newSlot: AvailabilitySlot): Observable<AvailabilitySlot> {
-    const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    console.log(newSlot);
-    console.log(`${this.apiUrl}/availability`);
-    return this.http.post<AvailabilitySlot>(`${this.apiUrl}/availability`, newSlot,{ headers });
+    console.log("Adding new slot:", newSlot);
+    return this.http.post<AvailabilitySlot>(
+      `${this.apiUrl}/availability`,
+      newSlot,
+      this.getAuthHeaders()
+    );
   }
 
-removeAvailability(slotId: number): Observable<string> {
-  const token = localStorage.getItem('token') || '';
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
- 
-  return this.http.delete<string>(`${this.apiUrl}/availability/${slotId}`,{ headers });
-}
+  removeAvailability(slotId: number): Observable<string> {
+    console.log("Removing slot ID:", slotId);
+    return this.http.delete<string>(
+      `${this.apiUrl}/availability/${slotId}`,
+      this.getAuthHeaders()
+    );
+  }
 
   // Appointments
   getAppointments(doctorId: number): Observable<Appointment[]> {
-     const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Appointment[]>(`${this.apiUrl}/${doctorId}/appointments`,{headers});
+    console.log("Fetching appointments for Doctor ID:", doctorId);
+    return this.http.get<Appointment[]>(
+      `${this.apiUrl}/${doctorId}/appointments`,
+      this.getAuthHeaders()
+    );
   }
 
-  updateAppointmentStatus(appointmentId: number, status: 'completed' | 'Cancel By Patient' | 'Cancel By Doctor'|'booked'): Observable<Appointment> {
+  updateAppointmentStatus(
+    appointmentId: number,
+    status: 'completed' | 'Cancel By Patient' | 'Cancel By Doctor' | 'booked'
+  ): Observable<Appointment> {
+    console.log("Updating appointment ID:", appointmentId, "with status:", status);
     return this.http.delete<Appointment>(
       `${this.apiUrl}/delete/appointment/${appointmentId}`,
-      {}
+      this.getAuthHeaders()
     );
   }
 }
- 
