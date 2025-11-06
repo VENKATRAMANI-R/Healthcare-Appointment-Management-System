@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { BookAppointment } from './Appointment-Booking/book-appointment/book-appointment';
 import { App } from './app';
 import { FindDoctors } from './find-doctors/find-doctors';
@@ -31,14 +31,21 @@ import { MyAppointments } from './Appointment-Booking/my-appointments/my-appoint
 import { DoctorLandingPage } from './doctor-landing-page/doctor-landing-page';
 import { NotificationPanal } from './notification-panal/notification-panal';
 import { NotificationPanalDoctor } from './notification-panal-doctor/notification-panal-doctor';
+import { authGuard } from './auth-guard';
+import { NgModule } from '@angular/core';
 export const routes: Routes = [
     {
-        path:'',
+         path:'',
+        component:LoginLanding
+    },
+    {
+        path:'loginLanding',
         component:LoginLanding
     },
     {
         path:'landingpage',
-        component:LandingPage
+        component:LandingPage,
+        canActivate:[authGuard]
     },
     {
         path:'bookAppointment',
@@ -55,15 +62,16 @@ export const routes: Routes = [
     {
         path: 'about-us', 
         component: AboutUs 
-
     },
     {
         path: 'FindDoctors',
         component: FindDoctors
+        
     },
     {
         path: 'departments',
         component: Departments
+        
     },
     {
         path: 'contact-us',
@@ -84,25 +92,30 @@ export const routes: Routes = [
     },
     {
         path:'my-consultations',
-        component:MyConsultations
+        component:MyConsultations,
+        canActivate:[authGuard]
     },
     {
         path:'consultation-list',
-        component:ConsultationList
+        component:ConsultationList,
+        canActivate:[authGuard]
     },
     {
-        path:'consultation-form/:appointmentId',
-        component:ConsultationForm
+        path:'consultation-form',
+        component:ConsultationForm,
+        canActivate:[authGuard]
 
     },
     {
         path:'doctor-consultations',
-        component:DoctorConsultations
+        component:DoctorConsultations,
+        canActivate:[authGuard]
 
     },
     {
         path:'doctor-consultation-list',
-        component:DoctorConsultationList
+        component:DoctorConsultationList,
+        canActivate:[authGuard]
     },
     {
         path: 'registration-page-doctor',
@@ -110,11 +123,13 @@ export const routes: Routes = [
     },
     {
         path:'doctor-availablity-management',
-        component:DoctorAvailablityManagement
+        component:DoctorAvailablityManagement,
+        canActivate:[authGuard]
     },
     {
         path:"my-appointments",
-        component:MyAppointments
+        component:MyAppointments,
+        canActivate:[authGuard]
     },
     {
         path:'patientProfiles',
@@ -135,7 +150,13 @@ export const routes: Routes = [
     },
     {
         path:'doctorLandingPage',
-        component:DoctorLandingPage
+        component:DoctorLandingPage,
+        canActivate:[authGuard]
     }
 
 ];
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

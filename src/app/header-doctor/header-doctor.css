@@ -1,0 +1,172 @@
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 50px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+  z-index: 1000;
+  min-width: 160px;
+}
+.dropdown-link {
+  display: block;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+  border-radius: 5px;
+}
+.dropdown-link:hover {
+  cursor: pointer;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 5px;
+}
+.logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+.top-bar {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.brand-logo {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.brand-logo .material-icons {
+    font-size: 20px;
+}
+.brand-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+}
+.context-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #718096;
+    font-size: 14px;
+}
+.context-info .material-icons {
+    font-size: 18px;
+}
+.profile-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.profile-btn:hover {
+    background: #f7fafc;
+}
+.profile-btn .material-icons {
+    font-size: 16px;
+    /* color: #718096; */
+}
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 12px;
+}
+.profile-avatar .material-icons {
+    
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+.notification{
+    font-size: 24px;
+    color: #718096;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.actions{
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+.btn {
+padding: 8px 16px;
+border: none;
+border-radius: 6px;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+text-decoration: none;
+}
+.btn .material-icons {
+font-size: 18px;
+}
+.btn-primary {
+background: #4299e1;
+color: white;
+}
+.btn-primary:hover:not(:disabled) {
+background: #3182ce;
+}
+.btn-secondary {
+background: #f56565;
+color: white;
+}
+.btn-secondary:hover:not(:disabled) {
+background: #e53e3e;
+}
+.btn-outline {
+background: white;
+border: 1px solid #e2e8f0;
+color: #4a5568;
+}
+.btn-outline:hover:not(:disabled) {
+background: #f7fafc;
+border-color: #cbd5e0;
+}
+.btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}

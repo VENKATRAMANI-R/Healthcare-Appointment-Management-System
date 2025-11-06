@@ -28,10 +28,10 @@ export interface Appointment {
   age: number; 
   gender: 'Male' | 'Female' | 'Other'; 
   reason: string; 
-  status: 'Confirmed' | 'Pending' | 'Completed' | 'Cancelled'
+  status: 'Confirmed' | 'Pending' | 'Completed' | 'cancel by doctor' | 'cancel by patient';
 } 
-type ViewMode = 'list' | 'compact'; 
-type SortDirection = 'asc' | 'desc'; 
+// type ViewMode = 'list' | 'compact'; 
+// type SortDirection = 'asc' | 'desc'; 
 @Component({
   selector: 'app-doctor-landing-page',
   imports: [CommonModule,ReactiveFormsModule],
@@ -47,10 +47,9 @@ export class DoctorLandingPage implements OnInit, OnDestroy{
 
   appointments: Appointment[] = [];
   filteredAppointments: Appointment[] = [];
-  nextAppointment: Appointment | null = null;
   showAlert = false;
   private subs: Subscription[] = [];
-
+  
   // constructor(private doctorService: DoctorService,private router: Router
   //   // private appointmentService: AppointmentService
   // ) 
@@ -69,17 +68,13 @@ constructor(private doctorService: DoctorService,
   currentDate = new Date(); 
   AccountDropdownState = false;
   searchQuery = ''; 
-  currentView: ViewMode = 'list'; 
+  // currentView: ViewMode = 'list'; 
   isLoading = false; 
    
-  // Pagination 
-  currentPage = 1; 
-  itemsPerPage = 8; 
-  totalPages = 1; 
    
   // Sorting 
   // sortColumn: keyof Appointment = 'time'; 
-  sortDirection: SortDirection = 'asc'; 
+  // sortDirection: SortDirection = 'asc'; 
  
   // Toast messages 
   toasts: Array<{id: string, message: string, type: string}> = []; 
@@ -88,55 +83,15 @@ constructor(private doctorService: DoctorService,
  
   ngOnInit(): void { 
     this.doctorId=Number(localStorage.getItem('doctorId')); 
-    this.filteredAppointments =  
- 
-[...this.appointments]; 
-    this.calculateTotalPages(); 
-    // this.updateNextAppointment(); 
+    this.loadAppointments();
+    this.filteredAppointments = [...this.appointments]; 
     this.updateDateTime(); 
     // Update time every minute
     this.dateUpdateInterval = setInterval(() => this.updateDateTime(), 60000); 
     // this.loadDoctor()
-    this.loadAppointments(); 
-    
+     this.loadAppointments();
     this.doctorName=localStorage.getItem('doctorName')||'';
-    
   } 
-
-// loadDoctor(): void {
-//   const sub = this.scheduleService.getDoctorProfile().subscribe({
-//     next: (doc: Doctor | null) => {
-//       this.doctor = doc;
-//     },
-//     error: (err: any) => {
-//       console.error('Failed to load doctor profile', err);
-//     }
-//   });
-//   this.subs.push(sub);
-// }
-// loadAppointments(): void {
-// // const sub = this.appointmentService.getTodayAppointments().subscribe({
-// // next: (appts: Appointment[]) => {
-// // this.appointments = appts;
-// // this.filteredAppointments = [...appts];
-// // this.updateNextAppointment();
-// // },
-// // error: (err: any) => {
-// // console.error('Failed to load appointments', err);
-// // }
-// // });
-// // this.subs.push(sub);
-// }
-// // updateNextAppointment(): void {
-// // const now = new Date();
-// // this.nextAppointment = this.appointments.find(apt => {
-// // // Assuming time format HH:mm
-// // const [hours, minutes] = apt.time.split(':').map(Number);
-// // const aptTime = new Date();
-// // aptTime.setHours(hours, minutes, 0, 0);
-// // return aptTime >= now && apt.status !== 'Completed';
-// // }) || this.appointments[0] || null;
-// // }
 
 
 
@@ -146,8 +101,6 @@ loadAppointments(): void {
     next: (appts) => {
       this.appointments = appts;
       this.filteredAppointments = [...appts];
-      // this.updateNextAppointment();
-      this.calculateTotalPages();
     },
     error: (err) => console.error('Failed to load appointments', err)
   });
@@ -155,22 +108,12 @@ loadAppointments(): void {
 
 
 
-  ngOnDestroy(): void { 
+ngOnDestroy(): void { 
     if (this.dateUpdateInterval) { 
       clearInterval(this.dateUpdateInterval); 
     } 
     // this.subs.forEach(sub => sub.unsubscribe());
-  } 
- 
-  // Getters 
-  // get doctorInitials(): string { 
-  //   const firstInitial = this.doctor?.firstName.charAt(this.doctor.firstName.indexOf(' ') + 1) ||  
- 
-  //   this.doctor?.firstName.charAt(0); 
-  //   const lastInitial = this.doctor?.lastName.charAt(0); 
-  //   const flag = firstInitial!=null && lastInitial!=null
-  //   return flag?firstInitial + lastInitial : ''; 
-  // } 
+} 
 
   get doctorFullName(): string { 
     return `${this.doctor?.firstName} ${this.doctor?.lastName}`; 
@@ -184,11 +127,6 @@ loadAppointments(): void {
     return this.isAvailable ? 'Available' : 'Unavailable'; 
   } 
  
-  get currentPageAppointments(): Appointment[] { 
-    const start = (this.currentPage - 1) * this.itemsPerPage; 
-    const end = start + this.itemsPerPage; 
-    return this.filteredAppointments.slice(start, end); 
-  } 
   
   get formattedDate(): string { 
     const options: Intl.DateTimeFormatOptions = {  
@@ -199,26 +137,19 @@ loadAppointments(): void {
     }; 
     return this.currentDate.toLocaleDateString('en-US', options); 
   }
+get currentPageAppointments(): Appointment[] {
+  return this.filteredAppointments;
+}
   // Methods 
   private updateDateTime(): void { 
     this.currentDate = new Date(); 
   } 
+
+//   private calculateTotalPages(): void { 
+//     this.totalPages =  
  
-  // private updateNextAppointment(): void { 
-  //   const now = new Date(); 
-  //   this.nextAppointment = this.appointments.find(apt => { 
-  //     const [hours, minutes] = apt.time.split(':').map(Number); 
-  //     const aptTime = new Date(); 
-  //     aptTime.setHours(hours, minutes, 0, 0); 
-  //     return aptTime >= now && apt.status !== 'Completed'; 
-  //   }) || this.appointments[0] || null; 
-  // } 
- 
-  private calculateTotalPages(): void { 
-    this.totalPages =  
- 
-Math.ceil(this.filteredAppointments.length / this.itemsPerPage); 
-  } 
+// Math.ceil(this.filteredAppointments.length / this.itemsPerPage); 
+//   } 
  
   setAvailability(available: boolean): void { 
     this.isAvailable = available; 
@@ -238,75 +169,15 @@ Math.ceil(this.filteredAppointments.length / this.itemsPerPage);
 [...this.appointments]; 
     } else { 
       this.filteredAppointments = this.appointments.filter(apt => 
-        apt.patientName.toLowerCase().includes(this.searchQuery) || 
-        apt.reason.toLowerCase().includes(this.searchQuery) || 
-        apt.status.toLowerCase().includes(this.searchQuery) 
+        apt.patientName.toLowerCase().includes(this.searchQuery) 
+        // || apt.reason.toLowerCase().includes(this.searchQuery) || 
+        // apt.status.toLowerCase().includes(this.searchQuery) 
       ); 
     } 
-     
-    this.currentPage = 1; 
-    this.calculateTotalPages(); 
-  } 
- 
-  onViewChange(view: ViewMode): void { 
- 
-    this.currentView = view; 
-  } 
- 
-  onSort(column: keyof Appointment): void { 
-    // if (this.sortColumn === column) { 
-    //   this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'; 
-    // } else { 
-    //   this.sortColumn = column; 
-    //   this.sortDirection = 'asc'; 
-    // } 
- 
-    this.filteredAppointments.sort((a, b) => { 
-      let valueA: any = a[column]; 
-      let valueB: any = b[column]; 
- 
-//       if (column === 'time') { 
-//         valueA = new Date(`1970-01-01 ${valueA}`); 
-//         valueB = new Date(`1970-01-01 $ 
- 
-// {valueB}`); 
-//       } else if (typeof valueA === 'string') { 
-//         valueA = valueA.toLowerCase(); 
-//         valueB = valueB.toLowerCase(); 
-//       } 
- 
-      const comparison = valueA < valueB ? -1 : valueA > valueB ? 1 : 0; 
-      return this.sortDirection === 'asc' ? comparison : -comparison; 
-    }); 
- } 
-
- 
-  // getSortIcon(column: keyof Appointment): string { 
-  //   if (this.sortColumn !== column) { 
-  //     return 'unfold_more'; 
-  //   } 
-  //   return this.sortDirection === 'asc' ? 'keyboard_arrow_up' : 'keyboard_arrow_down'; 
- 
-  // } 
- 
-  previousPage(): void { 
-    if (this.currentPage > 1) { 
-      this.currentPage--; 
-    } 
-  } 
- 
-  nextPage(): void { 
-    if (this.currentPage < this.totalPages) { 
-      this.currentPage++; 
-    } 
-  } 
- 
-  openChart(appointment: Appointment): void { 
-    this.showToast(`Opening chart for ${appointment.patientName}`, 'info'); 
   } 
 
   date = new Date();
-  appointment = { time: '2:00 PM' };
+  // appointment = { time: '2:00 PM' };
 
   showCustomAlert(): void {
     this.showAlert = true;
@@ -320,19 +191,12 @@ openConsultationForm(appointment: Appointment): void {
   this.router.navigate(['/consultation-form', appointment.id], {
     state: {
       appointment,
-      doctorName: localStorage.getItem('doctorName') || '',
       doctor: this.doctor,
       date: this.currentDate
     }
   });
 }
 
- 
-  // callPatient(): void { 
-  //   if (this.nextAppointment) { 
-  //     this.showToast(`Calling ${this.nextAppointment.patientName}...`, 'info'); 
-  //   } 
-  // } 
  
   openProfile(): void { 
     this.AccountDropdownState = !this.AccountDropdownState;
@@ -386,6 +250,7 @@ openConsultationForm(appointment: Appointment): void {
   }
   logout()
   {
+    localStorage.clear();
     this.router.navigate(['/login-doctor']);
   }
 }

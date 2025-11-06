@@ -159,6 +159,7 @@ patientDashboard = [
   }
   logout(){
     //configurations need to be done!
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
   AccountDropdown(){

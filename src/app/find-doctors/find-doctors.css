@@ -2,444 +2,221 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background-color: #f8fafc;
-  color: #334155;
-  line-height: 1.6;
+  background-color: #f9fafb;
+  color: #1e293b;
 }
 
-/* Professional Header */
-.professional-header {
-  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+/* Header */
+.header {
+  background: linear-gradient(120deg, #1e3a8a, #2563eb);
   color: white;
-  padding: 2rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.header-text h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
+.header h1 {
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #ffffff, #e0f2fe);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
-.header-text p {
-  font-size: 1.1rem;
+.header p {
   opacity: 0.9;
-  font-weight: 300;
 }
 
-.search-box {
+.search-section {
+  margin-top: 1.5rem;
   display: flex;
-  width: 100%;
-  max-width: 500px;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .search-input {
-  flex: 1;
-  padding: 1rem 1.5rem;
+  width: 50%;
+  max-width: 500px;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
   border: none;
   font-size: 1rem;
-  background: transparent;
-  outline: none;
 }
 
-.search-btn {
-  background: #059669;
+.btn {
+  background-color: #2563eb;
   color: white;
   border: none;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background 0.3s ease;
+  transition: background 0.3s;
 }
 
-.search-btn:hover {
-  background: #047857;
+.btn:hover {
+  background-color: #1d4ed8;
 }
 
 /* Main Container */
-.container {
+.main-container {
   display: flex;
   max-width: 1200px;
   margin: 2rem auto;
-  padding: 0 1rem;
   gap: 2rem;
+  padding: 0 1rem;
 }
 
-/* Filters Sidebar */
-.filters-sidebar {
-  width: 300px;
+/* Sidebar */
+.sidebar {
+  width: 260px;
   background: white;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  position: sticky;
-  align-self: flex-start;
-  top: 2rem;
-  border-left: 4px solid #1e40af;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: fit-content;
 }
 
-.filters-header {
+.filter-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e2e8f0;
 }
 
-.filters-header h2 {
-  color: #1e40af;
-  font-size: 1.3rem;
-  font-weight: 600;
+.filter-header h3 {
+  color: #1e3a8a;
 }
 
-.clear-filters-btn {
+.clear-btn {
   background: #ef4444;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.3s ease;
 }
 
-.clear-filters-btn:hover {
+.clear-btn:hover {
   background: #dc2626;
 }
 
-.specialization-options {
+.filter-list {
   list-style: none;
+  margin-top: 1rem;
 }
 
-.specialization-options li {
-  margin-bottom: 0.8rem;
-}
-
-.filter-option {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: background 0.3s ease;
-}
-
-.filter-option:hover {
-  background: #f1f5f9;
-}
-
-.filter-option input {
-  margin-right: 0.8rem;
-  width: 18px;
-  height: 18px;
-  accent-color: #1e40af;
+.filter-list li {
+  margin-bottom: 0.6rem;
 }
 
 .active-filters {
   margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
 }
 
-.active-filters h3 {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-  color: #475569;
-}
-
-.filter-tags {
+.tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
-.filter-tag {
-  background: #dbeafe;
-  color: #1e40af;
-  padding: 0.3rem 0.8rem;
+.tag {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 0.3rem 0.7rem;
   border-radius: 20px;
   font-size: 0.85rem;
-  font-weight: 500;
 }
 
-/* Main Content */
-.doctors-main {
+/* Content */
+.content {
   flex: 1;
 }
 
-/* Loading State */
-.loading-state {
-  text-align: center;
-  padding: 4rem 2rem;
+.state-box {
   background: white;
+  text-align: center;
+  padding: 3rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.loading-spinner {
-  width: 50px;
-  height: 50px;
+.spinner {
   border: 4px solid #e2e8f0;
-  border-top: 4px solid #1e40af;
+  border-top: 4px solid #2563eb;
   border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto 1rem;
   animation: spin 1s linear infinite;
-  margin: 0 auto 1.5rem;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Error State */
-.error-state, .no-results-state, .empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.error-icon, .no-results-icon, .empty-icon {
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
-}
-
-.error-state h3, .no-results-state h3, .empty-state h3 {
-  color: #1e293b;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.error-state p, .no-results-state p, .empty-state p {
-  color: #64748b;
-  margin-bottom: 2rem;
-}
-
-.retry-btn, .clear-search-btn {
-  background: #1e40af;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-
-.retry-btn:hover, .clear-search-btn:hover {
-  background: #1e3a8a;
-}
-
-/* Results Info */
 .results-info {
-  background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.results-info p {
-  color: #475569;
-  font-weight: 500;
-}
-
-/* Doctors Grid */
-.doctors-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Professional Doctor Card */
-.professional-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  border-top: 4px solid #059669;
-}
-
-.professional-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-
-.doctor-image-container {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-}
-
-.doctor-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.professional-card:hover .doctor-photo {
-  transform: scale(1.05);
-}
-
-.experience-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(5, 150, 105, 0.9);
-  color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  backdrop-filter: blur(10px);
-}
-
-.doctor-info {
-  padding: 1.5rem;
-  flex: 1;
-}
-
-.doctor-name {
-  font-size: 1.4rem;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.doctor-specialization {
-  color: #059669;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.doctor-qualification {
-  color: #64748b;
   margin-bottom: 1rem;
-  line-height: 1.5;
-}
-
-.doctor-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
-}
-
-.meta-item {
-  font-size: 0.9rem;
-  color: #475569;
-}
-
-.meta-item strong {
+  font-weight: 500;
   color: #334155;
 }
 
-.book-appointment-btn {
-  background: #1e40af;
-  color: white;
-  border: none;
-  padding: 1rem 1.5rem;
-  margin: 1rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
+/* Doctor Cards */
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.doctor-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-4px);
+}
+
+.doctor-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background-color: #f1f5f9;
+}
+
+.doctor-details {
+  padding: 1rem 1.2rem;
+}
+
+.doctor-details h2 {
+  font-size: 1.3rem;
+  color: #1e293b;
+}
+
+.specialization {
+  color: #059669;
   font-weight: 600;
-  font-size: 1rem;
-  transition: background 0.3s ease;
-  text-align: center;
 }
 
-.book-appointment-btn:hover {
-  background: #1e3a8a;
+.qualification {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .container {
+.book-btn {
+  background: #2563eb;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .main-container {
     flex-direction: column;
   }
-
-  .filters-sidebar {
+  .sidebar {
     width: 100%;
-    position: static;
-  }
-
-  .doctors-list {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .header-text h1 {
-    font-size: 2rem;
-  }
-
-  .search-box {
-    max-width: 100%;
-  }
-
-  .doctors-list {
-    grid-template-columns: 1fr;
-  }
-
-  .professional-card {
-    margin: 0 auto;
-    max-width: 400px;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-content {
-    padding: 0 1rem;
-  }
-
-  .header-text h1 {
-    font-size: 1.8rem;
-  }
-
-  .container {
-    padding: 0 0.5rem;
-  }
-
-  .doctor-meta {
-    flex-direction: column;
   }
 }

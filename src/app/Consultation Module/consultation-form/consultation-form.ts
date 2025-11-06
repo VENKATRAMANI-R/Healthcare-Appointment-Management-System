@@ -20,11 +20,11 @@ interface ConsultationNavigationState {
   templateUrl: './consultation-form.html',
   styleUrls: ['./consultation-form.css']
 })
+
 export class ConsultationForm implements OnInit {
   consultationForm!: FormGroup;
   doctorName: string = '';
   doctorId: number = 0;
-
 
   constructor(
     private consultationService: ConsultationService,
@@ -34,10 +34,13 @@ export class ConsultationForm implements OnInit {
 
   ngOnInit(): void {
     const nav = this.location.getState() as ConsultationNavigationState;
-    console.log('Received doctor:', nav.doctor);
+    const appointmentStatus = nav.appointment?.status.toLowerCase();
+    if (appointmentStatus === 'completed' || appointmentStatus === 'Cancel By Doctor' || appointmentStatus === 'Cancel By Patient') {
+         this.consultationForm.disable();
+}
+
     this.doctorName = localStorage.getItem('doctorName') || '';
     this.doctorId = localStorage.getItem('doctorId') ? +localStorage.getItem('doctorId')! : 0;
-    
 
     this.consultationForm = new FormGroup({
       appointmentId: new FormControl(nav.appointment?.id || '', Validators.required),
@@ -45,17 +48,14 @@ export class ConsultationForm implements OnInit {
       patientId: new FormControl(nav.appointment?.patId || '', Validators.required),
       patientName: new FormControl(nav.appointment?.patientName || '', Validators.required),
       doctorId: new FormControl(this.doctorId || '', Validators.required),
-      doctorName: new FormControl(
-        `${this.doctorName}` || '',
-        Validators.required
-      ),
+      doctorName: new FormControl(`${this.doctorName}` || '', Validators.required),
       notes: new FormControl(''),
       prescriptions: new FormArray([])
     });
   }
 
   formatDate(date: Date): string {
-    return new Date(date).toISOString().split('T')[0]; // yyyy-mm-dd
+    return new Date(date).toISOString().split('T')[0];
   }
 
   get prescriptions(): FormArray {
@@ -83,41 +83,22 @@ export class ConsultationForm implements OnInit {
       return;
     }
 
-    const formData = {
-      ...this.consultationForm.value
-    };
+    const formData = { ...this.consultationForm.value };
 
     this.consultationService.saveConsultation(formData).subscribe({
-      next: (res: any) => {
-        console.log('Consultation submitted:', res);
+      next: () => {
+        this.consultationService.updateAppointmentStatus(formData.appointmentId).subscribe({
+          next: () => {
+            alert('Consultation submitted successfully!');
+              this.router.navigate(['/doctorLandingPage']);
+          },
 
-        // Update appointment status to 'Complete
-        
-this.consultationService.updateAppointmentStatus(formData.appointmentId).subscribe({
-        next: () => {
-          console.log('Appointment marked as completed');
-
-          // Show success message and navigate button
-          alert('Consultation submitted successfully!');
-          this.router.navigate(['/doctorLandingPage']);
-        },
-        error: err => {
-          console.error('Failed to update appointment status', err);
-          alert('Consultation saved, but failed to update appointment status.');
-        }
-      });
-
-        alert('Consultation submitted successfully!');
-        this.consultationForm.reset();
-        this.prescriptions.clear();
+        });
       },
-      error: (err: any) => {
-        console.error('Error submitting consultation:', err);
+      error: () => {
         alert('Failed to submit consultation.');
       }
     });
   }
 }
-
-
 

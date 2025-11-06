@@ -1,70 +1,18 @@
-
 <div class="my-consultations-shell">
-  <div class="mc-header">
-    <h1 style="text-align: center;">Medical History</h1>
+  <h1 class="center-heading">Medical History</h1>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search by Doctor ID" [(ngModel)]="searchDoctorId" (input)="filterConsultations()">
+    <input type="text" placeholder="Search by Doctor Name" [(ngModel)]="searchDoctorName" (input)="filterConsultations()">
+    <input type="date" [(ngModel)]="searchDate" (change)="filterConsultations()">
   </div>
 
   <div *ngIf="isLoading">Loading consultations...</div>
   <div *ngIf="!isLoading && consultations.length === 0">No consultations found.</div>
 
   <app-consultation-list
-    *ngIf="!isLoading && consultations.length > 0"
-    [consultations]="consultations">
+    *ngIf="!isLoading && filteredConsultations.length > 0"
+    [consultations]="filteredConsultations">
   </app-consultation-list>
-
-
 </div>
-
-
-
-
-
-
-<!-- <div class="my-consultations-shell">
-  <div class="mc-header">
-    <h1 style="text-align: center;">Medical History</h1>
-
-  <app-consultation-list></app-consultation-list>
-</div> -->
-
-
-
-
-
-
-
-<!-- <div class="my-consultations-shell">
-  <h1 class="center-heading">Medical History</h1> --->
-
-<!-- Search Box -->
-<!-- <div class="search-bar">
-<input
-  type="search"
-  placeholder="Search by doctor name or date..."
-  (input)="onSearch($event)" />
-
-</div>
-
-<div class="patient-info">
-  <div class="info-row">
-    <span><strong>Patient ID:</strong> {{ patientId }}</span>
-    <span><strong>Date of Birth:</strong> {{ dob }}</span>
-  </div>
-  <div class="info-row">
-    <span><strong>Patient Name:</strong> {{ patientName }}</span>
-    <span><strong>Age:</strong> {{ age }}</span>
-  </div>
-</div>
-
-
- <app-consultation-list [consultations]="filteredConsultations"></app-consultation-list> -->
-
-<!-- <ng-container *ngIf="filteredConsultations.length > 0">
-  <app-consultation-list [consultations]="filteredConsultations"></app-consultation-list>
-</ng-container>
-
-<div *ngIf="filteredConsultations.length === 0" class="no-data">
-  No consultations available.
-</div>
-
-</div>  -->
