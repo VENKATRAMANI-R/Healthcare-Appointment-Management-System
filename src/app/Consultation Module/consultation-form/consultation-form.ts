@@ -35,7 +35,7 @@ export class ConsultationForm implements OnInit {
   ngOnInit(): void {
     const nav = this.location.getState() as ConsultationNavigationState;
     const appointmentStatus = nav.appointment?.status.toLowerCase();
-    if (appointmentStatus === 'completed' || appointmentStatus === 'cancelled') {
+    if (appointmentStatus === 'completed' || appointmentStatus === 'Cancel By Doctor' || appointmentStatus === 'Cancel By Patient') {
          this.consultationForm.disable();
 }
 

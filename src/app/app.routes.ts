@@ -91,7 +91,7 @@ export const routes: Routes = [
         component:ConsultationList
     },
     {
-        path:'consultation-form/:appointmentId',
+        path:'consultation-form',
         component:ConsultationForm
 
     },
