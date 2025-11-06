@@ -1,4 +1,4 @@
-<h1 style="text-align: center; color: rgb(46, 47, 47);">Book an Appointment</h1>
+<h1 class="appointment-title" >Book an Appointment</h1>
 
 <div id="container">
   <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
@@ -32,7 +32,7 @@
           [min]="getTodayDate()"
           required
         />
-        <small style="color: gray;">Select a date within the next 30 days.</small>
+        <small class="form-text">Select a date within the next 30 days.</small>
       </span>
 
       <div class="time-inputs">
@@ -78,7 +78,7 @@
           maxlength="50"
           placeholder="Problem in 50 characters"
         />
-        <small style="color: gray;">
+        <small class="form-text">
           {{ appointmentForm.get('problem')?.value?.length || 0 }}/50
         </small>
       </span>

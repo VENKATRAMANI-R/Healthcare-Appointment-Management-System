@@ -29,6 +29,12 @@
    align-items: center;
    background-color: white;
  }
+ .appointment-title{
+  text-align: center; color: rgb(46, 47, 47);
+ }
+ .form-text{
+  color: gray;
+ }
 #container {
   /* display: flex; */
   align-items: center;
