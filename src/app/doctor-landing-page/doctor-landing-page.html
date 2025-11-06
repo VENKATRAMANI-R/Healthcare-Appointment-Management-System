@@ -122,7 +122,7 @@
                     <button
                       class="btn btn-outline"
                         (click)="openConsultationForm(appointment)"
-                        [disabled]="appointment.status.toLowerCase() === 'completed' || appointment.status.toLowerCase() === 'cancelled'">
+                        [disabled]="appointment.status.toLowerCase() === 'completed' || appointment.status.toLowerCase() === 'cancel by doctor' || appointment.status.toLowerCase() === 'Cancel by patient'">
                       <span class="material-icons">assignment</span>
                        Consultation Form
                     </button>

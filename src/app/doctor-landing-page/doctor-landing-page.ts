@@ -28,7 +28,7 @@ export interface Appointment {
   age: number; 
   gender: 'Male' | 'Female' | 'Other'; 
   reason: string; 
-  status: 'Confirmed' | 'Pending' | 'Completed' | 'Cancelled'
+  status: 'Confirmed' | 'Pending' | 'Completed' | 'cancel by doctor' | 'cancel by patient';
 } 
 // type ViewMode = 'list' | 'compact'; 
 // type SortDirection = 'asc' | 'desc'; 
